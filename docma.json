@@ -1,5 +1,5 @@
 {
-    "debug": 5,
+    "debug": 13,
     "jsdoc": {
         "encoding": "utf8",
         "recurse": false,
@@ -32,11 +32,11 @@
     "app": {
         "title": "Docma Documentation",
         "meta": null,
-        "base": "/docma",
+        "base": "/docs",
         "entrance": "content:home",         // use "api:your-lib" to set the entrance to a JSAPI page
         "routing": "path",
         "server": "github",
-        "favicon": "./doc/favicon.ico"      // local path of favicon to be copied
+        "favicon": "./favicon.ico"      // local path of favicon to be copied
     },
     "template": {
         "path": "./templates/zebra",        // set to "zebra" (this path is for this repo only)
@@ -51,11 +51,11 @@
             },
             "sidebar": {
                 "enabled": true,
-                "outline": "tree",          // "flat" | "tree"
+                "outline": "flat",          // "flat" | "tree"
                 "collapsed": false,
                 "toolbar": true,
                 "itemsFolded": false,
-                "itemsOverflow": "crop",    // "crop" | "shrink"
+                "itemsOverflow": "shrink",  // "crop" | "shrink"
                 "badges": true,             // true | false | <string-value>
                 "search": true,
                 "animations": true
@@ -77,18 +77,18 @@
                 "dark": false,
                 "animations": true,
                 "menu": [
-                    {
-                        // "iconClass": "fas fa-book",
-                        "label": "Building Docs",
-                        "items": [
-                            { "label": "Guide", "href": "." },
-                            { "separator": true },
-                            { "label": "Docma (Builder) API", "href": "api" },
-                            { "label": "Build Configuration", "href": "api/#Docma~BuildConfiguration" },
-                            { "separator": true },
-                            { "label": "Docma CLI", "href": "cli" }
-                        ]
-                    },
+                    // {
+                    //     "iconClass": "fas fa-book",
+                    //     "label": "Building Docs",
+                    //     "items": [
+                    //         { "label": "Guide", "href": "." },
+                    //         { "separator": true },
+                    //         { "label": "Docma (Builder) API", "href": "api" },
+                    //         { "label": "Build Configuration", "href": "api/#Docma~BuildConfiguration" },
+                    //         { "separator": true },
+                    //         { "label": "Docma CLI", "href": "cli" }
+                    //     ]
+                    // },
                     {
                         "label": "F.A.Q.",
                         "href": "faq"
@@ -99,7 +99,7 @@
                         "items": [
                             { "label": "Default Template - Zebra", "href": "templates/zebra" },
                             { "separator": true },
-                            { "label": "Creating Docma Templates", "href": "templates/guide" },
+                            // { "label": "Creating Docma Templates", "href": "templates/guide" },
                             { "label": "Docma Template API", "href": "api/#Docma.Template" },
                             { "separator": true },
                             { "label": "Docma Web API", "href": "api/web" },
@@ -161,16 +161,15 @@
         // "./LICENSE:md",
         {
             // renamed markdown (deep routes)
-            "templates/guide": "./doc/templates/guide.md",
-            "templates/filters": "./doc/templates/filters.md",
-            "templates/zebra": "./templates/zebra/README.md",
-            // renamed html file
-            "home": "./doc/front.html"
+            // "templates/guide": "./doc/templates/guide.md",
+            // "templates/filters": "./doc/templates/filters.md",
+            "home": "./README.md",
+            "templates/zebra": "./templates/zebra/README.md"
         }
     ],
     "assets": {
         "/img": ["./doc/img/*.*"]
     },
-    "dest": "../onury.github.io/docma",
+    "dest": "./docs",
     "clean": true
 }

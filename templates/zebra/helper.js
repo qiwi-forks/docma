@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  *  Helper module for Zebra Template.
@@ -8,7 +8,6 @@
  */
 
 module.exports = (template, modules) => {
-
     const { _, utils } = modules;
     const opts = template.options;
     const typeOf = utils.type;
@@ -46,7 +45,7 @@ module.exports = (template, modules) => {
             // if a string passed to `logo`, we'll set both dark and light logo to
             // this value.
             const logo = opts.logo;
-            if (typeof logo === 'string') {
+            if (typeof logo === "string") {
                 opts.logo = {
                     dark: logo,
                     light: logo
@@ -59,17 +58,18 @@ module.exports = (template, modules) => {
          */
         setTitle() {
             const title = opts.title;
-            if (typeof title === 'string') {
+            if (typeof title === "string") {
                 opts.title = {
                     label: title,
-                    href: '#'
+                    href: "#"
                 };
             }
         },
         configNavMenu() {
             const navbar = template.options.navbar;
-            navbar.menu = (navbar.menu || []).map(topItem => {
-                if (!topItem.items || topItem.items.length === 0) return topItem;
+            navbar.menu = (navbar.menu || []).map((topItem) => {
+                if (!topItem.items || topItem.items.length === 0)
+                    return topItem;
                 topItem.chevron = true;
                 return _.defaultsDeep(topItem, {
                     chevron: true
@@ -86,14 +86,14 @@ module.exports = (template, modules) => {
          *  Checks whether the current template options (provided by the
          *  end-user) has old-structure (as in Default Template v1.x).
          */
-        isOldStructureOptions: opts && (
-            'navItems' in opts
-            || 'collapsed' in opts
-            || 'outline' in opts
-            || 'search' in opts
-            || ('navbar' in opts && typeof opts.navbar === 'boolean')
-            || ('sidebar' in opts && typeof opts.sidebar === 'boolean')
-        ),
+        isOldStructureOptions:
+            opts &&
+            ("navItems" in opts ||
+                "collapsed" in opts ||
+                "outline" in opts ||
+                "search" in opts ||
+                ("navbar" in opts && typeof opts.navbar === "boolean") ||
+                ("sidebar" in opts && typeof opts.sidebar === "boolean")),
         /**
          *  Normally we wouldn't need this, simply setting
          *  `template.defaultOptions` to some object would be enough since Docma
@@ -115,35 +115,35 @@ module.exports = (template, modules) => {
             const newOpts = _.cloneDeep(template.defaultOptions);
 
             // .title remains the same but set from provided opts.
-            setOpt('title', 'string', newOpts);
+            setOpt("title", "string", newOpts);
 
             // SIDEBAR OPTS
             // .sidebar is changed to .sidebar.enabled
-            setOpt('sidebar', 'boolean', newOpts.sidebar, 'enabled');
+            setOpt("sidebar", "boolean", newOpts.sidebar, "enabled");
             // .outline is changed to .sidebar.outline
-            setOpt('outline', 'string', newOpts.sidebar);
+            setOpt("outline", "string", newOpts.sidebar);
             // .collapsed is changed to .sidebar.collapsed
-            setOpt('collapsed', 'boolean', newOpts.sidebar);
+            setOpt("collapsed", "boolean", newOpts.sidebar);
             // .search is changed to .sidebar.search
-            setOpt('search', 'boolean', newOpts.sidebar);
+            setOpt("search", "boolean", newOpts.sidebar);
             // .toolbar is changed to .sidebar.toolbar
-            setOpt('toolbar', 'boolean', newOpts.sidebar);
+            setOpt("toolbar", "boolean", newOpts.sidebar);
             // .badges is changed to .sidebar.badges
-            setOpt('badges', ['boolean', 'string'], newOpts.sidebar);
+            setOpt("badges", ["boolean", "string"], newOpts.sidebar);
             // .animations is changed to .sidebar.animations (and .navbar.animations)
-            setOpt('animations', 'boolean', newOpts.sidebar);
+            setOpt("animations", "boolean", newOpts.sidebar);
 
             // SYMBOLS OPTS
             // .symbolMeta is changed to .symbols.meta
-            setOpt('symbolMeta', 'boolean', newOpts.symbols, 'meta');
+            setOpt("symbolMeta", "boolean", newOpts.symbols, "meta");
 
             // NAVBAR OPTS
             // .navbar is changed to .navbar.enabled
-            setOpt('navbar', 'boolean', newOpts.navbar, 'enabled');
+            setOpt("navbar", "boolean", newOpts.navbar, "enabled");
             // .navItems is changed to .navbar.menu
-            setOpt('navItems', 'array', newOpts.navbar, 'menu');
+            setOpt("navItems", "array", newOpts.navbar, "menu");
             // .animations is changed to .navbar.animations (and .sidebar.animations)
-            setOpt('animations', 'boolean', newOpts.navbar);
+            setOpt("animations", "boolean", newOpts.navbar);
 
             // now we can re-set the options with the new-structure
             template.options = newOpts;

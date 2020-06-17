@@ -1,31 +1,29 @@
-'use strict';
+"use strict";
 
 // core modules
-const path = require('path');
+const path = require("path");
 
 // dep modules
 // const fs = require('fs-extra');
 
 // own modules
-const Docma = require('../index');
+const Docma = require("../index");
 
-
-describe('build', () => {
-
+describe("build", () => {
     // beforeAll(function () {});
 
-    test('build with query-routing', async () => {
+    test("build with query-routing", async () => {
         const config = {
             debug: 30,
             src: [
-                'test/input/*.js',
+                "test/input/*.js",
                 {
-                    'group': 'test/input/src/**.js',
-                    'html/route': 'test/input/html-test.html'
+                    group: "test/input/src/**.js",
+                    "html/route": "test/input/html-test.html"
                 },
-                'test/input/md-test.md'
+                "test/input/md-test.md"
             ],
-            dest: 'test/output/query-routing',
+            dest: "test/output/query-routing",
             markdown: {
                 gfm: true,
                 tables: true,
@@ -39,15 +37,15 @@ describe('build', () => {
                 emoji: true
             },
             app: {
-                title: 'Docs',
-                entrance: 'api:group',
-                routing: 'query',
-                base: '/'
+                title: "Docs",
+                entrance: "api:group",
+                routing: "query",
+                base: "/"
             },
             template: {
-                path: './templates/zebra',
+                path: "./templates/zebra",
                 options: {
-                    title: ''
+                    title: ""
                 }
             }
         };
@@ -87,5 +85,4 @@ describe('build', () => {
     //             expect(Boolean(err)).toEqual(false);
     //         });
     // });
-
 });
