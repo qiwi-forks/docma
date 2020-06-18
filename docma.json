@@ -47,7 +47,7 @@
             },
             "logo": {                       // URL String or { dark: String, light: String }
                 "dark": "https://raw.githubusercontent.com/Prozi/docma/master/img/docma-logo.png",
-                "light": "https://raw.githubusercontent.com/Prozi/docma/master/img/docma-logo.pn"
+                "light": "https://raw.githubusercontent.com/Prozi/docma/master/img/docma-logo.png"
             },
             "sidebar": {
                 "enabled": true,
