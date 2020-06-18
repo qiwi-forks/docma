@@ -42,7 +42,8 @@
     "start": "npm run docs && npm run serve",
     "start:query": "npm run docs:query && npm run serve",
     "start:debug": "npm run docs:debug && npm run serve",
-    "test": "jest --verbose --no-cache"
+    "test": "jest --verbose --no-cache",
+    "postinstall": "mkdir -p lib/web/assets && touch lib/web/assets/docma.less"
   },
   "jest": {
     "testEnvironment": "node",
