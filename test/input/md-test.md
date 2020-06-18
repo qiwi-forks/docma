@@ -2,7 +2,7 @@
 
 ## How is this rendered to HTML?
 
-Markdown files are rendered into plain HTML using **[`marked`](https://github.com/chjj/marked)** and styled by **[Docma](https://github.com/onury/docma)** default template.
+Markdown files are rendered into plain HTML using **[`marked`](https://github.com/chjj/marked)** and styled by **[Docma](https://github.com/Prozi/docma)** default template.
 
 ### `Docma` Supproted Markdown options:
 

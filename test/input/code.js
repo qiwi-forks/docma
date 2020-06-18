@@ -3,11 +3,11 @@
  *
  * Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
  * tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
- * quis nostrud {@link https://github.com/onury/docma|GitHub Project}
+ * quis nostrud {@link https://github.com/Prozi/docma|GitHub Project}
  * exercitation ullamco laboris nisi ut aliquip ex ea commodo
  * consequat.
  *
- * @see {@link https://github.com/onury/docma|GitHub Project}
+ * @see {@link https://github.com/Prozi/docma|GitHub Project}
  *
  * @license MIT
  * @copyright 2016, Onur Yıldırım (onur@cutepilot.com)

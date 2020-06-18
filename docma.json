@@ -39,15 +39,15 @@
         "favicon": "./favicon.ico"      // local path of favicon to be copied
     },
     "template": {
-        "path": "./templates/zebra",        // set to "zebra" (this path is for this repo only)
+        "path": "zebra",        // set to "zebra" (this path is for this repo only)
         "options": {
             "title": {
                 "label": "Docma",
                 "href": "."
             },
             "logo": {                       // URL String or { dark: String, light: String }
-                "dark": "img/docma-logo-dark.png",
-                "light": "img/docma-logo-light.png"
+                "dark": "https://raw.githubusercontent.com/Prozi/docma/master/docma-logo.png",
+                "light": "https://raw.githubusercontent.com/Prozi/docma/master/docma-logo.pn"
             },
             "sidebar": {
                 "enabled": true,
@@ -97,7 +97,6 @@
                         "iconClass": "fas fa-puzzle-piece",
                         "label": "Templates",
                         "items": [
-                            { "label": "Default Template - Zebra", "href": "templates/zebra" },
                             { "separator": true },
                             // { "label": "Creating Docma Templates", "href": "templates/guide" },
                             { "label": "Docma Template API", "href": "api/#Docma.Template" },
@@ -117,7 +116,7 @@
                             },
                             {
                                 "label": "Docma Releases",
-                                "href": "https://github.com/onury/docma/releases",
+                                "href": "https://github.com/Prozi/docma/releases",
                                 "target": "_blank"
                             },
                             { "separator": true },
@@ -130,7 +129,7 @@
                     {
                         "iconClass": "fab fa-lg fa-github",
                         "label": "",
-                        "href": "https://github.com/onury/docma",
+                        "href": "https://github.com/Prozi/docma",
                         "target": "_blank"
                     }
                 ]
@@ -156,19 +155,18 @@
         },
         // Content sources
         // markdown
-        "./CHANGELOG.md",
-        "./doc/*.md",
+        // "./README.md",
+        "./*.md",
         // "./LICENSE:md",
         {
             // renamed markdown (deep routes)
             // "templates/guide": "./doc/templates/guide.md",
             // "templates/filters": "./doc/templates/filters.md",
-            "home": "./README.md",
-            "templates/zebra": "./templates/zebra/README.md"
+            "home": "./README.md"
         }
     ],
     "assets": {
-        "/img": ["./doc/img/*.*"]
+        "/img": ["./img/*.*"]
     },
     "dest": "./docs",
     "clean": true

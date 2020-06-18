@@ -20,4 +20,4 @@ Template specific options that can be used when building your documentation with
 
 ${license}
 
-[docma-repo]:https://github.com/onury/docma
+[docma-repo]:https://github.com/Prozi/docma

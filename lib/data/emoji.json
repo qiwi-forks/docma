@@ -1,9 +1,9 @@
 // Docma's cheat-sheet map for twemoji SVG URLs.
-// https://github.com/onury/docma
-// Inspired by http://ellekasai.github.io/twemoji-awesome
+// https://github.com/Prozi/docma
+// Inspired by https://ellekasai.github.io/twemoji-awesome
 // https://github.com/twitter/twemoji
 // Graphics licensed under CC-BY 4.0: https://creativecommons.org/licenses/by/4.0
-// http://www.emoji-cheat-sheet.com
+// https://www.emoji-cheat-sheet.com
 {
     "smile": "1f604",
     "laughing": "1f606",

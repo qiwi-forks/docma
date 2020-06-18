@@ -32,7 +32,7 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 ...like this:
 
 <p align="center">
-    <a href="https://onury.io/docma"><img width="650" height="385" src="https://raw.github.com/onury/docma/master/docma-screen.gif" alt="Docma screen" /></a>
+    <a href="https://onury.io/docma"><img width="650" height="385" src="https://raw.github.com/Prozi/docma/master/docma-screen.gif" alt="Docma screen" /></a>
     <br />
     <br />
     <sub>This is generated with the built-in template, Zebra.</sub><br />
@@ -99,7 +99,7 @@ See [Docma API Reference][docma-api].
 
 ## Parsed Output
 
-Sometimes, the issue is with invalid JSDoc comments. [See this](https://github.com/onury/docma/issues/55#issuecomment-437599192) for linting/validating your JSDoc while you type and within a build process.
+Sometimes, the issue is with invalid JSDoc comments. [See this](https://github.com/Prozi/docma/issues/55#issuecomment-437599192) for linting/validating your JSDoc while you type and within a build process.
 
 To investigate the parsed JSDoc output, enable the `debug` option that will create a JSON output(s) within the root of the destination directory. If you have a problem with the parsed documentation data, open an issue @ [jsdoc-x][jsdoc-x]. _(I'm the author.)_
 
@@ -113,9 +113,9 @@ See [**CHANGELOG**][changelog].
 
 | Docma version                                                                    | Node version |
 | -------------------------------------------------------------------------------- | ------------ |
-| [v3.0.0](https://github.com/onury/docma/blob/master/CHANGELOG.md#300-2018-11-18) | **v8+**      |
-| [v2.0.0](https://github.com/onury/docma/blob/master/CHANGELOG.md#200-2018-04-12) | **v6+**      |
-| [v1.0.0](https://github.com/onury/docma/blob/master/CHANGELOG.md#100-2016-06-11) | **v4+**      |
+| [v3.0.0](https://github.com/Prozi/docma/blob/master/CHANGELOG.md#300-2018-11-18) | **v8+**      |
+| [v2.0.0](https://github.com/Prozi/docma/blob/master/CHANGELOG.md#200-2018-04-12) | **v6+**      |
+| [v1.0.0](https://github.com/Prozi/docma/blob/master/CHANGELOG.md#100-2016-06-11) | **v4+**      |
 
 ## Documentation
 
@@ -134,10 +134,10 @@ Emoji shortcuts used in source markdown files are parsed into [twemoji][twemoji]
 -   [marked][marked] — A full-featured markdown parser and compiler, written in JavaScript. Built for speed.
 -   [dustjs][dustjs-github] — Asynchronous Javascript templating for the browser and server.
 
-[license]: https://github.com/onury/docma/blob/master/LICENSE
-[changelog]: https://github.com/onury/docma/blob/master/CHANGELOG.md
-[screenshot]: https://raw.github.com/onury/docma/master/docma-screen.jpg
-[screen-gif]: https://raw.github.com/onury/docma/master/docma-screen.gif
+[license]: https://github.com/Prozi/docma/blob/master/LICENSE
+[changelog]: https://github.com/Prozi/docma/blob/master/CHANGELOG.md
+[screenshot]: https://raw.github.com/Prozi/docma/master/docma-screen.jpg
+[screen-gif]: https://raw.github.com/Prozi/docma/master/docma-screen.gif
 [docma-docs]: https://onury.io/docma
 [docma-api]: https://onury.io/docma/api
 [docma-cli]: https://onury.io/docma/cli

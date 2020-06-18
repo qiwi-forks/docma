@@ -77,7 +77,7 @@ const info =
     "\n\n" +
     chalk.yellow("Docma Repo ") +
     "@ " +
-    chalk.blue("https://github.com/onury/docma") +
+    chalk.blue("https://github.com/Prozi/docma") +
     "\n" +
     chalk.yellow("Docma Docs ") +
     "@ " +
