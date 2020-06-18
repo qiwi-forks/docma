@@ -1,6 +1,6 @@
 {
   "name": "@jacekpietal/docma",
-  "version": "3.2.6",
+  "version": "3.2.7",
   "description": "A powerful dev-tool to easily generate beautiful HTML documentation from Javascript (JSDoc), Markdown and HTML files.",
   "repository": "Prozi/docma",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "docma": "bin/docma.js"
   },
   "engines": {
-    "node": ">=8"
+    "node": "*"
   },
   "scripts": {
     "lint": "yarn eslint ./lib ./test --fix",
@@ -29,8 +29,8 @@
     "docs:debug": "node bin/docma --debug",
     "serve": "node bin/docma serve -p 9000",
     "start": "npm run docs && npm run serve",
-    "start:query": "npm run zebra && npm run docs:query && npm run serve",
-    "start:debug": "npm run zebra && npm run docs:debug && npm run serve",
+    "start:query": "npm run docs:query && npm run serve",
+    "start:debug": "npm run docs:debug && npm run serve",
     "test": "jest --verbose --no-cache"
   },
   "jest": {
