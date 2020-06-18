@@ -1,17 +1,1 @@
-backup/
-wiki/
-doc/
-design/
 node_modules/
-bower_components/
-tmp/
-test/input/private/
-test/output/
-test/issue-*/
-npm-debug.log
-TODO.md
-NOTES.md
-.DS_Store
-.vscode
-docma.query.json
-.idea

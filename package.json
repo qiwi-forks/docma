@@ -16,9 +16,6 @@
   ],
   "private": false,
   "main": "index.js",
-  "files": [
-    "*"
-  ],
   "bin": {
     "docma": "bin/docma.js"
   },

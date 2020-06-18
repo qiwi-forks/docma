@@ -111,7 +111,7 @@
                         "items": [
                             {
                                 "label": "<code>npm i docma -D</code>",
-                                "href": "https://www.npmjs.com/package/docma",
+                                "href": "https://www.npmjs.com/package/@jacekpietal/docma",
                                 "target": "_blank"
                             },
                             {
