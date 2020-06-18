@@ -1,6 +1,6 @@
 # Docma Changelog
 
-All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
+All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [3.2.2](https://github.com/onury/docma/compare/v3.1.0...v3.2.2) (2019-01-08)
 
@@ -67,7 +67,7 @@ All notable changes to this project will be documented in this file. The format 
 > Thanks to [@feugy](https://github.com/feugy) for this PR.
 
 #### Added
-- `serve` command now takes `conf.app.base` parameter into consideration, and will redirect `http://localhost:9000/` to it.
+- `serve` command now takes `conf.app.base` parameter into consideration, and will redirect `https://localhost:9000/` to it.
 
 #### Fixed
 - `serve` command can handle `conf.app.dest` relative path, and resolves them against current working directory. 
@@ -122,7 +122,7 @@ All notable changes to this project will be documented in this file. The format 
 
 #### Removed
 - **For template authors only**: 
-    + **BREAKING**: `docma.template.json` file that defines the template build and configuration options is dropped in favor of template module main (JS) file or `package.json`. There are several other improvements. See updated documentation on [Creating Docma Templates](http://onury.io/docma/templates/guide).
+    + **BREAKING**: `docma.template.json` file that defines the template build and configuration options is dropped in favor of template module main (JS) file or `package.json`. There are several other improvements. See updated documentation on [Creating Docma Templates](https://onury.io/docma/templates/guide).
     + **BREAKING**: `compile` property of template configuration is removed. Now, scripts or less/sass files of the template should be pre-compiled. This is logical and speeds up the documentation build process of Docma.
 
 ### Docma CLI
@@ -164,7 +164,7 @@ See [CLI documentation][cli] for detailed information on updated CLI.
 ### Docma Template API
 
 #### Changed
-- Docma templates are now node modules. This is the initial Template API. See updated documentation on [Creating Docma Templates](http://onury.io/docma/templates/guide).
+- Docma templates are now node modules. This is the initial Template API. See updated documentation on [Creating Docma Templates](https://onury.io/docma/templates/guide).
 
 ### Default Template - Zebra `v2.0.0`
 
@@ -294,7 +294,7 @@ See [CLI documentation][cli] for detailed information on updated CLI.
 
 #### Added
 - Build config options: `config.jsdoc.allowUnknownTags`, `config.jsdoc.dictionaries`, `config.jsdoc.includePattern`, `config.jsdoc.excludePattern` (`jsdoc-x` feature).
-- [JSDoc plugin](http://usejsdoc.org/about-plugins.html) support via the new `config.jsdoc.plugins` option (`jsdoc-x` feature).
+- [JSDoc plugin](https://usejsdoc.org/about-plugins.html) support via the new `config.jsdoc.plugins` option (`jsdoc-x` feature).
 
 <br />
 

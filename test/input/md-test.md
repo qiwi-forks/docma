@@ -80,7 +80,7 @@ _Docma supports all `marked` options and a few others._
         <td><code>Boolean</code></td>
         <td><code>true</code></td>
         <td>
-            If set to <code>true</code>, emoji shortcuts (e.g. <code>&#x3A;smiley&#x3A;</code>) are parsed into <code>&lt;img /&gt;</code> elements with <a href="http://twitter.github.io/twemoji">twemoji</a> SVG URLs (and <code>class="docma emoji"</code> attribute).
+            If set to <code>true</code>, emoji shortcuts (e.g. <code>&#x3A;smiley&#x3A;</code>) are parsed into <code>&lt;img /&gt;</code> elements with <a href="https://twitter.github.io/twemoji">twemoji</a> SVG URLs (and <code>class="docma emoji"</code> attribute).
         </td>
     </tr>
 </table>
@@ -168,11 +168,11 @@ Can use hyphens, asterisks or underscores...
 YouTube videos can't be added directly but you can add an image with a link to the video like this:
 
 <p>
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=oksphy2zJqQ">
-<img src="http://img.youtube.com/vi/oksphy2zJqQ/0.jpg" alt="Dire Straits rules!" width="240" height="180" border="10" />
+<a href="https://www.youtube.com/watch?feature=player_embedded&v=oksphy2zJqQ">
+<img src="https://img.youtube.com/vi/oksphy2zJqQ/0.jpg" alt="Dire Straits rules!" width="240" height="180" border="10" />
 </a>
 </p>
 
 Or, in pure Markdown, but losing the image sizing and border:
 
-[![Dire Straits rules!](http://img.youtube.com/vi/oksphy2zJqQ/0.jpg)](http://www.youtube.com/watch?v=oksphy2zJqQ)
+[![Dire Straits rules!](https://img.youtube.com/vi/oksphy2zJqQ/0.jpg)](https://www.youtube.com/watch?v=oksphy2zJqQ)
