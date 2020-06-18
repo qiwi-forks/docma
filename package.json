@@ -1,6 +1,6 @@
 {
   "name": "@jacekpietal/docma",
-  "version": "3.2.4",
+  "version": "3.2.5",
   "description": "A powerful dev-tool to easily generate beautiful HTML documentation from Javascript (JSDoc), Markdown and HTML files.",
   "repository": "Prozi/docma",
   "license": "MIT",
@@ -17,10 +17,7 @@
   "private": false,
   "main": "index.js",
   "files": [
-    "index.js",
-    "lib",
-    "bin",
-    "LICENSE"
+    "*"
   ],
   "bin": {
     "docma": "bin/docma.js"
@@ -33,9 +30,8 @@
     "docs": "node bin/docma",
     "docs:query": "node bin/docma -c ./test/docma.query.json",
     "docs:debug": "node bin/docma --debug",
-    "zebra": "cd ./templates/zebra && npm run build",
     "serve": "node bin/docma serve -p 9000",
-    "start": "npm run zebra && npm run docs && npm run serve",
+    "start": "npm run docs && npm run serve",
     "start:query": "npm run zebra && npm run docs:query && npm run serve",
     "start:debug": "npm run zebra && npm run docs:debug && npm run serve",
     "test": "jest --verbose --no-cache"

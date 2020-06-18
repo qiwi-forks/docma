@@ -51,13 +51,13 @@ You can use Docma CLI to build documentations directly from your console.
 Once you create the configuration file `docma.json` in your project root, it's quite simple.
 
 ```console
-docma
+yarn docma
 ```
 
 You can even serve the docs locally and test.
 
 ```console
-docma serve
+yarn docma serve
 ```
 
 See
