@@ -1,6 +1,6 @@
 {
   "name": "@jacekpietal/docma",
-  "version": "3.2.7",
+  "version": "3.2.8",
   "description": "A powerful dev-tool to easily generate beautiful HTML documentation from Javascript (JSDoc), Markdown and HTML files.",
   "repository": "Prozi/docma",
   "license": "MIT",
@@ -22,6 +22,17 @@
   "engines": {
     "node": "*"
   },
+  "files": [
+    "bin",
+    "docma.json",
+    "docs",
+    "favicon.ico",
+    "img",
+    "index.js",
+    "lib",
+    "LICENSE",
+    "package.json"
+  ],
   "scripts": {
     "lint": "yarn eslint ./lib ./test --fix",
     "docs": "node bin/docma",
