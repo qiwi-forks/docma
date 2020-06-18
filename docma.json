@@ -32,7 +32,7 @@
     "app": {
         "title": "Docma Documentation",
         "meta": null,
-        "base": "/docs",
+        "base": ".",
         "entrance": "content:home",         // use "api:your-lib" to set the entrance to a JSAPI page
         "routing": "path",
         "server": "github",

@@ -42,7 +42,7 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 ## Installation
 
 ```console
-npm i docma -D
+yarn add @jacekpietal/docma -D
 ```
 
 ## Building Documentation with CLI
