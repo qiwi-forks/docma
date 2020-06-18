@@ -8,6 +8,10 @@
     "name": "Onur Yıldırım",
     "email": "onur@cutepilot.com"
   },
+  "maintainers": [{
+    "name": "Jacek Pietal",
+    "url": "https://github.com/Prozi"
+  }],
   "main": "index.js",
   "files": [
     "index.js",
