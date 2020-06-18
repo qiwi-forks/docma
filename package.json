@@ -1,6 +1,6 @@
 {
   "name": "@jacekpietal/docma",
-  "version": "3.2.8",
+  "version": "3.2.9",
   "description": "A powerful dev-tool to easily generate beautiful HTML documentation from Javascript (JSDoc), Markdown and HTML files.",
   "repository": "Prozi/docma",
   "license": "MIT",
@@ -38,7 +38,7 @@
     "docs": "node bin/docma",
     "docs:query": "node bin/docma -c ./test/docma.query.json",
     "docs:debug": "node bin/docma --debug",
-    "serve": "node bin/docma serve -p 9000",
+    "serve": "node bin/docma serve",
     "start": "npm run docs && npm run serve",
     "start:query": "npm run docs:query && npm run serve",
     "start:debug": "npm run docs:debug && npm run serve",

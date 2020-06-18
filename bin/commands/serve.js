@@ -12,7 +12,14 @@ module.exports = function serve(dirname, config) {
         console.log(`Runs at port ${config.port}`);
     }
 
-    let command = "node_modules/http-server/bin/http-server";
+    let server = "node_modules/http-server/bin/http-server";
+    let args =
+        process.argv.slice(3, process.argv.length).join(" ") ||
+        `docs --port ${config.port}`;
 
-    return execSync(`node ${command} ./docs --port ${config.port}`);
+    let command = `node ${server} ${args}`;
+
+    console.log(command);
+
+    return execSync(command);
 };
