@@ -1,6 +1,6 @@
-<h1 align="center">
+<p align="center">
     <a href="https://onury.io/docma"><img width="200" height="200" src="https://raw.githubusercontent.com/Prozi/docma/master/img/docma-logo.png" alt="Docma" /></a>
-</h1>
+</p>
 
 <p align="center">
     <a href="https://www.npmjs.com/package/@jacekpietal/docma"><img src="https://img.shields.io/npm/v/@jacekpietal/docma.svg?style=flat-square" alt="npm" /></a>
