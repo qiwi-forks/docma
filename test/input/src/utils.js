@@ -1,4 +1,3 @@
-
 let toString = Object.prototype.toString;
 
 /**
@@ -6,14 +5,13 @@ let toString = Object.prototype.toString;
  *  @class
  */
 const utils = {
-
     /**
      *  Checks whether the given object is an `Object`.
      *  @param {*} o - Object to be checked.
      *  @returns {Boolean}
      */
     isObject(o) {
-        return toString.call(o) === '[object Object]';
+        return toString.call(o) === "[object Object]";
     },
 
     /**
@@ -22,7 +20,7 @@ const utils = {
      *  @returns {Boolean}
      */
     isArray(o) {
-        return toString.call(o) === '[object Array]';
+        return toString.call(o) === "[object Array]";
     },
 
     /**
@@ -32,7 +30,11 @@ const utils = {
      *  @returns {Boolean}
      */
     hasOwn(o, prop) {
-        return o && typeof o.hasOwnProperty === 'function' && o.hasOwnProperty(prop);
+        return (
+            o &&
+            typeof o.hasOwnProperty === "function" &&
+            o.hasOwnProperty(prop)
+        );
     },
 
     /**
@@ -42,7 +44,8 @@ const utils = {
      */
     deepCopy(object) {
         if (!utils.isObject(object)) return object;
-        var k, o,
+        var k,
+            o,
             copy = {};
         for (k in object) {
             if (utils.hasOwn(object, k)) {
@@ -65,10 +68,10 @@ const utils = {
         var length = array.length,
             index = -1;
         while (++index < length) {
-            if (callback.call(thisArg, array[index], index, array) === false) break;
+            if (callback.call(thisArg, array[index], index, array) === false)
+                break;
         }
     }
-
 };
 
 export default utils;

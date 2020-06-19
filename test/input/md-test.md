@@ -89,10 +89,10 @@ _Docma supports all `marked` options and a few others._
 
 #### Unordered List
 
-- *This text is italicized*
-- ~~This was mistaken text~~.
-- **This is bold text**
-- **This text is _extremely_ important**
+-   _This text is italicized_
+-   ~~This was mistaken text~~.
+-   **This is bold text**
+-   **This text is _extremely_ important**
 
 #### Quotation
 
@@ -103,7 +103,9 @@ In the words of Abraham Lincoln:
 Use `git status` to list all new or modified files that haven't yet been committed.
 
 #### Code Block
+
 Some JS code exmaple here:
+
 ```js
 module.exports = function () {
     "use strict";
@@ -123,20 +125,21 @@ module.exports = function () {
 #### Nested List:
 
 1. Make my changes
-  1. Fix bug
-  2. Improve formatting
-    * Make the headings bigger
-2. Push my commits to GitHub
-3. Open a pull request
-  * Describe my changes
-  * Mention all the members of my team
-    * Ask for feedback
+1. Fix bug
+1. Improve formatting
+    - Make the headings bigger
+1. Push my commits to GitHub
+1. Open a pull request
+
+-   Describe my changes
+-   Mention all the members of my team
+    -   Ask for feedback
 
 #### Task List:
 
-- [x] Finish my changes
-- [ ] Push my commits to GitHub
-- [ ] Open a pull request
+-   [x] Finish my changes
+-   [ ] Push my commits to GitHub
+-   [ ] Open a pull request
 
 #### Emoji
 
@@ -150,18 +153,17 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 
 Colons can be used to align columns.
 
-| Tables are cool | Left aligned column | Right Aligned  |
-| --------------- | ------------------- | -----:|
-| Column 1        | Column 2            | $1600 |
-| This is the     | second row...       |   $12 |
-| Zebra stripes   | are neat!           |    $1 |
+| Tables are cool | Left aligned column | Right Aligned |
+| --------------- | ------------------- | ------------: |
+| Column 1        | Column 2            |        \$1600 |
+| This is the     | second row...       |          \$12 |
+| Zebra stripes   | are neat!           |           \$1 |
 
 #### Horizontal Rule
 
 ---
 
 Can use hyphens, asterisks or underscores...
-
 
 #### Images & YouTube Videos
 

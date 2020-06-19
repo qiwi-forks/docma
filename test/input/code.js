@@ -13,7 +13,6 @@
  * @copyright 2016, Onur Yıldırım (onur@cutepilot.com)
  */
 class Code {
-
     /**
      * Initiates a new instance of the `Code` class.
      *
@@ -202,7 +201,6 @@ class Code {
     static staticMethod(options) {
         return new Code(options);
     }
-
 }
 
 /**
