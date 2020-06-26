@@ -71,7 +71,7 @@ const utils = {
             if (callback.call(thisArg, array[index], index, array) === false)
                 break;
         }
-    }
+    },
 };
 
 export default utils;

@@ -41,11 +41,11 @@ const examples =
     chalk.white("      docma -c path/to/docma.json -d path/to/docs") +
     "\n  * Re-define source files (ignore the ones defined in the config file):\n" +
     chalk.white(
-        "      docma -c path/to/docma.json -s path/to/lib-1.js -s path/to/lib-2.js"
+        "      docma -c path/to/docma.json -s path/to/lib-1.js -s path/to/lib-2.js",
     ) +
     "\n  * Define name-grouped source files:\n" +
     chalk.white(
-        "      docma -c path/to/docma.json -s mylib:path/to/lib-1.js -s mylib:path/to/lib-2.js"
+        "      docma -c path/to/docma.json -s mylib:path/to/lib-1.js -s mylib:path/to/lib-2.js",
     ) +
     "\n" +
     "\n  * See help for `serve` command:\n" +
@@ -91,7 +91,7 @@ console.log();
 
 const argv = yargs
     .usage(
-        "docma [command] [options]\n\nBuild documentation from Javascript, Markdown and HTML files."
+        "docma [command] [options]\n\nBuild documentation from Javascript, Markdown and HTML files.",
     ) // 'Usage: $0 <cmd> [options]'
     .help("h", "Show this help")
     .alias("h", "help")
@@ -103,7 +103,7 @@ const argv = yargs
         description:
             "Docma JSON configuration file path. You can define all build options within this file. Any option (below) set via CLI will overwrite the value defined in this file.",
         global: false,
-        normalize: true // apply path.normalize
+        normalize: true, // apply path.normalize
     })
     .option("s", {
         alias: "src",
@@ -111,61 +111,61 @@ const argv = yargs
         description:
             '<[name:]path>   Source file path. To define multiple source files, this option can be used more than once. To group/name source files, prefix each path with "name:" e.g. -s a.js -s mylib:b.js -s mylib:c.js -s other:d.js',
         global: false,
-        normalize: true
+        normalize: true,
     })
     .option("d", {
         alias: "dest",
         type: "string",
         description: "<path>   Destination output directory path.",
         global: false,
-        normalize: true
+        normalize: true,
     })
     .option("b", {
         alias: "base",
         type: "string",
         description: "<url-path>   Overwrites base path of the generated app.",
-        global: false
+        global: false,
     })
     .option("clean", {
         type: "boolean",
         description: "Whether to empty destination directory before building.",
-        global: false
+        global: false,
     })
     .option("web-logs", {
         type: "boolean",
         description:
             "(Debug) Enable logs in the browser console, for the generated SPA.",
-        global: false
+        global: false,
     })
     .option("V", {
         alias: "verbose",
         type: "boolean",
         description: "(Debug) Output verbose logs to consoles.",
-        global: false
+        global: false,
     })
     .option("nomin", {
         type: "boolean",
         description:
             "(Debug) Disable minification for the generated SPA assets. (e.g. js, css files)",
-        global: false
+        global: false,
     })
     .option("jd-out", {
         type: "boolean",
         description:
             "(Debug) Output one or more [name.]jsdoc.json files for each (name-grouped) javascript source.",
-        global: false
+        global: false,
     })
     .option("debug", {
         type: "boolean",
         description:
             "Enable all debugging options. Equivalent to: --web-logs -v --nomin --jd-out",
-        global: false
+        global: false,
     })
     .option("q", {
         alias: "quiet",
         type: "boolean",
         description: "(Debug) Disable build logs for the Node console.",
-        global: false
+        global: false,
     })
     .command(
         "serve [path]",
@@ -178,25 +178,25 @@ const argv = yargs
                         describe: "Port number to bind the mock-server on.",
                         type: "number",
                         default: 9000,
-                        global: false
+                        global: false,
                     },
                     b: {
                         alias: "base",
                         describe: "Base path for the application.",
                         type: "string",
                         default: null,
-                        global: false
+                        global: false,
                     },
                     q: {
                         alias: "quiet",
                         type: "boolean",
                         description:
                             "Disable request logs for the Node console.",
-                        global: false
-                    }
+                        global: false,
+                    },
                 })
                 .epilog(serveExamples + info);
-        }
+        },
     )
     .command(
         "template <cmd>",
@@ -208,7 +208,7 @@ const argv = yargs
                     "Initialize a new Docma template module.",
                     () => {
                         // yargs.options();
-                    }
+                    },
                 )
                 .command(
                     "doctor [path]",
@@ -221,13 +221,13 @@ const argv = yargs
                                     describe:
                                         "Whether to stop on first fault when diagnosing the template.",
                                     default: false,
-                                    global: false
-                                }
+                                    global: false,
+                                },
                             })
                             .epilog(templateDoctorExamples + info);
-                    }
+                    },
                 );
-        }
+        },
     )
     .wrap(80)
     // .locale('en')
@@ -305,7 +305,7 @@ function getConfigFileSync() {
         if (fs.pathExistsSync(argv.config)) return path.resolve(argv.config);
         // throw only if -c option is set initially and file does not exist
         console.error(
-            chalk.red(`Error: Config file "${argv.config}" does not exist.`)
+            chalk.red(`Error: Config file "${argv.config}" does not exist.`),
         );
         process.exit(1);
     }
@@ -327,8 +327,8 @@ function getConfigFileSync() {
     // otherwise we'll use empty config
     console.log(
         chalk.blue(
-            "No configuration file specified. Using default configuration."
-        )
+            "No configuration file specified. Using default configuration.",
+        ),
     );
     return null;
 }
@@ -345,7 +345,7 @@ if (cmds.indexOf("serve") >= 0) {
     serve(argv.path, {
         port: argv.port,
         base: argv.base,
-        quiet: argv.quiet
+        quiet: argv.quiet,
     });
 } else if (cmds.indexOf("template") >= 0) {
     if (cmds.indexOf("init") >= 0) {
@@ -353,7 +353,7 @@ if (cmds.indexOf("serve") >= 0) {
     } else if (cmds.indexOf("doctor") >= 0) {
         doctor(argv.path, {
             quiet: argv.quiet,
-            stopOnFirstFailure: argv.first
+            stopOnFirstFailure: argv.first,
         });
     }
 } else {

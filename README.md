@@ -79,7 +79,7 @@ Either by passing a [configuration][docma-config] object.
 ```js
 const config = {
     src: ["./code/**/*.js", "./README.md"],
-    dest: "./output/doc"
+    dest: "./output/doc",
 };
 Docma.create()
     .build(config)

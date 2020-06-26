@@ -17,15 +17,15 @@ module.exports = (templatePath, options) => {
         templatePath = process.cwd();
         console.log(
             chalk.cyan(
-                `No path is specified. Checking for Docma template in current working directory...`
-            )
+                `No path is specified. Checking for Docma template in current working directory...`,
+            ),
         );
     } else {
         templatePath = path.resolve(templatePath);
         console.log(
             chalk.cyan(
-                `Checking for Docma template in directory '${templatePath}'...`
-            )
+                `Checking for Docma template in directory '${templatePath}'...`,
+            ),
         );
     }
 

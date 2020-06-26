@@ -19,9 +19,9 @@ describe("build", () => {
                 "test/input/*.js",
                 {
                     group: "test/input/src/**.js",
-                    "html/route": "test/input/html-test.html"
+                    "html/route": "test/input/html-test.html",
                 },
-                "test/input/md-test.md"
+                "test/input/md-test.md",
             ],
             dest: "test/output/query-routing",
             markdown: {
@@ -34,20 +34,20 @@ describe("build", () => {
                 smartypants: false,
                 xhtml: false,
                 tasks: true,
-                emoji: true
+                emoji: true,
             },
             app: {
                 title: "Docs",
                 entrance: "api:group",
                 routing: "query",
-                base: "/"
+                base: "/",
             },
             template: {
                 path: "./templates/zebra",
                 options: {
-                    title: ""
-                }
-            }
+                    title: "",
+                },
+            },
         };
         try {
             await expect(Docma.create().build(config)).resolves.toEqual(true);

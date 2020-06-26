@@ -23,27 +23,27 @@ const INIT_DIR_PATH = path.join(__dirname, "..", "..", "lib", "_init");
 
 module.exports = (rootDirPath) => {
     console.log(
-        chalk.white("Welcome! This will initialize a new Docma Template.")
+        chalk.white("Welcome! This will initialize a new Docma Template."),
     );
     console.log(
         chalk.gray(
-            "Note that entered information will also be used in your package.json"
-        )
+            "Note that entered information will also be used in your package.json",
+        ),
     );
 
     if (!rootDirPath) {
         rootDirPath = process.cwd();
         console.log(
             chalk.cyan(
-                "No path is specified. Using current working directory...\n"
-            )
+                "No path is specified. Using current working directory...\n",
+            ),
         );
     } else {
         rootDirPath = path.resolve(rootDirPath);
         console.log(
             chalk.cyan(
-                `Template will be initialized in directory '${rootDirPath}'...\n`
-            )
+                `Template will be initialized in directory '${rootDirPath}'...\n`,
+            ),
         );
     }
 
@@ -66,8 +66,8 @@ module.exports = (rootDirPath) => {
                     if (!stats.isDirectory()) {
                         throw new Error(
                             chalk.red(
-                                `Target path is not a directory: '${rootDirPath}'\n`
-                            )
+                                `Target path is not a directory: '${rootDirPath}'\n`,
+                            ),
                         );
                     }
                     return utils.fs.isEmptyDir(rootDirPath);
@@ -76,8 +76,8 @@ module.exports = (rootDirPath) => {
                     if (!empty) {
                         throw new Error(
                             chalk.yellow(
-                                `Target directory is not empty: '${rootDirPath}'\n`
-                            )
+                                `Target directory is not empty: '${rootDirPath}'\n`,
+                            ),
                         );
                     }
                     return rootDirPath;
@@ -108,8 +108,8 @@ module.exports = (rootDirPath) => {
             files: ["template/", "index.js", "LICENSE"],
             keywords: ["docma", "template"],
             peerDependencies: {
-                docma: ">=" + answers.minDocmaVersion
-            }
+                docma: ">=" + answers.minDocmaVersion,
+            },
         };
         return JSON.stringify(pkg, null, "  ");
     }
@@ -123,21 +123,21 @@ module.exports = (rootDirPath) => {
             .then(() => {
                 return fs.copy(
                     path.join(INIT_DIR_PATH, "template"),
-                    templateDirPath
+                    templateDirPath,
                 );
             })
             .then(() => {
                 return parseWriteFile(
                     answers,
                     path.join(INIT_DIR_PATH, "README.md"),
-                    path.join(rootDirPath, "README.md")
+                    path.join(rootDirPath, "README.md"),
                 );
             })
             .then(() => {
                 return parseWriteFile(
                     answers,
                     path.join(INIT_DIR_PATH, "index.js"),
-                    path.join(rootDirPath, "index.js")
+                    path.join(rootDirPath, "index.js"),
                 );
             })
             .then(() => {
@@ -148,7 +148,7 @@ module.exports = (rootDirPath) => {
                     return parseWriteFile(
                         answers,
                         path.join(INIT_DIR_PATH, "LICENSE-MIT"),
-                        path.join(rootDirPath, "LICENSE")
+                        path.join(rootDirPath, "LICENSE"),
                     );
                 }
                 return null;
@@ -183,7 +183,7 @@ module.exports = (rootDirPath) => {
                         return true;
                     });
                 });
-            }
+            },
         },
         {
             type: "input",
@@ -199,7 +199,7 @@ module.exports = (rootDirPath) => {
                     return true;
                 }
                 return ins.message;
-            }
+            },
         },
         {
             type: "input",
@@ -208,7 +208,7 @@ module.exports = (rootDirPath) => {
             default: "",
             filter(input) {
                 return utils.removeNewLines(input, " ").trim();
-            }
+            },
         },
         {
             type: "input",
@@ -218,7 +218,7 @@ module.exports = (rootDirPath) => {
             validate(input) {
                 const ins = TemplateDoctor.inspectMinDocmaVersion(input);
                 return !ins.valid ? ins.message : true;
-            }
+            },
         },
         {
             type: "input",
@@ -232,7 +232,7 @@ module.exports = (rootDirPath) => {
             },
             filter(input) {
                 return utils.removeNewLines(input || "").trim();
-            }
+            },
         },
         {
             type: "input",
@@ -246,7 +246,7 @@ module.exports = (rootDirPath) => {
                     return "Please enter your full name.";
                 }
                 return true;
-            }
+            },
         },
         {
             type: "input",
@@ -261,7 +261,7 @@ module.exports = (rootDirPath) => {
                     return "Invalid email addres.";
                 }
                 return true;
-            }
+            },
         },
         {
             type: "input",
@@ -269,8 +269,8 @@ module.exports = (rootDirPath) => {
             name: "repository",
             filter(input) {
                 return utils.removeNewLines(input).trim();
-            }
-        }
+            },
+        },
     ];
 
     // --------------------------------
@@ -294,34 +294,34 @@ module.exports = (rootDirPath) => {
         .then(() => {
             console.log();
             console.log(
-                chalk.green.bold("Your template is initialized successfully.")
+                chalk.green.bold("Your template is initialized successfully."),
             );
             console.log();
             console.log(chalk.white.bold.underline("Reminders:\n"));
             console.log(
                 chalk.cyan(
-                    "- This is just a starting point for your template. Go through the generated files and modify them."
-                )
+                    "- This is just a starting point for your template. Go through the generated files and modify them.",
+                ),
             );
             console.log(
                 chalk.cyan(
-                    "- You can run `docma template doctor` to diagnose your template while developing."
-                )
+                    "- You can run `docma template doctor` to diagnose your template while developing.",
+                ),
             );
             console.log(
                 chalk.cyan(
-                    "- Check out generated package.json for module configuration."
-                )
+                    "- Check out generated package.json for module configuration.",
+                ),
             );
             console.log(
                 chalk.cyan(
-                    "- Once you complete your template, make sure you publish it to npm."
-                )
+                    "- Once you complete your template, make sure you publish it to npm.",
+                ),
             );
             console.log(
                 chalk.cyan(
-                    "- Please test your template thoroughly before you publish."
-                )
+                    "- Please test your template thoroughly before you publish.",
+                ),
             );
             console.log();
             process.exit(0);

@@ -172,7 +172,7 @@
                         [],
                         a.c.map(function (e) {
                             return l("self" === e ? a : e);
-                        })
+                        }),
                     )),
                     a.c.forEach(function (e) {
                         r(e, a);
@@ -190,7 +190,7 @@
                     : {
                           exec: function () {
                               return null;
-                          }
+                          },
                       };
             }
         }
@@ -279,7 +279,7 @@
                         n +
                         '" for mode "' +
                         (E.cN || "<unnamed>") +
-                        '"'
+                        '"',
                 );
             return (k += n), n.length || 1;
         }
@@ -353,7 +353,7 @@
             (I.useBR
                 ? ((n = document.createElementNS(
                       "http://www.w3.org/1999/xhtml",
-                      "div"
+                      "div",
                   )),
                   (n.innerHTML = e.innerHTML
                       .replace(/\n/g, "")
@@ -365,7 +365,7 @@
             t.length &&
                 ((o = document.createElementNS(
                     "http://www.w3.org/1999/xhtml",
-                    "div"
+                    "div",
                 )),
                 (o.innerHTML = r.value),
                 (r.value = c(t, u(o), l))),
@@ -376,7 +376,7 @@
             r.second_best &&
                 (e.second_best = {
                     language: r.second_best.language,
-                    re: r.second_best.r
+                    re: r.second_best.r,
                 }));
     }
     function b(e) {
@@ -418,7 +418,7 @@
             classPrefix: "hljs-",
             tabReplace: null,
             useBR: !1,
-            languages: void 0
+            languages: void 0,
         };
     return (
         (e.highlight = f),
@@ -444,7 +444,7 @@
         (e.ASM = { cN: "string", b: "'", e: "'", i: "\\n", c: [e.BE] }),
         (e.QSM = { cN: "string", b: '"', e: '"', i: "\\n", c: [e.BE] }),
         (e.PWM = {
-            b: /\b(a|an|the|are|I'm|isn't|don't|doesn't|won't|but|just|should|pretty|simply|enough|gonna|going|wtf|so|such|will|you|your|they|like|more)\b/
+            b: /\b(a|an|the|are|I'm|isn't|don't|doesn't|won't|but|just|should|pretty|simply|enough|gonna|going|wtf|so|such|will|you|your|they|like|more)\b/,
         }),
         (e.C = function (n, t, r) {
             var a = e.inherit({ cN: "comment", b: n, e: t, c: [] }, r || {});
@@ -453,7 +453,7 @@
                 a.c.push({
                     cN: "doctag",
                     b: "(?:TODO|FIXME|NOTE|BUG|XXX):",
-                    r: 0
+                    r: 0,
                 }),
                 a
             );
@@ -469,14 +469,14 @@
             b:
                 e.NR +
                 "(%|em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|in|pt|pc|px|deg|grad|rad|turn|s|ms|Hz|kHz|dpi|dpcm|dppx)?",
-            r: 0
+            r: 0,
         }),
         (e.RM = {
             cN: "regexp",
             b: /\//,
             e: /\/[gimuy]*/,
             i: /\n/,
-            c: [e.BE, { b: /\[/, e: /\]/, r: 0, c: [e.BE] }]
+            c: [e.BE, { b: /\[/, e: /\]/, r: 0, c: [e.BE] }],
         }),
         (e.TM = { cN: "title", b: e.IR, r: 0 }),
         (e.UTM = { cN: "title", b: e.UIR, r: 0 }),
@@ -493,9 +493,9 @@ hljs.registerLanguage("json", function (e) {
             e: "}",
             c: [
                 { cN: "attr", b: /"/, e: /"/, c: [e.BE], i: "\\n" },
-                e.inherit(r, { b: /:/ })
+                e.inherit(r, { b: /:/ }),
             ],
-            i: "\\S"
+            i: "\\S",
         },
         c = { b: "\\[", e: "\\]", c: [e.inherit(r)], i: "\\S" };
     return n.splice(n.length, 0, t, c), { c: n, k: i, i: "\\S" };
@@ -514,8 +514,8 @@ hljs.registerLanguage("http", function (e) {
                 c: [
                     { cN: "string", b: " ", e: " ", eB: !0, eE: !0 },
                     { b: t },
-                    { cN: "keyword", b: "[A-Z]+" }
-                ]
+                    { cN: "keyword", b: "[A-Z]+" },
+                ],
             },
             {
                 cN: "attribute",
@@ -523,22 +523,22 @@ hljs.registerLanguage("http", function (e) {
                 e: ": ",
                 eE: !0,
                 i: "\\n|\\s|=",
-                starts: { e: "$", r: 0 }
+                starts: { e: "$", r: 0 },
             },
-            { b: "\\n\\n", starts: { sL: [], eW: !0 } }
-        ]
+            { b: "\\n\\n", starts: { sL: [], eW: !0 } },
+        ],
     };
 });
 hljs.registerLanguage("bash", function (e) {
     var t = {
             cN: "variable",
-            v: [{ b: /\$[\w\d#@][\w\d_]*/ }, { b: /\$\{(.*?)}/ }]
+            v: [{ b: /\$[\w\d#@][\w\d_]*/ }, { b: /\$\{(.*?)}/ }],
         },
         s = {
             cN: "string",
             b: /"/,
             e: /"/,
-            c: [e.BE, t, { cN: "variable", b: /\$\(/, e: /\)/, c: [e.BE] }]
+            c: [e.BE, t, { cN: "variable", b: /\$\(/, e: /\)/, c: [e.BE] }],
         },
         a = { cN: "string", b: /'/, e: /'/ };
     return {
@@ -550,7 +550,7 @@ hljs.registerLanguage("bash", function (e) {
             literal: "true false",
             built_in:
                 "break cd continue eval exec exit export getopts hash pwd readonly return shift test times trap umask unset alias bind builtin caller command declare echo enable help let local logout mapfile printf read readarray source type typeset ulimit unalias set shopt autoload bg bindkey bye cap chdir clone comparguments compcall compctl compdescribe compfiles compgroups compquote comptags comptry compvalues dirs disable disown echotc echoti emulate fc fg float functions getcap getln history integer jobs kill limit log noglob popd print pushd pushln rehash sched setcap setopt stat suspend ttyctl unfunction unhash unlimit unsetopt vared wait whence where which zcompile zformat zftp zle zmodload zparseopts zprof zpty zregexparse zsocket zstyle ztcp",
-            _: "-ne -eq -lt -gt -f -d -e -s -l -a"
+            _: "-ne -eq -lt -gt -f -d -e -s -l -a",
         },
         c: [
             { cN: "meta", b: /^#![^\n]+sh\s*$/, r: 10 },
@@ -559,13 +559,13 @@ hljs.registerLanguage("bash", function (e) {
                 b: /\w[\w\d_]*\s*\(\s*\)\s*\{/,
                 rB: !0,
                 c: [e.inherit(e.TM, { b: /\w[\w\d_]*/ })],
-                r: 0
+                r: 0,
             },
             e.HCM,
             s,
             a,
-            t
-        ]
+            t,
+        ],
     };
 });
 hljs.registerLanguage("javascript", function (e) {
@@ -575,16 +575,16 @@ hljs.registerLanguage("javascript", function (e) {
                 "in of if for while finally var new function do return void else break catch instanceof with throw case default try this switch continue typeof delete let yield const export super debugger as async await static import from as",
             literal: "true false null undefined NaN Infinity",
             built_in:
-                "eval isFinite isNaN parseFloat parseInt decodeURI decodeURIComponent encodeURI encodeURIComponent escape unescape Object Function Boolean Error EvalError InternalError RangeError ReferenceError StopIteration SyntaxError TypeError URIError Number Math Date String RegExp Array Float32Array Float64Array Int16Array Int32Array Int8Array Uint16Array Uint32Array Uint8Array Uint8ClampedArray ArrayBuffer DataView JSON Intl arguments require module console window document Symbol Set Map WeakSet WeakMap Proxy Reflect Promise"
+                "eval isFinite isNaN parseFloat parseInt decodeURI decodeURIComponent encodeURI encodeURIComponent escape unescape Object Function Boolean Error EvalError InternalError RangeError ReferenceError StopIteration SyntaxError TypeError URIError Number Math Date String RegExp Array Float32Array Float64Array Int16Array Int32Array Int8Array Uint16Array Uint32Array Uint8Array Uint8ClampedArray ArrayBuffer DataView JSON Intl arguments require module console window document Symbol Set Map WeakSet WeakMap Proxy Reflect Promise",
         },
         a = {
             cN: "number",
             v: [
                 { b: "\\b(0[bB][01]+)" },
                 { b: "\\b(0[oO][0-7]+)" },
-                { b: e.CNR }
+                { b: e.CNR },
             ],
-            r: 0
+            r: 0,
         },
         n = { cN: "subst", b: "\\$\\{", e: "\\}", k: t, c: [] },
         c = { cN: "string", b: "`", e: "`", c: [e.BE, n] };
@@ -610,9 +610,9 @@ hljs.registerLanguage("javascript", function (e) {
                         b: r + "\\s*:",
                         rB: !0,
                         r: 0,
-                        c: [{ cN: "attr", b: r, r: 0 }]
-                    }
-                ]
+                        c: [{ cN: "attr", b: r, r: 0 }],
+                    },
+                ],
             },
             {
                 b: "(" + e.RSR + "|\\b(case|return|throw)\\b)\\s*",
@@ -638,11 +638,11 @@ hljs.registerLanguage("javascript", function (e) {
                                         eB: !0,
                                         eE: !0,
                                         k: t,
-                                        c: s
-                                    }
-                                ]
-                            }
-                        ]
+                                        c: s,
+                                    },
+                                ],
+                            },
+                        ],
                     },
                     {
                         b: /</,
@@ -654,12 +654,12 @@ hljs.registerLanguage("javascript", function (e) {
                                 b: /<\w+/,
                                 e: /(\/\w+|\w+\/)>/,
                                 skip: !0,
-                                c: [{ b: /<\w+\s*\/>/, skip: !0 }, "self"]
-                            }
-                        ]
-                    }
+                                c: [{ b: /<\w+\s*\/>/, skip: !0 }, "self"],
+                            },
+                        ],
+                    },
                 ],
-                r: 0
+                r: 0,
             },
             {
                 cN: "function",
@@ -668,9 +668,9 @@ hljs.registerLanguage("javascript", function (e) {
                 eE: !0,
                 c: [
                     e.inherit(e.TM, { b: r }),
-                    { cN: "params", b: /\(/, e: /\)/, eB: !0, eE: !0, c: s }
+                    { cN: "params", b: /\(/, e: /\)/, eB: !0, eE: !0, c: s },
                 ],
-                i: /\[|%/
+                i: /\[|%/,
             },
             { b: /\$[(.]/ },
             e.METHOD_GUARD,
@@ -680,11 +680,11 @@ hljs.registerLanguage("javascript", function (e) {
                 e: /[{;=]/,
                 eE: !0,
                 i: /[:"\[\]]/,
-                c: [{ bK: "extends" }, e.UTM]
+                c: [{ bK: "extends" }, e.UTM],
             },
-            { bK: "constructor", e: /\{/, eE: !0 }
+            { bK: "constructor", e: /\{/, eE: !0 },
         ],
-        i: /#(?!!)/
+        i: /#(?!!)/,
     };
 });
 hljs.registerLanguage("less", function (e) {
@@ -707,7 +707,7 @@ hljs.registerLanguage("less", function (e) {
         e.CSSNM,
         {
             b: "(url|data-uri)\\(",
-            starts: { cN: "string", e: "[\\)\\n]", eE: !0 }
+            starts: { cN: "string", e: "[\\)\\n]", eE: !0 },
         },
         b("number", "#[0-9A-Fa-f]+\\b"),
         n,
@@ -715,7 +715,7 @@ hljs.registerLanguage("less", function (e) {
         b("variable", "@{" + r + "}"),
         b("built_in", "~?`[^`]*?`"),
         { cN: "attribute", b: r + "\\s*:", e: ":", rB: !0, eE: !0 },
-        { cN: "meta", b: "!important" }
+        { cN: "meta", b: "!important" },
     );
     var i = c.concat({ b: "{", e: "}", c: a }),
         o = { bK: "when", eW: !0, c: [{ bK: "and not" }].concat(c) },
@@ -730,25 +730,25 @@ hljs.registerLanguage("less", function (e) {
                     b: t,
                     e: ":",
                     eE: !0,
-                    starts: { eW: !0, i: "[<=$]", r: 0, c: c }
-                }
-            ]
+                    starts: { eW: !0, i: "[<=$]", r: 0, c: c },
+                },
+            ],
         },
         l = {
             cN: "keyword",
             b:
                 "@(import|media|charset|font-face|(-[a-z]+-)?keyframes|supports|document|namespace|page|viewport|host)\\b",
-            starts: { e: "[;{}]", rE: !0, c: c, r: 0 }
+            starts: { e: "[;{}]", rE: !0, c: c, r: 0 },
         },
         C = {
             cN: "variable",
             v: [{ b: "@" + r + "\\s*:", r: 15 }, { b: "@" + r }],
-            starts: { e: "[;}]", rE: !0, c: i }
+            starts: { e: "[;}]", rE: !0, c: i },
         },
         p = {
             v: [
                 { b: "[\\.#:&\\[>]", e: "[;{}]" },
-                { b: t, e: "{" }
+                { b: t, e: "{" },
             ],
             rB: !0,
             rE: !0,
@@ -767,8 +767,8 @@ hljs.registerLanguage("less", function (e) {
                 { cN: "selector-attr", b: "\\[", e: "\\]" },
                 { cN: "selector-pseudo", b: /:(:)?[a-zA-Z0-9\_\-\+\(\)"'.]+/ },
                 { b: "\\(", e: "\\)", c: i },
-                { b: "!important" }
-            ]
+                { b: "!important" },
+            ],
         };
     return (
         a.push(e.CLCM, e.CBCM, l, C, u, p), { cI: !0, i: "[=>'/<($\"]", c: a }
@@ -792,12 +792,12 @@ hljs.registerLanguage("xml", function (s) {
                             v: [
                                 { b: /"/, e: /"/ },
                                 { b: /'/, e: /'/ },
-                                { b: /[^\s"'=<>`]+/ }
-                            ]
-                        }
-                    ]
-                }
-            ]
+                                { b: /[^\s"'=<>`]+/ },
+                            ],
+                        },
+                    ],
+                },
+            ],
         };
     return {
         aliases: ["html", "xhtml", "rss", "atom", "xjb", "xsd", "xsl", "plist"],
@@ -808,7 +808,7 @@ hljs.registerLanguage("xml", function (s) {
                 b: "<!DOCTYPE",
                 e: ">",
                 r: 10,
-                c: [{ b: "\\[", e: "\\]" }]
+                c: [{ b: "\\[", e: "\\]" }],
             },
             s.C("<!--", "-->", { r: 10 }),
             { b: "<\\!\\[CDATA\\[", e: "\\]\\]>", r: 10 },
@@ -816,7 +816,7 @@ hljs.registerLanguage("xml", function (s) {
                 b: /<\?(php)?/,
                 e: /\?>/,
                 sL: "php",
-                c: [{ b: "/\\*", e: "\\*/", skip: !0 }]
+                c: [{ b: "/\\*", e: "\\*/", skip: !0 }],
             },
             {
                 cN: "tag",
@@ -824,7 +824,7 @@ hljs.registerLanguage("xml", function (s) {
                 e: ">",
                 k: { name: "style" },
                 c: [t],
-                starts: { e: "</style>", rE: !0, sL: ["css", "xml"] }
+                starts: { e: "</style>", rE: !0, sL: ["css", "xml"] },
             },
             {
                 cN: "tag",
@@ -835,23 +835,23 @@ hljs.registerLanguage("xml", function (s) {
                 starts: {
                     e: "</script>",
                     rE: !0,
-                    sL: ["actionscript", "javascript", "handlebars", "xml"]
-                }
+                    sL: ["actionscript", "javascript", "handlebars", "xml"],
+                },
             },
             {
                 cN: "meta",
                 v: [
                     { b: /<\?xml/, e: /\?>/, r: 10 },
-                    { b: /<\?\w+/, e: /\?>/ }
-                ]
+                    { b: /<\?\w+/, e: /\?>/ },
+                ],
             },
             {
                 cN: "tag",
                 b: "</?",
                 e: "/?>",
-                c: [{ cN: "name", b: /[^\/><\s]+/, r: 0 }, t]
-            }
-        ]
+                c: [{ cN: "name", b: /[^\/><\s]+/, r: 0 }, t],
+            },
+        ],
     };
 });
 hljs.registerLanguage("markdown", function (e) {
@@ -860,7 +860,7 @@ hljs.registerLanguage("markdown", function (e) {
         c: [
             {
                 cN: "section",
-                v: [{ b: "^#{1,6}", e: "$" }, { b: "^.+?\\n[=-]{2,}$" }]
+                v: [{ b: "^#{1,6}", e: "$" }, { b: "^.+?\\n[=-]{2,}$" }],
             },
             { b: "<", e: ">", sL: "xml", r: 0 },
             { cN: "bullet", b: "^([*+-]|(\\d+\\.))\\s+" },
@@ -872,8 +872,8 @@ hljs.registerLanguage("markdown", function (e) {
                 v: [
                     { b: "^```w*s*$", e: "^```s*$" },
                     { b: "`.+?`" },
-                    { b: "^( {4}|	)", e: "$", r: 0 }
-                ]
+                    { b: "^( {4}|	)", e: "$", r: 0 },
+                ],
             },
             { b: "^[-\\*]{3,}", e: "$" },
             {
@@ -882,19 +882,19 @@ hljs.registerLanguage("markdown", function (e) {
                 c: [
                     { cN: "string", b: "\\[", e: "\\]", eB: !0, rE: !0, r: 0 },
                     { cN: "link", b: "\\]\\(", e: "\\)", eB: !0, eE: !0 },
-                    { cN: "symbol", b: "\\]\\[", e: "\\]", eB: !0, eE: !0 }
+                    { cN: "symbol", b: "\\]\\[", e: "\\]", eB: !0, eE: !0 },
                 ],
-                r: 10
+                r: 10,
             },
             {
                 b: /^\[[^\n]+\]:/,
                 rB: !0,
                 c: [
                     { cN: "symbol", b: /\[/, e: /\]/, eB: !0, eE: !0 },
-                    { cN: "link", b: /:\s*/, e: /$/, eB: !0 }
-                ]
-            }
-        ]
+                    { cN: "link", b: /:\s*/, e: /$/, eB: !0 },
+                ],
+            },
+        ],
     };
 });
 hljs.registerLanguage("scss", function (e) {
@@ -916,9 +916,9 @@ hljs.registerLanguage("scss", function (e) {
                 e.QSM,
                 e.ASM,
                 e.CBCM,
-                { cN: "meta", b: "!important" }
-            ]
-        }
+                { cN: "meta", b: "!important" },
+            ],
+        },
     });
     return {
         cI: !0,
@@ -933,26 +933,26 @@ hljs.registerLanguage("scss", function (e) {
                 cN: "selector-tag",
                 b:
                     "\\b(a|abbr|acronym|address|area|article|aside|audio|b|base|big|blockquote|body|br|button|canvas|caption|cite|code|col|colgroup|command|datalist|dd|del|details|dfn|div|dl|dt|em|embed|fieldset|figcaption|figure|footer|form|frame|frameset|(h[1-6])|head|header|hgroup|hr|html|i|iframe|img|input|ins|kbd|keygen|label|legend|li|link|map|mark|meta|meter|nav|noframes|noscript|object|ol|optgroup|option|output|p|param|pre|progress|q|rp|rt|ruby|samp|script|section|select|small|span|strike|strong|style|sub|sup|table|tbody|td|textarea|tfoot|th|thead|time|title|tr|tt|ul|var|video)\\b",
-                r: 0
+                r: 0,
             },
             {
                 b:
-                    ":(visited|valid|root|right|required|read-write|read-only|out-range|optional|only-of-type|only-child|nth-of-type|nth-last-of-type|nth-last-child|nth-child|not|link|left|last-of-type|last-child|lang|invalid|indeterminate|in-range|hover|focus|first-of-type|first-line|first-letter|first-child|first|enabled|empty|disabled|default|checked|before|after|active)"
+                    ":(visited|valid|root|right|required|read-write|read-only|out-range|optional|only-of-type|only-child|nth-of-type|nth-last-of-type|nth-last-child|nth-child|not|link|left|last-of-type|last-child|lang|invalid|indeterminate|in-range|hover|focus|first-of-type|first-line|first-letter|first-child|first|enabled|empty|disabled|default|checked|before|after|active)",
             },
             {
                 b:
-                    "::(after|before|choices|first-letter|first-line|repeat-index|repeat-item|selection|value)"
+                    "::(after|before|choices|first-letter|first-line|repeat-index|repeat-item|selection|value)",
             },
             i,
             {
                 cN: "attribute",
                 b:
                     "\\b(z-index|word-wrap|word-spacing|word-break|width|widows|white-space|visibility|vertical-align|unicode-bidi|transition-timing-function|transition-property|transition-duration|transition-delay|transition|transform-style|transform-origin|transform|top|text-underline-position|text-transform|text-shadow|text-rendering|text-overflow|text-indent|text-decoration-style|text-decoration-line|text-decoration-color|text-decoration|text-align-last|text-align|tab-size|table-layout|right|resize|quotes|position|pointer-events|perspective-origin|perspective|page-break-inside|page-break-before|page-break-after|padding-top|padding-right|padding-left|padding-bottom|padding|overflow-y|overflow-x|overflow-wrap|overflow|outline-width|outline-style|outline-offset|outline-color|outline|orphans|order|opacity|object-position|object-fit|normal|none|nav-up|nav-right|nav-left|nav-index|nav-down|min-width|min-height|max-width|max-height|mask|marks|margin-top|margin-right|margin-left|margin-bottom|margin|list-style-type|list-style-position|list-style-image|list-style|line-height|letter-spacing|left|justify-content|initial|inherit|ime-mode|image-orientation|image-resolution|image-rendering|icon|hyphens|height|font-weight|font-variant-ligatures|font-variant|font-style|font-stretch|font-size-adjust|font-size|font-language-override|font-kerning|font-feature-settings|font-family|font|float|flex-wrap|flex-shrink|flex-grow|flex-flow|flex-direction|flex-basis|flex|filter|empty-cells|display|direction|cursor|counter-reset|counter-increment|content|column-width|column-span|column-rule-width|column-rule-style|column-rule-color|column-rule|column-gap|column-fill|column-count|columns|color|clip-path|clip|clear|caption-side|break-inside|break-before|break-after|box-sizing|box-shadow|box-decoration-break|bottom|border-width|border-top-width|border-top-style|border-top-right-radius|border-top-left-radius|border-top-color|border-top|border-style|border-spacing|border-right-width|border-right-style|border-right-color|border-right|border-radius|border-left-width|border-left-style|border-left-color|border-left|border-image-width|border-image-source|border-image-slice|border-image-repeat|border-image-outset|border-image|border-color|border-collapse|border-bottom-width|border-bottom-style|border-bottom-right-radius|border-bottom-left-radius|border-bottom-color|border-bottom|border|background-size|background-repeat|background-position|background-origin|background-image|background-color|background-clip|background-attachment|background-blend-mode|background|backface-visibility|auto|animation-timing-function|animation-play-state|animation-name|animation-iteration-count|animation-fill-mode|animation-duration|animation-direction|animation-delay|animation|align-self|align-items|align-content)\\b",
-                i: "[^\\s]"
+                i: "[^\\s]",
             },
             {
                 b:
-                    "\\b(whitespace|wait|w-resize|visible|vertical-text|vertical-ideographic|uppercase|upper-roman|upper-alpha|underline|transparent|top|thin|thick|text|text-top|text-bottom|tb-rl|table-header-group|table-footer-group|sw-resize|super|strict|static|square|solid|small-caps|separate|se-resize|scroll|s-resize|rtl|row-resize|ridge|right|repeat|repeat-y|repeat-x|relative|progress|pointer|overline|outside|outset|oblique|nowrap|not-allowed|normal|none|nw-resize|no-repeat|no-drop|newspaper|ne-resize|n-resize|move|middle|medium|ltr|lr-tb|lowercase|lower-roman|lower-alpha|loose|list-item|line|line-through|line-edge|lighter|left|keep-all|justify|italic|inter-word|inter-ideograph|inside|inset|inline|inline-block|inherit|inactive|ideograph-space|ideograph-parenthesis|ideograph-numeric|ideograph-alpha|horizontal|hidden|help|hand|groove|fixed|ellipsis|e-resize|double|dotted|distribute|distribute-space|distribute-letter|distribute-all-lines|disc|disabled|default|decimal|dashed|crosshair|collapse|col-resize|circle|char|center|capitalize|break-word|break-all|bottom|both|bolder|bold|block|bidi-override|below|baseline|auto|always|all-scroll|absolute|table|table-cell)\\b"
+                    "\\b(whitespace|wait|w-resize|visible|vertical-text|vertical-ideographic|uppercase|upper-roman|upper-alpha|underline|transparent|top|thin|thick|text|text-top|text-bottom|tb-rl|table-header-group|table-footer-group|sw-resize|super|strict|static|square|solid|small-caps|separate|se-resize|scroll|s-resize|rtl|row-resize|ridge|right|repeat|repeat-y|repeat-x|relative|progress|pointer|overline|outside|outset|oblique|nowrap|not-allowed|normal|none|nw-resize|no-repeat|no-drop|newspaper|ne-resize|n-resize|move|middle|medium|ltr|lr-tb|lowercase|lower-roman|lower-alpha|loose|list-item|line|line-through|line-edge|lighter|left|keep-all|justify|italic|inter-word|inter-ideograph|inside|inset|inline|inline-block|inherit|inactive|ideograph-space|ideograph-parenthesis|ideograph-numeric|ideograph-alpha|horizontal|hidden|help|hand|groove|fixed|ellipsis|e-resize|double|dotted|distribute|distribute-space|distribute-letter|distribute-all-lines|disc|disabled|default|decimal|dashed|crosshair|collapse|col-resize|circle|char|center|capitalize|break-word|break-all|bottom|both|bolder|bold|block|bidi-override|below|baseline|auto|always|all-scroll|absolute|table|table-cell)\\b",
             },
             {
                 b: ":",
@@ -963,8 +963,8 @@ hljs.registerLanguage("scss", function (e) {
                     e.CSSNM,
                     e.QSM,
                     e.ASM,
-                    { cN: "meta", b: "!important" }
-                ]
+                    { cN: "meta", b: "!important" },
+                ],
             },
             {
                 b: "@",
@@ -977,10 +977,10 @@ hljs.registerLanguage("scss", function (e) {
                     e.ASM,
                     r,
                     e.CSSNM,
-                    { b: "\\s[A-Za-z0-9_.-]+", r: 0 }
-                ]
-            }
-        ]
+                    { b: "\\s[A-Za-z0-9_.-]+", r: 0 },
+                ],
+            },
+        ],
     };
 });
 hljs.registerLanguage("dust", function (e) {
@@ -999,12 +999,12 @@ hljs.registerLanguage("dust", function (e) {
                     {
                         cN: "name",
                         b: /[a-zA-Z\.-]+/,
-                        starts: { eW: !0, r: 0, c: [e.QSM] }
-                    }
-                ]
+                        starts: { eW: !0, r: 0, c: [e.QSM] },
+                    },
+                ],
             },
-            { cN: "template-variable", b: /\{/, e: /\}/, i: /;/, k: t }
-        ]
+            { cN: "template-variable", b: /\{/, e: /\}/, i: /;/, k: t },
+        ],
     };
 });
 hljs.registerLanguage("shell", function (s) {
@@ -1014,9 +1014,9 @@ hljs.registerLanguage("shell", function (s) {
             {
                 cN: "meta",
                 b: "^\\s{0,3}[\\w\\d\\[\\]()@-]*[>%$#]",
-                starts: { e: "$", sL: "bash" }
-            }
-        ]
+                starts: { e: "$", sL: "bash" },
+            },
+        ],
     };
 });
 hljs.registerLanguage("css", function (e) {
@@ -1041,19 +1041,19 @@ hljs.registerLanguage("css", function (e) {
                                 rB: !0,
                                 c: [
                                     { cN: "built_in", b: /[\w-]+/ },
-                                    { b: /\(/, e: /\)/, c: [e.ASM, e.QSM] }
-                                ]
+                                    { b: /\(/, e: /\)/, c: [e.ASM, e.QSM] },
+                                ],
                             },
                             e.CSSNM,
                             e.QSM,
                             e.ASM,
                             e.CBCM,
                             { cN: "number", b: "#[0-9A-Fa-f]+" },
-                            { cN: "meta", b: "!important" }
-                        ]
-                    }
-                }
-            ]
+                            { cN: "meta", b: "!important" },
+                        ],
+                    },
+                },
+            ],
         };
     return {
         cI: !0,
@@ -1076,13 +1076,13 @@ hljs.registerLanguage("css", function (e) {
                         eW: !0,
                         eE: !0,
                         r: 0,
-                        c: [e.ASM, e.QSM, e.CSSNM]
-                    }
-                ]
+                        c: [e.ASM, e.QSM, e.CSSNM],
+                    },
+                ],
             },
             { cN: "selector-tag", b: c, r: 0 },
-            { b: "{", e: "}", i: /\S/, c: [e.CBCM, t] }
-        ]
+            { b: "{", e: "}", i: /\S/, c: [e.CBCM, t] },
+        ],
     };
 });
 hljs.registerLanguage("typescript", function (e) {
@@ -1091,7 +1091,7 @@ hljs.registerLanguage("typescript", function (e) {
             "in if for while finally var new function do return void else break catch instanceof with throw case default try this switch continue typeof delete let yield const class public private protected get set super static implements enum export import declare type namespace abstract as from extends async await",
         literal: "true false null undefined NaN Infinity",
         built_in:
-            "eval isFinite isNaN parseFloat parseInt decodeURI decodeURIComponent encodeURI encodeURIComponent escape unescape Object Function Boolean Error EvalError InternalError RangeError ReferenceError StopIteration SyntaxError TypeError URIError Number Math Date String RegExp Array Float32Array Float64Array Int16Array Int32Array Int8Array Uint16Array Uint32Array Uint8Array Uint8ClampedArray ArrayBuffer DataView JSON Intl arguments require module console window document any number boolean string void Promise"
+            "eval isFinite isNaN parseFloat parseInt decodeURI decodeURIComponent encodeURI encodeURIComponent escape unescape Object Function Boolean Error EvalError InternalError RangeError ReferenceError StopIteration SyntaxError TypeError URIError Number Math Date String RegExp Array Float32Array Float64Array Int16Array Int32Array Int8Array Uint16Array Uint32Array Uint8Array Uint8ClampedArray ArrayBuffer DataView JSON Intl arguments require module console window document any number boolean string void Promise",
     };
     return {
         aliases: ["ts"],
@@ -1104,7 +1104,7 @@ hljs.registerLanguage("typescript", function (e) {
                 cN: "string",
                 b: "`",
                 e: "`",
-                c: [e.BE, { cN: "subst", b: "\\$\\{", e: "\\}" }]
+                c: [e.BE, { cN: "subst", b: "\\$\\{", e: "\\}" }],
             },
             e.CLCM,
             e.CBCM,
@@ -1113,9 +1113,9 @@ hljs.registerLanguage("typescript", function (e) {
                 v: [
                     { b: "\\b(0[bB][01]+)" },
                     { b: "\\b(0[oO][0-7]+)" },
-                    { b: e.CNR }
+                    { b: e.CNR },
                 ],
-                r: 0
+                r: 0,
             },
             {
                 b: "(" + e.RSR + "|\\b(case|return|throw)\\b)\\s*",
@@ -1141,14 +1141,14 @@ hljs.registerLanguage("typescript", function (e) {
                                         eB: !0,
                                         eE: !0,
                                         k: r,
-                                        c: ["self", e.CLCM, e.CBCM]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
+                                        c: ["self", e.CLCM, e.CBCM],
+                                    },
+                                ],
+                            },
+                        ],
+                    },
                 ],
-                r: 0
+                r: 0,
             },
             {
                 cN: "function",
@@ -1167,11 +1167,11 @@ hljs.registerLanguage("typescript", function (e) {
                         eE: !0,
                         k: r,
                         c: [e.CLCM, e.CBCM],
-                        i: /["'\(]/
-                    }
+                        i: /["'\(]/,
+                    },
                 ],
                 i: /%/,
-                r: 0
+                r: 0,
             },
             {
                 bK: "constructor",
@@ -1187,16 +1187,16 @@ hljs.registerLanguage("typescript", function (e) {
                         eE: !0,
                         k: r,
                         c: [e.CLCM, e.CBCM],
-                        i: /["'\(]/
-                    }
-                ]
+                        i: /["'\(]/,
+                    },
+                ],
             },
             { b: /module\./, k: { built_in: "module" }, r: 0 },
             { bK: "module", e: /\{/, eE: !0 },
             { bK: "interface", e: /\{/, eE: !0, k: "interface extends" },
             { b: /\$[(.]/ },
             { b: "\\." + e.IR, r: 0 },
-            { cN: "meta", b: "@[A-Za-z]+" }
-        ]
+            { cN: "meta", b: "@[A-Za-z]+" },
+        ],
     };
 });

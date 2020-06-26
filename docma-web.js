@@ -15,7 +15,7 @@
     }
 })(this, function () {
     var dust = {
-            version: "2.7.5"
+            version: "2.7.5",
         },
         NONE = "NONE",
         ERROR = "ERROR",
@@ -28,7 +28,7 @@
         whitespace: false,
         amd: false,
         cjs: false,
-        cache: true
+        cache: true,
     };
 
     // Directive aliases to minify code
@@ -43,7 +43,7 @@
         notexists: "nx",
         block: "b",
         partial: "p",
-        helper: "h"
+        helper: "h",
     };
 
     (function initLogging() {
@@ -61,7 +61,7 @@
             } else {
                 log = function () {
                     consoleLog(
-                        Array.prototype.slice.apply(arguments).join(" ")
+                        Array.prototype.slice.apply(arguments).join(" "),
                     );
                 };
             }
@@ -159,7 +159,7 @@
     function load(nameOrTemplate, chunk, context) {
         if (!nameOrTemplate) {
             return chunk.setError(
-                new Error("No template or template name provided to render")
+                new Error("No template or template name provided to render"),
             );
         }
 
@@ -168,7 +168,7 @@
         if (template) {
             return template(
                 chunk,
-                Context.wrap(context, template.templateName)
+                Context.wrap(context, template.templateName),
             );
         } else {
             if (dust.onLoad) {
@@ -192,17 +192,17 @@
                             // It's a template string, compile it and register under `name`
                             if (dust.compile) {
                                 template = dust.loadSource(
-                                    dust.compile(srcOrTemplate, name)
+                                    dust.compile(srcOrTemplate, name),
                                 );
                             } else {
                                 return chunk.setError(
-                                    new Error("Dust compiler not available")
+                                    new Error("Dust compiler not available"),
                                 );
                             }
                         }
                         template(
                             chunk,
-                            Context.wrap(context, template.templateName)
+                            Context.wrap(context, template.templateName),
                         ).end();
                     }
 
@@ -214,7 +214,7 @@
                 });
             }
             return chunk.setError(
-                new Error("Template Not Found: " + nameOrTemplate)
+                new Error("Template Not Found: " + nameOrTemplate),
             );
         }
     }
@@ -341,13 +341,13 @@
             if (!JSON) {
                 dust.log(
                     "JSON is undefined; could not parse `" + value + "`",
-                    WARN
+                    WARN,
                 );
                 return value;
             } else {
                 return JSON.parse(value);
             }
-        }
+        },
     };
 
     function Context(stack, global, options, blocks, templateName) {
@@ -471,7 +471,7 @@
                 if (dust.isThenable(ctx)) {
                     // Bail early by returning a Thenable for the remainder of the search tree
                     return ctx.then(
-                        getWithResolvedData(this, cur, down.slice(i))
+                        getWithResolvedData(this, cur, down.slice(i)),
                     );
                 }
                 ctxThis = ctx;
@@ -499,7 +499,7 @@
                         "}` in template `" +
                         this.getTemplateName() +
                         "`",
-                    INFO
+                    INFO,
                 );
             }
             return ctx;
@@ -514,7 +514,7 @@
         if (head === undefined) {
             dust.log(
                 "Not pushing an undefined variable onto the context",
-                INFO
+                INFO,
             );
             return this;
         }
@@ -533,7 +533,7 @@
             this.global,
             this.options,
             this.blocks,
-            this.getTemplateName()
+            this.getTemplateName(),
         );
     };
 
@@ -563,7 +563,7 @@
                     "` in template `" +
                     this.getTemplateName() +
                     "`",
-                DEBUG
+                DEBUG,
             );
             return false;
         }
@@ -579,7 +579,7 @@
         dust.log(
             "Malformed template `" +
                 this.getTemplateName() +
-                "` was missing one or more blocks."
+                "` was missing one or more blocks.",
         );
         return false;
     };
@@ -599,7 +599,7 @@
                 this.global,
                 this.options,
                 newBlocks,
-                this.getTemplateName()
+                this.getTemplateName(),
             );
         }
         return this;
@@ -646,7 +646,7 @@
                 this.callback(chunk.error);
                 dust.log(
                     "Rendering failed with error `" + chunk.error + "`",
-                    ERROR
+                    ERROR,
                 );
                 this.flush = EMPTY_FUNC;
                 return;
@@ -677,7 +677,7 @@
                 this.emit("end");
                 dust.log(
                     "Streaming failed with error `" + chunk.error + "`",
-                    ERROR
+                    ERROR,
                 );
                 this.flush = EMPTY_FUNC;
                 return;
@@ -704,7 +704,7 @@
         if (!handlers.length) {
             dust.log(
                 "Stream broadcasting, but no listeners for `" + type + "`",
-                DEBUG
+                DEBUG,
             );
             return false;
         }
@@ -725,7 +725,7 @@
                 "No callback function provided for `" +
                     type +
                     "` event listener",
-                WARN
+                WARN,
             );
         } else {
             handlers.push(callback);
@@ -850,7 +850,7 @@
                 this,
                 context,
                 null,
-                { auto: auto, filters: filters }
+                { auto: auto, filters: filters },
             ]);
             if (elem instanceof Chunk) {
                 return elem;
@@ -883,7 +883,7 @@
                     this,
                     context,
                     bodies,
-                    params
+                    params,
                 ]);
             } catch (err) {
                 dust.log(err, ERROR);
@@ -953,7 +953,7 @@
             "Section without corresponding key in template `" +
                 context.getTemplateName() +
                 "`",
-            DEBUG
+            DEBUG,
         );
         return this;
     };
@@ -970,7 +970,7 @@
                 "No block for exists check in template `" +
                     context.getTemplateName() +
                     "`",
-                DEBUG
+                DEBUG,
             );
         } else if (skip) {
             return skip(this, context);
@@ -990,7 +990,7 @@
                 "No block for not-exists check in template `" +
                     context.getTemplateName() +
                     "`",
-                DEBUG
+                DEBUG,
             );
         } else if (skip) {
             return skip(this, context);
@@ -1065,7 +1065,7 @@
             } catch (err) {
                 dust.log(
                     "Error in helper `" + name + "`: " + err.message,
-                    ERROR
+                    ERROR,
                 );
                 return chunk.setError(err);
             }
@@ -1089,7 +1089,7 @@
         context,
         bodies,
         auto,
-        filters
+        filters,
     ) {
         return this.map(function (chunk) {
             thenable.then(
@@ -1111,11 +1111,11 @@
                             "Unhandled promise rejection in `" +
                                 context.getTemplateName() +
                                 "`",
-                            INFO
+                            INFO,
                         );
                         chunk.end();
                     }
-                }
+                },
             );
         });
     };
@@ -1161,7 +1161,7 @@
                             "Unhandled stream error in `" +
                                 context.getTemplateName() +
                                 "`",
-                            INFO
+                            INFO,
                         );
                     }
                     if (!ended) {
@@ -1335,13 +1335,13 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             "Deprecation warning: " +
                 target +
                 " is deprecated and will be removed in a future version of dustjs-helpers",
-            "WARN"
+            "WARN",
         );
         log(
             null,
             "For help and a deprecation timeline, see https://github.com/linkedin/dustjs-helpers/wiki/Deprecated-Features#" +
                 target.replace(/\W+/g, ""),
-            "WARN"
+            "WARN",
         );
         _deprecatedCache[target] = true;
     }
@@ -1377,7 +1377,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             isPending: false,
             isResolved: false,
             isDeferredComplete: false,
-            deferreds: []
+            deferreds: [],
         };
 
         for (key in opts) {
@@ -1622,7 +1622,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                     log(
                         "math",
                         "Method `" + method + "` is not supported",
-                        "ERROR"
+                        "ERROR",
                     );
             }
 
@@ -1711,7 +1711,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                     log(
                         "any",
                         "Must not be nested inside {@any} or {@none} block",
-                        "ERROR"
+                        "ERROR",
                     );
                 } else {
                     chunk = chunk.map(function (chunk) {
@@ -1743,7 +1743,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                     log(
                         "none",
                         "Must not be nested inside {@any} or {@none} block",
-                        "ERROR"
+                        "ERROR",
                     );
                 } else {
                     chunk = chunk.map(function (chunk) {
@@ -1793,7 +1793,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 value = (key + "").length;
             }
             return chunk.write(value);
-        }
+        },
     };
 
     for (var key in helpers) {
@@ -1843,9 +1843,9 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             // "/:test(\\d+)?" => ["/", "test", "\d+", undefined, "?", undefined]
             // "/route(\\d+)"  => [undefined, undefined, undefined, "\d+", undefined, undefined]
             // "/*"            => ["/", undefined, undefined, undefined, undefined, "*"]
-            "([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^()])+)\\))?|\\(((?:\\\\.|[^()])+)\\))([+*?])?|(\\*))"
+            "([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^()])+)\\))?|\\(((?:\\\\.|[^()])+)\\))([+*?])?|(\\*))",
         ].join("|"),
-        "g"
+        "g",
     );
 
     /**
@@ -1901,7 +1901,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 delimiter: delimiter,
                 optional: optional,
                 repeat: repeat,
-                pattern: escapeGroup(pattern)
+                pattern: escapeGroup(pattern),
             });
         }
 
@@ -1963,7 +1963,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                         continue;
                     } else {
                         throw new TypeError(
-                            'Expected "' + token.name + '" to be defined'
+                            'Expected "' + token.name + '" to be defined',
                         );
                     }
                 }
@@ -1975,7 +1975,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                                 token.name +
                                 '" to not repeat, but received "' +
                                 value +
-                                '"'
+                                '"',
                         );
                     }
 
@@ -1984,7 +1984,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                             continue;
                         } else {
                             throw new TypeError(
-                                'Expected "' + token.name + '" to not be empty'
+                                'Expected "' + token.name + '" to not be empty',
                             );
                         }
                     }
@@ -2000,7 +2000,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                                     token.pattern +
                                     '", but received "' +
                                     segment +
-                                    '"'
+                                    '"',
                             );
                         }
 
@@ -2022,7 +2022,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                             token.pattern +
                             '", but received "' +
                             segment +
-                            '"'
+                            '"',
                     );
                 }
 
@@ -2094,7 +2094,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                     delimiter: null,
                     optional: false,
                     repeat: false,
-                    pattern: null
+                    pattern: null,
                 });
             }
         }
@@ -2325,13 +2325,13 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             _window.document.addEventListener(
                 clickEvent,
                 this.clickHandler,
-                false
+                false,
             );
         } else if (hasDocument) {
             _window.document.removeEventListener(
                 clickEvent,
                 this.clickHandler,
-                false
+                false,
             );
         }
 
@@ -2438,7 +2438,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             window.document.removeEventListener(
                 clickEvent,
                 this.clickHandler,
-                false
+                false,
             );
         hasWindow &&
             window.removeEventListener("popstate", this._onpopstate, false);
@@ -2730,7 +2730,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                     loc.pathname + loc.search + loc.hash,
                     undefined,
                     undefined,
-                    false
+                    false,
                 );
             }
         };
@@ -2841,7 +2841,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             },
             set: function (val) {
                 pageInstance.len = val;
-            }
+            },
         });
 
         Object.defineProperty(pageFn, "current", {
@@ -2850,7 +2850,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             },
             set: function (val) {
                 pageInstance.current = val;
-            }
+            },
         });
 
         // In 2.0 these can be named exports
@@ -2951,7 +2951,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 .split("/")
                 .filter((o) => o.length)
                 .pop() + "/",
-            ""
+            "",
         );
 
         var pageBase = _page._getBase();
@@ -2971,7 +2971,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             ? _page._decodeURLEncodedURIComponent(path.slice(i + 1))
             : "";
         this.pathname = _page._decodeURLEncodedURIComponent(
-            ~i ? path.slice(0, i) : path
+            ~i ? path.slice(0, i) : path,
         );
         this.params = {};
 
@@ -3004,7 +3004,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 this.title,
                 hashbang && this.path !== "/"
                     ? "#!" + this.path
-                    : this.canonicalPath
+                    : this.canonicalPath,
             );
         }
     };
@@ -3023,7 +3023,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 this.title,
                 page._hashbang && this.path !== "/"
                     ? "#!" + this.path
-                    : this.canonicalPath
+                    : this.canonicalPath,
             );
         }
     };
@@ -3269,8 +3269,8 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                         ? listener
                         : {
                               listener: listener,
-                              once: false
-                          }
+                              once: false,
+                          },
                 );
             }
         }
@@ -3294,7 +3294,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
     proto.addOnceListener = function addOnceListener(evt, listener) {
         return this.addListener(evt, {
             listener: listener,
-            once: true
+            once: true,
         });
     };
 
@@ -3404,7 +3404,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
     proto.manipulateListeners = function manipulateListeners(
         remove,
         evt,
-        listeners
+        listeners,
     ) {
         var i;
         var value;
@@ -3608,7 +3608,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
         return chk
             .p("navbar", ctx, ctx, { boxed: "true" })
             .w(
-                '<div id="page-content-wrapper"><div class="container container-boxed"><br /><br /><h1>404</h1><hr /><h3>Page Not Found</h3><br />The file or page you have requested is not found. &nbsp;&nbsp;<br />Please make sure page address is entered correctly.<br /><br /><br /></div></div>'
+                '<div id="page-content-wrapper"><div class="container container-boxed"><br /><br /><h1>404</h1><hr /><h3>Page Not Found</h3><br />The file or page you have requested is not found. &nbsp;&nbsp;<br />Please make sure page address is entered correctly.<br /><br /><br /></div></div>',
             );
     }
     body_0.__dustBody = !0;
@@ -3625,16 +3625,16 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                     "template",
                     "options",
                     "sidebar",
-                    "enabled"
+                    "enabled",
                 ]),
                 ctx,
                 { block: body_1 },
-                {}
+                {},
             )
             .w('<div id="page-content-wrapper"><div class="container"><br />')
             .s(ctx.get(["documentation"], false), ctx, { block: body_2 }, {})
             .w(
-                '<br /><span class="docma-info">Documentation built with <b><a target="_blank" rel="noopener noreferrer" href="https://onury.io/docma">Docma</a></b>.</span></div></div></div>'
+                '<br /><span class="docma-info">Documentation built with <b><a target="_blank" rel="noopener noreferrer" href="https://onury.io/docma">Docma</a></b>.</span></div></div></div>',
             );
     }
     body_0.__dustBody = !0;
@@ -3648,7 +3648,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
     function body_2(chk, ctx) {
         return chk.p("symbol", ctx, ctx, {
             symbol: ctx.getPath(true, []),
-            template: ctx.get(["template"], false)
+            template: ctx.get(["template"], false),
         });
     }
     body_2.__dustBody = !0;
@@ -3666,9 +3666,9 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 { block: body_1 },
                 {
                     key: ctx.getPath(false, ["currentRoute", "sourceType"]),
-                    value: "md"
+                    value: "md",
                 },
-                "h"
+                "h",
             )
             .w('\'><div id="docma-content"></div>')
             .h(
@@ -3677,9 +3677,9 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 { block: body_2 },
                 {
                     key: ctx.getPath(false, ["currentRoute", "sourceType"]),
-                    value: "md"
+                    value: "md",
                 },
-                "h"
+                "h",
             )
             .w("</div></div>");
     }
@@ -3690,7 +3690,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
     body_1.__dustBody = !0;
     function body_2(chk, ctx) {
         return chk.w(
-            '<br /><hr /><span class="docma-info">Documentation built with <b><a target="_blank" rel="noopener noreferrer" href="https://onury.io/docma">Docma</a></b>.</span>'
+            '<br /><hr /><span class="docma-info">Documentation built with <b><a target="_blank" rel="noopener noreferrer" href="https://onury.io/docma">Docma</a></b>.</span>',
         );
     }
     body_2.__dustBody = !0;
@@ -3712,18 +3712,18 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                     "template",
                     "options",
                     "symbols",
-                    "enums"
+                    "enums",
                 ]),
-                value: "table"
+                value: "table",
             },
-            "h"
+            "h",
         );
     }
     body_1.__dustBody = !0;
     function body_2(chk, ctx) {
         return chk
             .w(
-                '<div class="space-top-sm space-bottom-xs fw-bold">Enumeration</div><ul class="param-list">'
+                '<div class="space-top-sm space-bottom-xs fw-bold">Enumeration</div><ul class="param-list">',
             )
             .s(ctx.get(["$members"], false), ctx, { block: body_3 }, {})
             .w("</ul>");
@@ -3732,13 +3732,13 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
     function body_3(chk, ctx) {
         return chk
             .w(
-                '<li><div class="param-meta clearfix"><span class="inline-block space-right-sm"><code>'
+                '<li><div class="param-meta clearfix"><span class="inline-block space-right-sm"><code>',
             )
             .f(ctx.getPath(true, []), ctx, "h", ["$longname", "s", "$dot_prop"])
             .w("</code>&nbsp;:&nbsp;<code>")
             .f(ctx.getPath(true, []), ctx, "h", ["s", "$type"])
             .w(
-                '</code></span><span class="param-info-box"><span class="param-info value">Value:&nbsp;</span><code>'
+                '</code></span><span class="param-info-box"><span class="param-info value">Value:&nbsp;</span><code>',
             )
             .f(ctx.getPath(true, []), ctx, "h", ["$val"])
             .w('</code></span></div><div class="param-desc">')
@@ -3749,7 +3749,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
     function body_4(chk, ctx) {
         return chk
             .w(
-                '<table class="table table-striped table-bordered"><thead><tr><th>Enumeration</th><th>Type</th><th>Value</th><th>Description</th></tr></thead><tbody>'
+                '<table class="table table-striped table-bordered"><thead><tr><th>Enumeration</th><th>Type</th><th>Value</th><th>Description</th></tr></thead><tbody>',
             )
             .s(ctx.get(["$members"], false), ctx, { block: body_5 }, {})
             .w("</tbody></table>");
@@ -3777,7 +3777,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             ctx.getPath(false, ["template", "options", "navbar", "enabled"]),
             ctx,
             { block: body_1 },
-            {}
+            {},
         );
     }
     body_0.__dustBody = !0;
@@ -3788,7 +3788,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 ctx.getPath(false, ["template", "options", "navbar", "dark"]),
                 ctx,
                 { block: body_2 },
-                {}
+                {},
             )
             .w('"><div class="navbar-inner ')
             .x(ctx.get(["boxed"], false), ctx, { block: body_3 }, {})
@@ -3797,19 +3797,19 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 ctx.getPath(false, ["template", "options", "logo", "dark"]),
                 ctx,
                 { block: body_4 },
-                {}
+                {},
             )
             .w('<span class="navbar-title"><a href="')
             .f(
                 ctx.getPath(false, ["template", "options", "title", "href"]),
                 ctx,
-                "h"
+                "h",
             )
             .w('">')
             .f(
                 ctx.getPath(false, ["template", "options", "title", "label"]),
                 ctx,
-                "h"
+                "h",
             )
             .w("</a></span></div>")
             .h(
@@ -3822,18 +3822,18 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                         "options",
                         "navbar",
                         "menu",
-                        "length"
+                        "length",
                     ]),
-                    value: 0
+                    value: 0,
                 },
-                "h"
+                "h",
             )
             .w("</div></nav>")
             .x(
                 ctx.getPath(false, ["template", "options", "navbar", "fixed"]),
                 ctx,
                 { block: body_16 },
-                {}
+                {},
             )
             .w('<div class="nav-overlay"></div>');
     }
@@ -3851,7 +3851,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             ctx.getPath(false, ["template", "options", "navbar", "dark"]),
             ctx,
             { else: body_5, block: body_6 },
-            {}
+            {},
         );
     }
     body_4.__dustBody = !0;
@@ -3861,7 +3861,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             .f(
                 ctx.getPath(false, ["template", "options", "logo", "dark"]),
                 ctx,
-                "h"
+                "h",
             )
             .w('" alt="logo" class="navbar-logo" />');
     }
@@ -3872,7 +3872,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             .f(
                 ctx.getPath(false, ["template", "options", "logo", "light"]),
                 ctx,
-                "h"
+                "h",
             )
             .w('" alt="logo" class="navbar-logo" />');
     }
@@ -3880,13 +3880,13 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
     function body_7(chk, ctx) {
         return chk
             .w(
-                '<div class="navbar-menu-btn" tabindex="0"><i class="fas fa-lg fa-bars trans-all-ease"></i><i class="fas fa-md fa-times trans-all-ease"></i></div><div class="navbar-menu"><ul class="navbar-list">'
+                '<div class="navbar-menu-btn" tabindex="0"><i class="fas fa-lg fa-bars trans-all-ease"></i><i class="fas fa-md fa-times trans-all-ease"></i></div><div class="navbar-menu"><ul class="navbar-list">',
             )
             .s(
                 ctx.getPath(false, ["template", "options", "navbar", "menu"]),
                 ctx,
                 { block: body_8 },
-                {}
+                {},
             )
             .w("</ul></div>");
     }
@@ -3896,7 +3896,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             ctx.get(["items"], false),
             ctx,
             { else: body_9, block: body_10 },
-            {}
+            {},
         );
     }
     body_8.__dustBody = !0;
@@ -3911,10 +3911,10 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 ctx.get(["href"], false),
                 ctx,
                 { else: body_11, block: body_12 },
-                {}
+                {},
             )
             .w(
-                '" role="button" aria-haspopup="true" aria-expanded="false"><i class="nav-icon '
+                '" role="button" aria-haspopup="true" aria-expanded="false"><i class="nav-icon ',
             )
             .f(ctx.get(["iconClass"], false), ctx, "h")
             .w('" aria-hidden="true"></i>')
@@ -3964,7 +3964,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             ctx.get(["separator"], false),
             ctx,
             { else: body_1, block: body_6 },
-            {}
+            {},
         );
     }
     body_0.__dustBody = !0;
@@ -3975,7 +3975,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 ctx.get(["href"], false),
                 ctx,
                 { else: body_2, block: body_3 },
-                {}
+                {},
             )
             .w('" target="')
             .f(ctx.get(["target"], false), ctx, "h")
@@ -4029,18 +4029,18 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                     "template",
                     "options",
                     "symbols",
-                    "params"
+                    "params",
                 ]),
-                value: "table"
+                value: "table",
             },
-            "h"
+            "h",
         );
     }
     body_1.__dustBody = !0;
     function body_2(chk, ctx) {
         return chk
             .w(
-                '<div class="space-top-sm space-bottom-xs fw-bold">Parameters</div><ul class="param-list">'
+                '<div class="space-top-sm space-bottom-xs fw-bold">Parameters</div><ul class="param-list">',
             )
             .s(ctx.get(["params"], false), ctx, { block: body_3 }, {})
             .w("</ul>");
@@ -4049,7 +4049,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
     function body_3(chk, ctx) {
         return chk
             .w(
-                '<li><div class="param-meta clearfix"><span class="inline-block space-right-sm"><code>'
+                '<li><div class="param-meta clearfix"><span class="inline-block space-right-sm"><code>',
             )
             .x(ctx.get(["variable"], false), ctx, { block: body_4 }, {})
             .f(ctx.get(["name"], false), ctx, "h", ["s", "$dot_prop"])
@@ -4061,7 +4061,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 ctx.get(["optional"], false),
                 ctx,
                 { else: body_6, block: body_7 },
-                {}
+                {},
             )
             .w('</span></div><div class="param-desc">')
             .f(ctx.getPath(true, []), ctx, "h", ["s", "$param_desc"])
@@ -4090,7 +4090,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
     function body_8(chk, ctx) {
         return chk
             .w(
-                '<table class="table table-striped table-bordered"><thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead><tbody>'
+                '<table class="table table-striped table-bordered"><thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead><tbody>',
             )
             .s(ctx.get(["params"], false), ctx, { block: body_9 }, {})
             .w("</tbody></table>");
@@ -4109,7 +4109,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 ctx.get(["optional"], false),
                 ctx,
                 { else: body_12, block: body_13 },
-                {}
+                {},
             )
             .f(ctx.getPath(true, []), ctx, "h", ["s", "$param_desc"])
             .w("</td></tr>");
@@ -4130,7 +4130,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
     function body_13(chk, ctx) {
         return chk
             .w(
-                '<span class="param-info default boxed">Default</span><span class="color-gray">:</span><code>'
+                '<span class="param-info default boxed">Default</span><span class="color-gray">:</span><code>',
             )
             .f(ctx.getPath(true, []), ctx, "h", ["$def"])
             .w("</code>");
@@ -4145,7 +4145,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             ctx.get(["properties"], false),
             ctx,
             { block: body_1 },
-            {}
+            {},
         );
     }
     body_0.__dustBody = !0;
@@ -4159,18 +4159,18 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                     "template",
                     "options",
                     "symbols",
-                    "props"
+                    "props",
                 ]),
-                value: "table"
+                value: "table",
             },
-            "h"
+            "h",
         );
     }
     body_1.__dustBody = !0;
     function body_2(chk, ctx) {
         return chk
             .w(
-                '<div class="space-top-sm space-bottom-xs fw-bold">Properties</div><ul class="param-list">'
+                '<div class="space-top-sm space-bottom-xs fw-bold">Properties</div><ul class="param-list">',
             )
             .s(ctx.get(["properties"], false), ctx, { block: body_3 }, {})
             .w("</ul>");
@@ -4179,7 +4179,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
     function body_3(chk, ctx) {
         return chk
             .w(
-                '<li><div class="param-meta clearfix"><span class="inline-block space-right-sm"><code>'
+                '<li><div class="param-meta clearfix"><span class="inline-block space-right-sm"><code>',
             )
             .f(ctx.get(["name"], false), ctx, "h", ["s", "$dot_prop"])
             .w("</code>&nbsp;:&nbsp;<code>")
@@ -4192,7 +4192,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
     function body_4(chk, ctx) {
         return chk
             .w(
-                '<table class="table table-striped table-bordered"><thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead><tbody>'
+                '<table class="table table-striped table-bordered"><thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead><tbody>',
             )
             .s(ctx.get(["properties"], false), ctx, { block: body_5 }, {})
             .w("</tbody></table>");
@@ -4216,25 +4216,25 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
     function body_0(chk, ctx) {
         return chk
             .w(
-                '<div class="sidebar-header"><div id="sidebar-toggle"><i class="fas fa-lg fa-bars trans-all-ease"></i></div><div class="sidebar-brand">'
+                '<div class="sidebar-header"><div id="sidebar-toggle"><i class="fas fa-lg fa-bars trans-all-ease"></i></div><div class="sidebar-brand">',
             )
             .x(
                 ctx.getPath(false, ["template", "options", "logo", "light"]),
                 ctx,
                 { block: body_1 },
-                {}
+                {},
             )
             .w('<span class="sidebar-title"><a href="')
             .f(
                 ctx.getPath(false, ["template", "options", "title", "href"]),
                 ctx,
-                "h"
+                "h",
             )
             .w('">')
             .f(
                 ctx.getPath(false, ["template", "options", "title", "label"]),
                 ctx,
-                "h"
+                "h",
             )
             .w("</a></span></div>")
             .x(
@@ -4242,25 +4242,25 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                     "template",
                     "options",
                     "sidebar",
-                    "search"
+                    "search",
                 ]),
                 ctx,
                 { block: body_2 },
-                {}
+                {},
             )
             .x(
                 ctx.getPath(false, [
                     "template",
                     "options",
                     "sidebar",
-                    "toolbar"
+                    "toolbar",
                 ]),
                 ctx,
                 { block: body_3 },
-                {}
+                {},
             )
             .w(
-                '</div><div class="sidebar-nav-container"><ul class="sidebar-nav">'
+                '</div><div class="sidebar-nav-container"><ul class="sidebar-nav">',
             )
             .f(ctx.get(["symbols"], false), ctx, "h", ["s", "$navnodes"])
             .w("</ul></div>");
@@ -4272,21 +4272,21 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             .f(
                 ctx.getPath(false, ["template", "options", "logo", "light"]),
                 ctx,
-                "h"
+                "h",
             )
             .w('" alt="logo" class="sidebar-logo" />');
     }
     body_1.__dustBody = !0;
     function body_2(chk, ctx) {
         return chk.w(
-            '<div class="sidebar-search"><div class="sidebar-search-icon"><i class="fas fa-md fa-search"></i></div><input id="txt-search" type="search" placeholder="Search..." autocorrect="off" autocapitalize="off" spellcheck="false" /><div class="sidebar-search-clean"><i class="fas fa-lg fa-times-circle"></i></div></div>'
+            '<div class="sidebar-search"><div class="sidebar-search-icon"><i class="fas fa-md fa-search"></i></div><input id="txt-search" type="search" placeholder="Search..." autocorrect="off" autocapitalize="off" spellcheck="false" /><div class="sidebar-search-clean"><i class="fas fa-lg fa-times-circle"></i></div></div>',
         );
     }
     body_2.__dustBody = !0;
     function body_3(chk, ctx) {
         return chk
             .w(
-                '<div class="sidebar-toolbar"><div class="toolbar-scope-filters"></div><div class="toolbar-kind-filters"></div><div class="toolbar-buttons"><span class="btn-switch-fold inline-block" title="Fold Symbols">'
+                '<div class="sidebar-toolbar"><div class="toolbar-scope-filters"></div><div class="toolbar-kind-filters"></div><div class="toolbar-buttons"><span class="btn-switch-fold inline-block" title="Fold Symbols">',
             )
             .h(
                 "eq",
@@ -4297,15 +4297,15 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                         "template",
                         "options",
                         "sidebar",
-                        "itemsFolded"
+                        "itemsFolded",
                     ]),
                     type: "boolean",
-                    value: "true"
+                    value: "true",
                 },
-                "h"
+                "h",
             )
             .w(
-                '</span><span class="btn-switch-outline inline-block space-left-xs" title="Toggle Outline">'
+                '</span><span class="btn-switch-outline inline-block space-left-xs" title="Toggle Outline">',
             )
             .h(
                 "eq",
@@ -4316,12 +4316,12 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                         "template",
                         "options",
                         "sidebar",
-                        "outline"
+                        "outline",
                     ]),
                     type: "string",
-                    value: "tree"
+                    value: "tree",
                 },
-                "h"
+                "h",
             )
             .w("</span></div></div>");
     }
@@ -4351,7 +4351,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             ctx.getPath(false, ["symbol", "$hide"]),
             ctx,
             { block: body_1 },
-            {}
+            {},
         );
     }
     body_0.__dustBody = !0;
@@ -4360,11 +4360,11 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             .w('<div id="')
             .f(ctx.get(["symbol"], false), ctx, "h", ["$id"])
             .w(
-                '" class="symbol-container"><div class="symbol-heading"><div class="symbol"><a href="#'
+                '" class="symbol-container"><div class="symbol-heading"><div class="symbol"><a href="#',
             )
             .f(ctx.get(["symbol"], false), ctx, "h", ["$id"])
             .w(
-                '"><i class="fas fa-link color-gray-light" aria-hidden="true"></i></a><code class="symbol-name">'
+                '"><i class="fas fa-link color-gray-light" aria-hidden="true"></i></a><code class="symbol-name">',
             )
             .f(ctx.get(["symbol"], false), ctx, "h", ["s", "$longname_params"])
             .w('</code><span class="symbol-sep">')
@@ -4374,63 +4374,63 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             .w("</code>")
             .f(ctx.get(["symbol"], false), ctx, "h", ["s", "$tags"])
             .w(
-                '</div></div><div class="symbol-definition"><div class="symbol-info">'
+                '</div></div><div class="symbol-definition"><div class="symbol-info">',
             )
             .x(
                 ctx.getPath(false, ["symbol", "alias"]),
                 ctx,
                 { block: body_2 },
-                {}
+                {},
             )
             .x(
                 ctx.getPath(false, ["symbol", "augments"]),
                 ctx,
                 { block: body_4 },
-                {}
+                {},
             )
             .x(
                 ctx.getPath(false, ["symbol", "version"]),
                 ctx,
                 { block: body_5 },
-                {}
+                {},
             )
             .x(
                 ctx.getPath(false, ["symbol", "since"]),
                 ctx,
                 { block: body_6 },
-                {}
+                {},
             )
             .x(
                 ctx.getPath(false, ["symbol", "copyright"]),
                 ctx,
                 { block: body_7 },
-                {}
+                {},
             )
             .x(
                 ctx.getPath(false, ["symbol", "author"]),
                 ctx,
                 { block: body_8 },
-                {}
+                {},
             )
             .x(
                 ctx.getPath(false, ["symbol", "license"]),
                 ctx,
                 { block: body_9 },
-                {}
+                {},
             )
             .w("</div>")
             .x(
                 ctx.getPath(false, ["symbol", "defaultvalue"]),
                 ctx,
                 { block: body_10 },
-                {}
+                {},
             )
             .f(ctx.get(["symbol"], false), ctx, "h", ["s", "$desc"])
             .x(
                 ctx.getPath(false, ["symbol", "see"]),
                 ctx,
                 { block: body_11 },
-                {}
+                {},
             )
             .h(
                 "ne",
@@ -4438,64 +4438,64 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 { block: body_16 },
                 {
                     key: ctx.getPath(false, ["symbol", "meta", "code", "type"]),
-                    value: "ClassDeclaration"
+                    value: "ClassDeclaration",
                 },
-                "h"
+                "h",
             )
             .x(
                 ctx.getPath(false, ["symbol", "fires"]),
                 ctx,
                 { block: body_19 },
-                {}
+                {},
             )
             .x(
                 ctx.getPath(false, ["symbol", "returns"]),
                 ctx,
                 { block: body_21 },
-                {}
+                {},
             )
             .x(
                 ctx.getPath(false, ["symbol", "generator"]),
                 ctx,
                 { block: body_24 },
-                {}
+                {},
             )
             .x(
                 ctx.getPath(false, ["symbol", "exceptions"]),
                 ctx,
                 { block: body_28 },
-                {}
+                {},
             )
             .x(
                 ctx.getPath(false, ["symbol", "isEnum"]),
                 ctx,
                 { block: body_31 },
-                {}
+                {},
             )
             .x(
                 ctx.getPath(false, ["symbol", "examples"]),
                 ctx,
                 { block: body_32 },
-                {}
+                {},
             )
             .x(
                 ctx.getPath(false, ["template", "options", "symbols", "meta"]),
                 ctx,
                 { block: body_35 },
-                {}
+                {},
             )
             .w("</div></div><hr />")
             .x(
                 ctx.getPath(false, ["symbol", "$constructor"]),
                 ctx,
                 { block: body_39 },
-                {}
+                {},
             )
             .nx(
                 ctx.getPath(false, ["symbol", "isEnum"]),
                 ctx,
                 { block: body_41 },
-                {}
+                {},
             );
     }
     body_1.__dustBody = !0;
@@ -4504,7 +4504,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             ctx.get(["$constructor"], false),
             ctx,
             { block: body_3 },
-            {}
+            {},
         );
     }
     body_2.__dustBody = !0;
@@ -4513,7 +4513,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             .w('<p><b class="caption">Alias:</b> <code>')
             .f(ctx.getPath(false, ["symbol", "alias"]), ctx, "h", [
                 "s",
-                "$dot_prop"
+                "$dot_prop",
             ])
             .w("</code></p>");
     }
@@ -4551,7 +4551,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             .w('<p><b class="caption">Author:</b>&nbsp;')
             .f(ctx.getPath(false, ["symbol", "author"]), ctx, "h", [
                 "s",
-                "$author"
+                "$author",
             ])
             .w("</p>");
     }
@@ -4566,7 +4566,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
     function body_10(chk, ctx) {
         return chk
             .w(
-                '<p class="symbol-def-val"><b class="caption"><i>Value:</i></b>&nbsp;<code>'
+                '<p class="symbol-def-val"><b class="caption"><i>Value:</i></b>&nbsp;<code>',
             )
             .f(ctx.get(["symbol"], false), ctx, "h", ["$def"])
             .w("</code></p>");
@@ -4581,9 +4581,9 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 { else: body_12, block: body_14 },
                 {
                     key: ctx.getPath(false, ["symbol", "see", "length"]),
-                    value: 1
+                    value: 1,
                 },
-                "h"
+                "h",
             )
             .w("</p>");
     }
@@ -4593,7 +4593,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             ctx.getPath(false, ["symbol", "see"]),
             ctx,
             { block: body_13 },
-            {}
+            {},
         );
     }
     body_12.__dustBody = !0;
@@ -4608,7 +4608,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 ctx.getPath(false, ["symbol", "see"]),
                 ctx,
                 { block: body_15 },
-                {}
+                {},
             )
             .w("</ul>");
     }
@@ -4623,21 +4623,21 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
     function body_16(chk, ctx) {
         return chk
             .p("params", ctx, ctx.rebase(ctx.get(["symbol"], false)), {
-                template: ctx.get(["template"], false)
+                template: ctx.get(["template"], false),
             })
             .w(" ")
             .x(
                 ctx.getPath(false, ["symbol", "isEnum"]),
                 ctx,
                 { else: body_17, block: body_18 },
-                {}
+                {},
             );
     }
     body_16.__dustBody = !0;
     function body_17(chk, ctx) {
         return chk
             .p("properties", ctx, ctx.rebase(ctx.get(["symbol"], false)), {
-                template: ctx.get(["template"], false)
+                template: ctx.get(["template"], false),
             })
             .w(" ");
     }
@@ -4654,9 +4654,9 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             {
                 key: ctx.getPath(false, ["symbol", "fires", "length"]),
                 value: "0",
-                type: "number"
+                type: "number",
             },
-            "h"
+            "h",
         );
     }
     body_19.__dustBody = !0;
@@ -4675,9 +4675,9 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             {
                 key: ctx.getPath(false, ["symbol", "returns", "length"]),
                 value: "1",
-                type: "number"
+                type: "number",
             },
-            "h"
+            "h",
         );
     }
     body_21.__dustBody = !0;
@@ -4700,7 +4700,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             ctx.getPath(false, ["symbol", "yields"]),
             ctx,
             { block: body_25 },
-            {}
+            {},
         );
     }
     body_24.__dustBody = !0;
@@ -4712,9 +4712,9 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             {
                 key: ctx.getPath(false, ["symbol", "yields", "length"]),
                 value: "1",
-                type: "number"
+                type: "number",
             },
-            "h"
+            "h",
         );
     }
     body_25.__dustBody = !0;
@@ -4740,9 +4740,9 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             {
                 key: ctx.getPath(false, ["symbol", "exceptions", "length"]),
                 value: "1",
-                type: "number"
+                type: "number",
             },
-            "h"
+            "h",
         );
     }
     body_28.__dustBody = !0;
@@ -4763,7 +4763,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
     function body_31(chk, ctx) {
         return chk
             .p("enums", ctx, ctx.rebase(ctx.get(["symbol"], false)), {
-                template: ctx.get(["template"], false)
+                template: ctx.get(["template"], false),
             })
             .w(" ");
     }
@@ -4773,7 +4773,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             ctx.getPath(false, ["symbol", "examples"]),
             ctx,
             { block: body_33 },
-            {}
+            {},
         );
     }
     body_32.__dustBody = !0;
@@ -4786,9 +4786,9 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 { block: body_34 },
                 {
                     key: ctx.getPath(false, ["symbol", "examples", "length"]),
-                    value: 1
+                    value: 1,
                 },
-                "h"
+                "h",
             )
             .w("</b>")
             .f(ctx.getPath(true, []), ctx, "h", ["$get_caption", "s"])
@@ -4796,7 +4796,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             .f(ctx.getPath(true, []), ctx, "h", [
                 "$nt",
                 "$tnl",
-                "$remove_caption"
+                "$remove_caption",
             ])
             .w("</code></pre>");
     }
@@ -4809,7 +4809,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 ctx,
                 {},
                 { key: ctx.get(["$idx"], false), method: "add", operand: "1" },
-                "h"
+                "h",
             );
     }
     body_34.__dustBody = !0;
@@ -4818,7 +4818,7 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             ctx.getPath(false, ["symbol", "meta", "lineno"]),
             ctx,
             { block: body_36 },
-            {}
+            {},
         );
     }
     body_35.__dustBody = !0;
@@ -4829,13 +4829,13 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
                 ctx.getPath(false, ["symbol", "meta", "filename"]),
                 ctx,
                 { block: body_37 },
-                {}
+                {},
             )
             .x(
                 ctx.getPath(false, ["symbol", "meta", "lineno"]),
                 ctx,
                 { block: body_38 },
-                {}
+                {},
             )
             .w("</p>");
     }
@@ -4862,16 +4862,16 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             {
                 key: ctx.getPath(false, ["symbol", "hideconstructor"]),
                 type: "boolean",
-                value: "true"
+                value: "true",
             },
-            "h"
+            "h",
         );
     }
     body_39.__dustBody = !0;
     function body_40(chk, ctx) {
         return chk.p("symbol", ctx, ctx, {
             symbol: ctx.getPath(false, ["symbol", "$constructor"]),
-            template: ctx.get(["template"], false)
+            template: ctx.get(["template"], false),
         });
     }
     body_40.__dustBody = !0;
@@ -4880,14 +4880,14 @@ if (typeof define === "function" && define.amd && define.amd.dust === true) {
             ctx.getPath(false, ["symbol", "$members"]),
             ctx,
             { block: body_42 },
-            {}
+            {},
         );
     }
     body_41.__dustBody = !0;
     function body_42(chk, ctx) {
         return chk.p("symbol", ctx, ctx, {
             symbol: ctx.getPath(true, []),
-            template: ctx.get(["template"], false)
+            template: ctx.get(["template"], false),
         });
     }
     body_42.__dustBody = !0;
@@ -5666,7 +5666,7 @@ var DocmaWeb = (function () {
             .replace(/(```\s*)([\s\S]*?)(\s*```)/g, function (match, p1, p2) {
                 // , p3, offset, string
                 return Utils.normalizeTabs(
-                    Utils._wrapCode(p2, true, true).replace(/`/g, "&#x60;")
+                    Utils._wrapCode(p2, true, true).replace(/`/g, "&#x60;"),
                 );
             })
             .replace(/(`)(.*?)(`)/g, function (match, p1, p2) {
@@ -5804,7 +5804,7 @@ var DocmaWeb = (function () {
             spaces = p2.replace(/\t/g, "  ");
             // convert indent to multiples of 2
             spaces = new Array(spaces.length - (spaces.length % 2) + 1).join(
-                " "
+                " ",
             );
             return p1 + spaces;
         });
@@ -5862,7 +5862,7 @@ var DocmaWeb = (function () {
         return {
             filename: Utils.notate(symbol, "meta.filename"),
             lineno: Utils.notate(symbol, "meta.lineno"),
-            path: Utils.notate(symbol, "meta.path")
+            path: Utils.notate(symbol, "meta.path"),
         };
     };
 
@@ -5995,7 +5995,7 @@ var DocmaWeb = (function () {
             .map(function (type) {
                 if (opts.links)
                     type = Utils._parseAnchorLinks(docsOrApis, type, {
-                        linkType: opts.links
+                        linkType: opts.links,
                     });
                 return type;
             })
@@ -6039,7 +6039,7 @@ var DocmaWeb = (function () {
             if (opts.links) {
                 types = types.map(function (type) {
                     return Utils._parseAnchorLinks(docsOrApis, type, {
-                        linkType: opts.links
+                        linkType: opts.links,
                     });
                 });
             }
@@ -6076,7 +6076,7 @@ var DocmaWeb = (function () {
             .map(function (item) {
                 if (opts.links) {
                     var parsed = Utils._parseAnchorLinks(docsOrApis, item, {
-                        linkType: opts.links
+                        linkType: opts.links,
                     });
                     return Utils._wrapCode(parsed, false);
                 }
@@ -6123,7 +6123,7 @@ var DocmaWeb = (function () {
         var pList = list.map(function (item) {
             if (addDesc) {
                 desc = Utils.parse(item.description || "", {
-                    keepIfSingle: true
+                    keepIfSingle: true,
                 });
                 if (desc) desc = descDelim + desc;
             }
@@ -6132,7 +6132,7 @@ var DocmaWeb = (function () {
                 var types = (item.type.names || []).map(function (type) {
                     if (opts.links) {
                         var parsed = Utils._parseAnchorLinks(docsOrApis, type, {
-                            linkType: opts.links
+                            linkType: opts.links,
                         });
                         return Utils._wrapCode(parsed, false);
                     }
@@ -6186,7 +6186,7 @@ var DocmaWeb = (function () {
             name = (parts[0] || "").trim(); // .replace(/event:/, '').trim()
             if (opts.links) {
                 var parsed = Utils._parseAnchorLinks(docsOrApis, name, {
-                    linkType: opts.links
+                    linkType: opts.links,
                 });
                 return Utils._wrapCode(parsed, false);
             }
@@ -6261,7 +6261,7 @@ var DocmaWeb = (function () {
                 if (enumerable) {
                     Object.defineProperty(target, prop, {
                         enumerable: true,
-                        value: source[prop]
+                        value: source[prop],
                     });
                 } else {
                     target[prop] = source[prop];
@@ -6500,7 +6500,7 @@ var DocmaWeb = (function () {
             var docElem = document.documentElement;
             return {
                 top: rect.top + window.pageYOffset - docElem.clientTop,
-                left: rect.left + window.pageXOffset - docElem.clientLeft
+                left: rect.left + window.pageXOffset - docElem.clientLeft,
             };
         }
     };
@@ -6608,7 +6608,7 @@ var DocmaWeb = (function () {
             "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/",
         functions:
             "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/",
-        web: "https://developer.mozilla.org/en-US/docs/Web/API/"
+        web: "https://developer.mozilla.org/en-US/docs/Web/API/",
     };
     var _builtins = {
         globals: [
@@ -6671,14 +6671,14 @@ var DocmaWeb = (function () {
             "WebAssembly.Table",
             "WebAssembly.CompileError",
             "WebAssembly.LinkError",
-            "WebAssembly.RuntimeError"
+            "WebAssembly.RuntimeError",
         ],
         statements: [
             "function",
             "function*",
             "async function",
             "class",
-            "debugger"
+            "debugger",
         ],
         operators: ["void", "super", "this"],
         functions: ["arguments"],
@@ -6942,8 +6942,8 @@ var DocmaWeb = (function () {
             "XMLSerializer",
             "XPathExpression",
             "XPathResult",
-            "XSLTProcessor"
-        ]
+            "XSLTProcessor",
+        ],
     };
 
     /** @private */
@@ -7044,7 +7044,7 @@ var DocmaWeb = (function () {
             configurable: false,
             get: function () {
                 return this._.app || null;
-            }
+            },
         });
 
         /**
@@ -7088,7 +7088,7 @@ var DocmaWeb = (function () {
             configurable: false,
             get: function () {
                 return this._.apis || {};
-            }
+            },
         });
 
         /**
@@ -7105,7 +7105,7 @@ var DocmaWeb = (function () {
             configurable: false,
             get: function () {
                 return this._.routes || {};
-            }
+            },
         });
 
         /**
@@ -7139,7 +7139,7 @@ var DocmaWeb = (function () {
             configurable: false,
             get: function () {
                 return this._.template || {};
-            }
+            },
         });
 
         // --------------------------------
@@ -7187,7 +7187,7 @@ var DocmaWeb = (function () {
                 var fullpath = Utils._ensureSlash(
                         true,
                         window.location.pathname,
-                        true
+                        true,
                     ),
                     base = Utils._ensureSlash(true, docma.app.base, true),
                     pathname = fullpath;
@@ -7201,12 +7201,12 @@ var DocmaWeb = (function () {
                     port: window.location.port,
                     protocol: (window.location.protocol || "").replace(
                         /:$/,
-                        ""
+                        "",
                     ),
                     entrance: Utils._ensureSlash(
                         true,
                         docma.app.entrance,
-                        false
+                        false,
                     ),
                     base: base,
                     hash: (window.location.hash || "").replace(/^#/, ""),
@@ -7224,16 +7224,16 @@ var DocmaWeb = (function () {
                         if (query.slice(0, 1) === "?") query = query.slice(1);
                         name = (name || "").replace(/[[\]]/g, "\\$&");
                         var regex = new RegExp(
-                                "&?" + name + "(=([^&#]*)|&|#|$)"
+                                "&?" + name + "(=([^&#]*)|&|#|$)",
                             ),
                             results = regex.exec(query);
                         if (!results || !results[2]) return "";
                         return decodeURIComponent(
-                            results[2].replace(/\+/g, " ")
+                            results[2].replace(/\+/g, " "),
                         );
-                    }
+                    },
                 };
-            }
+            },
         });
 
         /**
@@ -7264,7 +7264,7 @@ var DocmaWeb = (function () {
             configurable: false,
             get: function () {
                 return this._.currentRoute || null;
-            }
+            },
         });
 
         /**
@@ -7294,7 +7294,7 @@ var DocmaWeb = (function () {
             configurable: false,
             get: function () {
                 return this._.documentation || [];
-            }
+            },
         });
 
         /**
@@ -7320,7 +7320,7 @@ var DocmaWeb = (function () {
             configurable: false,
             get: function () {
                 return this._.symbols || [];
-            }
+            },
         });
     }
 
@@ -7419,7 +7419,7 @@ var DocmaWeb = (function () {
          *  bookmark (i.e. hashchange).
          *  @type {String}
          */
-        Navigate: "navigate"
+        Navigate: "navigate",
     };
 
     /**
@@ -7578,7 +7578,7 @@ var DocmaWeb = (function () {
         var docmaElem = document.getElementById(this._.elementID);
         if (!docmaElem) {
             docmaElem = Utils.DOM.createChild(document.body, "div", {
-                id: this._.elementID
+                id: this._.elementID,
             });
         }
         return docmaElem;
@@ -7602,7 +7602,7 @@ var DocmaWeb = (function () {
                     this._.partials.content +
                     ' should have an element with id="' +
                     this._.contentElementID +
-                    '".'
+                    '".',
             );
         }
         return dContent;
@@ -7829,7 +7829,7 @@ var DocmaWeb = (function () {
             // no callback, throw...
             throw new Error(
                 "Page or content not found for route: " +
-                    Utils._safeStringify(routeInfo)
+                    Utils._safeStringify(routeInfo),
             );
         });
     };
@@ -7972,7 +7972,7 @@ var DocmaWeb = (function () {
         // search in existing routes.
         var info = Utils._find(docma.routes, {
             type: type,
-            name: name
+            name: name,
         });
         // if found, assign properties `id`, `name`, `type` and `path`.
         if (info) Utils._assign(this, info);
@@ -8014,7 +8014,7 @@ var DocmaWeb = (function () {
          *  files or HTML files generated from markdown.
          *  @type {String}
          */
-        CONTENT: "content"
+        CONTENT: "content",
     };
     _arrRouteTypes = Utils._values(DocmaWeb.Route.Type);
 
@@ -8043,7 +8043,7 @@ var DocmaWeb = (function () {
          *  source.
          *  @type {String}
          */
-        HTML: "html"
+        HTML: "html",
     };
 
     /**
@@ -8144,7 +8144,7 @@ var DocmaWeb = (function () {
         }
         // this._docma.log('Route Info:', this.toString());
         this._docma._trigger(DocmaWeb.Event.Route, [
-            this.exists() ? this : null
+            this.exists() ? this : null,
         ]);
         this._docma.render(this, cb);
         return this;
@@ -8174,7 +8174,7 @@ var DocmaWeb = (function () {
             path: this.path,
             type: this.type,
             sourceType: this.sourceType,
-            name: this.name
+            name: this.name,
         };
     };
 
@@ -8220,7 +8220,7 @@ var DocmaWeb = (function () {
 
     dust.filters.$desc = function (symbol) {
         return DocmaWeb.Utils.parse(
-            symbol.classdesc || symbol.description || ""
+            symbol.classdesc || symbol.description || "",
         );
     };
 
@@ -8281,7 +8281,7 @@ var docma = Object.freeze(
                 name: "_def_",
                 path: "api/",
                 contentPath: null,
-                sourceType: "js"
+                sourceType: "js",
             },
             {
                 id: "api:web",
@@ -8289,7 +8289,7 @@ var docma = Object.freeze(
                 name: "web",
                 path: "api/web/",
                 contentPath: null,
-                sourceType: "js"
+                sourceType: "js",
             },
             {
                 id: "api:web/utils",
@@ -8297,7 +8297,7 @@ var docma = Object.freeze(
                 name: "web/utils",
                 path: "api/web/utils/",
                 contentPath: null,
-                sourceType: "js"
+                sourceType: "js",
             },
             {
                 id: "content:changelog",
@@ -8305,7 +8305,7 @@ var docma = Object.freeze(
                 name: "changelog",
                 path: "changelog/",
                 contentPath: "content/changelog.html",
-                sourceType: "md"
+                sourceType: "md",
             },
             {
                 id: "content:readme",
@@ -8313,7 +8313,7 @@ var docma = Object.freeze(
                 name: "readme",
                 path: "readme/",
                 contentPath: "content/readme.html",
-                sourceType: "md"
+                sourceType: "md",
             },
             {
                 id: "content:home",
@@ -8321,8 +8321,8 @@ var docma = Object.freeze(
                 name: "home",
                 path: "home/",
                 contentPath: "content/home.html",
-                sourceType: "md"
-            }
+                sourceType: "md",
+            },
         ],
         apis: {
             _def_: {
@@ -8340,9 +8340,9 @@ var docma = Object.freeze(
                                 id: "astnode100000111",
                                 name: "Docma",
                                 type: "MethodDefinition",
-                                paramnames: []
+                                paramnames: [],
                             },
-                            vars: { "": null }
+                            vars: { "": null },
                         },
                         description: "Initializes a new instance of `Docma`.",
                         examples: ["const docma = new Docma();"],
@@ -8354,7 +8354,7 @@ var docma = Object.freeze(
                         undocumented: true,
                         $longname: "Docma",
                         $kind: "constructor",
-                        $docmaLink: "api/#Docma"
+                        $docmaLink: "api/#Docma",
                     },
                     {
                         comment:
@@ -8369,8 +8369,8 @@ var docma = Object.freeze(
                                 id: "astnode100000111",
                                 name: "Docma",
                                 type: "MethodDefinition",
-                                paramnames: []
-                            }
+                                paramnames: [],
+                            },
                         },
                         name: "Docma",
                         longname: "Docma",
@@ -8382,7 +8382,7 @@ var docma = Object.freeze(
                             "Docma (builder) class for generating HTML documentation from the given\n Javascript and/or markdown source files. This is the default object exported\n from the `docma` Node module.\n\n <blockquote>This documentation you're reading is built with Docma.</blockquote>",
                         $longname: "Docma",
                         $kind: "constructor",
-                        $docmaLink: "api/#Docma"
+                        $docmaLink: "api/#Docma",
                     },
                     {
                         comment:
@@ -8397,9 +8397,9 @@ var docma = Object.freeze(
                                 id: "astnode100002720",
                                 name: "Docma#build",
                                 type: "MethodDefinition",
-                                paramnames: ["config"]
+                                paramnames: ["config"],
                             },
-                            vars: { "": null }
+                            vars: { "": null },
                         },
                         description:
                             "Parses the given source files and builds a Single Page Application (SPA)\n with the given Docma template.\n\n For a verbose build, `debug` option should be {@link #Docma.Debug|enabled}.",
@@ -8408,18 +8408,18 @@ var docma = Object.freeze(
                                 type: { names: ["Object", "String"] },
                                 description:
                                     "Either a build configuration object or the file path of a\n        configuration JSON file.\n        See {@link #Docma~BuildConfiguration|`BuildConfiguration`} for details.",
-                                name: "config"
-                            }
+                                name: "config",
+                            },
                         ],
                         returns: [
                             {
                                 type: { names: ["Promise.<Boolean>"] },
                                 description:
-                                    "Promise that resolves to a `Boolean` value for whether the build\n          operation is successful. This will always return `true` if\n          no errors occur. You should `.catch()` the errors of the\n          promise chain."
-                            }
+                                    "Promise that resolves to a `Boolean` value for whether the build\n          operation is successful. This will always return `true` if\n          no errors occur. You should `.catch()` the errors of the\n          promise chain.",
+                            },
                         ],
                         examples: [
-                            "const docma = new Docma();\n docma.build(config)\n \t.then(success => {\n \t\tconsole.log('Documentation is built successfully.');\n \t})\n \t.catch(error => {\n \t\tconsole.log(error.stack);\n \t});"
+                            "const docma = new Docma();\n docma.build(config)\n \t.then(success => {\n \t\tconsole.log('Documentation is built successfully.');\n \t})\n \t.catch(error => {\n \t\tconsole.log(error.stack);\n \t});",
                         ],
                         name: "build",
                         longname: "Docma#build",
@@ -8428,7 +8428,7 @@ var docma = Object.freeze(
                         scope: "instance",
                         $longname: "Docma#build",
                         $kind: "method",
-                        $docmaLink: "api/#Docma#build"
+                        $docmaLink: "api/#Docma#build",
                     },
                     {
                         comment:
@@ -8438,7 +8438,7 @@ var docma = Object.freeze(
                             lineno: 1231,
                             columnno: 0,
                             path: "/home/jpietal/projects/docma/lib",
-                            code: {}
+                            code: {},
                         },
                         description:
                             "Docma build configuration object that defines parse options for the given\n source files; and templating options for the Single Page Application to be\n generated.\n\n This is very configurable but, you're only required to define very few\n options such as the source files (`src`) and the destination directory\n (`dest`) for a simple build.\n\n <blockquote>See the example at the bottom or for a real example; check out Docma's own\n build configuration file, that generates this documentation you're reading\n {@link https://github.com/Prozi/docma/blob/master/docma.json|here}.</blockquote>",
@@ -8450,20 +8450,20 @@ var docma = Object.freeze(
                                 type: { names: ["String", "Array", "Object"] },
                                 description:
                                     "One or more source file/directory paths to\n        be processed. This also accepts\n        {@link https://github.com/isaacs/node-glob|Glob} strings or array of\n        globs. e.g. `./src/&#x2A;&#x2A;/&#x2A;.js` will produce an array of\n        all `.js` files under `./src` directory and sub-directories.\n\n        JavaScript files will be parsed with JSDoc and files with `.md`, `.htm`\n        and `.html` extensions will be automatically parsed to proper formats.\n        But if you need; you can force a specific parser on defined files.\n        e.g. `./LICENSE:md` will be force-parsed to markdown.\n\n        See examples at the bottom for a better understanding.",
-                                name: "src"
+                                name: "src",
                             },
                             {
                                 type: { names: ["Object"] },
                                 optional: true,
                                 description:
                                     'Non-source, static asset files/directories to be\n        copied over to build directory; so you can use/link to files such as\n        images, ZIPs, PDFs, etc... Keys of this object define the target\n        directory, relative to the build destination directory. Value of each\n        key can either be a single file path string or an array. This also\n        accepts {@link https://github.com/isaacs/node-glob|Glob} strings or\n        array of globs. e.g. `{ "/": ["./&#x2A;.png"] }` will copy all PNG\n        files of the current relative directory to the root of destination\n        directory. <b>CAUTION:</b> Each copy operation will overwrite the\n        file if it already exists.',
-                                name: "assets"
+                                name: "assets",
                             },
                             {
                                 type: { names: ["String"] },
                                 description:
                                     "Destination output directory path. <b>CAUTION:</b>\n        Files in this directory will be overwritten. If `clean` option is\n        enabled, all contents will be removed. Make sure you set this to\n        a correct path.",
-                                name: "dest"
+                                name: "dest",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8471,7 +8471,7 @@ var docma = Object.freeze(
                                 defaultvalue: false,
                                 description:
                                     "Whether the destination directory should be\n        emptied before the build.",
-                                name: "clean"
+                                name: "clean",
                             },
                             {
                                 type: { names: ["Boolean", "Number"] },
@@ -8479,13 +8479,13 @@ var docma = Object.freeze(
                                 defaultvalue: false,
                                 description:
                                     "Specifies debug settings for build\n        operation and generated SPA. This takes a bitwise numeric value so\n        you can combine flags to your liking. If a `Boolean` value set,\n        `false` means `Docma.Debug.DISABLED` and `true` means\n        `Docma.Debug.ALL` which enables all debugging options. See\n        {@link #Docma.Debug|`Debug` flags enumeration} for all possible\n        values.",
-                                name: "debug"
+                                name: "debug",
                             },
                             {
                                 type: { names: ["Object"] },
                                 optional: true,
                                 description: "JSDoc parse options.",
-                                name: "jsdoc"
+                                name: "jsdoc",
                             },
                             {
                                 type: { names: ["String"] },
@@ -8493,7 +8493,7 @@ var docma = Object.freeze(
                                 defaultvalue: '"utf8"',
                                 description:
                                     "Encoding to be used when reading JS\n        source files.",
-                                name: "jsdoc.encoding"
+                                name: "jsdoc.encoding",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8501,7 +8501,7 @@ var docma = Object.freeze(
                                 defaultvalue: false,
                                 description:
                                     "Specifies whether to recurse into\n        sub-directories when scanning for source files.",
-                                name: "jsdoc.recurse"
+                                name: "jsdoc.recurse",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8509,28 +8509,28 @@ var docma = Object.freeze(
                                 defaultvalue: false,
                                 description:
                                     "Specifies whether to treat errors as\n        fatal errors, and treat warnings as errors.",
-                                name: "jsdoc.pedantic"
+                                name: "jsdoc.pedantic",
                             },
                             {
                                 type: { names: ["String", "Array"] },
                                 optional: true,
                                 description:
                                     'Specifies which symbols to be processed\n        with the given access property. Possible values: `"private"`,\n        `"protected"`, `"public"` or `"all"` (for all access levels). By\n        default, all except private symbols are processed. Note that, if\n        access is not set for a documented symbol, it will still be included,\n        regardless of this option.',
-                                name: "jsdoc.access"
+                                name: "jsdoc.access",
                             },
                             {
                                 type: { names: ["Boolean"] },
                                 optional: true,
                                 defaultvalue: false,
                                 description: "-",
-                                name: "jsdoc.private"
+                                name: "jsdoc.private",
                             },
                             {
                                 type: { names: ["String"] },
                                 optional: true,
                                 description:
                                     "The path to the `package.json` file that\n        contains the project name, version, and other details. If set to\n        `true` instead of a path string, the first `package.json` file found\n        in the source paths.",
-                                name: "jsdoc.package"
+                                name: "jsdoc.package",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8538,7 +8538,7 @@ var docma = Object.freeze(
                                 defaultvalue: true,
                                 description:
                                     "Specifies whether to include\n        `module.exports` symbols.",
-                                name: "jsdoc.module"
+                                name: "jsdoc.module",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8546,7 +8546,7 @@ var docma = Object.freeze(
                                 defaultvalue: false,
                                 description:
                                     "Specifies whether to include\n        undocumented symbols.",
-                                name: "jsdoc.undocumented"
+                                name: "jsdoc.undocumented",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8554,7 +8554,7 @@ var docma = Object.freeze(
                                 defaultvalue: false,
                                 description:
                                     "Specifies whether to include\n        symbols without a description.",
-                                name: "jsdoc.undescribed"
+                                name: "jsdoc.undescribed",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8562,21 +8562,21 @@ var docma = Object.freeze(
                                 defaultvalue: false,
                                 description:
                                     "Specifies whether to include symbols\n        marked with `ignore` tag.",
-                                name: "jsdoc.ignored"
+                                name: "jsdoc.ignored",
                             },
                             {
                                 type: { names: ["String"] },
                                 optional: true,
                                 description:
                                     "When set, all `symbol.meta.path` values\n        will be relative to this path.",
-                                name: "jsdoc.relativePath"
+                                name: "jsdoc.relativePath",
                             },
                             {
                                 type: { names: ["function"] },
                                 optional: true,
                                 description:
                                     "This is used to filter the parsed\n        documentation output array. If a `Function` is passed; it's invoked\n        for each included `symbol`. e.g. `function (symbol) { return symbol;\n        }` Returning a falsy value will remove the symbol from the output.\n        Returning `true` will keep the original symbol. To keep the symbol\n        and alter its contents, simply return an altered symbol object.",
-                                name: "jsdoc.predicate"
+                                name: "jsdoc.predicate",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8584,7 +8584,7 @@ var docma = Object.freeze(
                                 defaultvalue: false,
                                 description:
                                     "Specifies whether to arrange\n        symbols by their hierarchy. This will find and move symbols that have\n        a `memberof` property to a `$members` property of their corresponding\n        owners. Also the constructor symbol will be moved to a `$constructor`\n        property of the `ClassDeclaration` symbol; if any.",
-                                name: "jsdoc.hierarchy"
+                                name: "jsdoc.hierarchy",
                             },
                             {
                                 type: { names: ["Boolean", "String"] },
@@ -8592,7 +8592,7 @@ var docma = Object.freeze(
                                 defaultvalue: '"alphabetic"',
                                 description:
                                     'Specifies whether to sort\n        the documentation symbols. For alphabetic sort, set to `true` or\n        `"alphabetic"`. To group-sort set to `"grouped"`. <i>(Group sorting\n        is done in the following order: by memberof, by scope, by access\n        type, by kind, alphabetic.)</i> To sort by only `"scope"` or\n        `"access"` or `"kind"`, set to corresponding string. <i>(Sorting by\n        kind is done in the following order: constant, package/module,\n        namespace, class, constructor, method, property, enum, typedef,\n        event, interface, mixin, external, other members.)</i> Set to `false`\n        to disable. <i>Note that this sorts the documentation symbols data,\n        how it\'s displayed might be altered by the Docma template you\'re\n        using.</i>',
-                                name: "jsdoc.sort"
+                                name: "jsdoc.sort",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8600,7 +8600,7 @@ var docma = Object.freeze(
                                 defaultvalue: true,
                                 description:
                                     "Specifies whether to allow\n        unrecognized tags. If set to `false` parsing will fail on unknown\n        tags.",
-                                name: "jsdoc.allowUnknownTags"
+                                name: "jsdoc.allowUnknownTags",
                             },
                             {
                                 type: { names: ["Array"] },
@@ -8608,7 +8608,7 @@ var docma = Object.freeze(
                                 defaultvalue: '["jsdoc", "closure"]',
                                 description:
                                     "Indicates the\n        dictionaries to be used. By default, both standard JSDoc tags and\n        Closure Compiler tags are enabled.",
-                                name: "jsdoc.dictionaries"
+                                name: "jsdoc.dictionaries",
                             },
                             {
                                 type: { names: ["String"] },
@@ -8616,7 +8616,7 @@ var docma = Object.freeze(
                                 defaultvalue: '".+\\\\.js(doc|x)?$"',
                                 description:
                                     'String pattern for\n        defining sources to be included. By default, only files ending in\n        `".js"`, "`.jsdoc"`, and `".jsx"` will be processed.',
-                                name: "jsdoc.includePattern"
+                                name: "jsdoc.includePattern",
                             },
                             {
                                 type: { names: ["String"] },
@@ -8624,7 +8624,7 @@ var docma = Object.freeze(
                                 defaultvalue: '"(^|\\\\/|\\\\\\\\)_"',
                                 description:
                                     "String pattern for\n        defining sources to be ignored. By default, any file starting with an\n        underscore or in a directory starting with an underscore will be\n        ignored.",
-                                name: "jsdoc.excludePattern"
+                                name: "jsdoc.excludePattern",
                             },
                             {
                                 type: { names: ["Array"] },
@@ -8632,13 +8632,13 @@ var docma = Object.freeze(
                                 defaultvalue: "[]",
                                 description:
                                     "Defines the JSDoc plugins to be used. See\n        {@link https://usejsdoc.org/about-plugins.html|this guide} on JSDoc\n        plugins.",
-                                name: "jsdoc.plugins"
+                                name: "jsdoc.plugins",
                             },
                             {
                                 type: { names: ["Object"] },
                                 optional: true,
                                 description: "Markdown parse options.",
-                                name: "markdown"
+                                name: "markdown",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8646,7 +8646,7 @@ var docma = Object.freeze(
                                 defaultvalue: true,
                                 description:
                                     "Whether to enable\n        {@link https://help.github.com/categories/writing-on-github|GitHub flavored markdown}.",
-                                name: "markdown.gfm"
+                                name: "markdown.gfm",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8654,7 +8654,7 @@ var docma = Object.freeze(
                                 defaultvalue: true,
                                 description:
                                     "Whether to enable enable GFM\n        {@link https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#tables|tables}.\n        This option requires the `gfm` option to be `true`.",
-                                name: "markdown.tables"
+                                name: "markdown.tables",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8662,7 +8662,7 @@ var docma = Object.freeze(
                                 defaultvalue: false,
                                 description:
                                     "Whether to enable enable GFM\n        {@link https://help.github.com/articles/basic-writing-and-formatting-syntax/#paragraphs-and-line-breaks|line breaks}.\n        This option requires the `gfm` option to be `true`.",
-                                name: "markdown.breaks"
+                                name: "markdown.breaks",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8670,7 +8670,7 @@ var docma = Object.freeze(
                                 defaultvalue: false,
                                 description:
                                     "Whether to conform with obscure\n        parts of `markdown.pl` as much as possible. Don't fix any of the\n        original markdown bugs or poor behavior.",
-                                name: "markdown.pedantic"
+                                name: "markdown.pedantic",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8678,7 +8678,7 @@ var docma = Object.freeze(
                                 defaultvalue: false,
                                 description:
                                     "Whether to use smarter list\n        behavior than the original markdown. May eventually be default with\n        the old behavior moved into `pedantic`.",
-                                name: "markdown.sanitize"
+                                name: "markdown.sanitize",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8686,7 +8686,7 @@ var docma = Object.freeze(
                                 defaultvalue: false,
                                 description:
                                     'Whether to use "smart"\n        typographic punctuation for things like quotes and dashes.',
-                                name: "markdown.smartypants"
+                                name: "markdown.smartypants",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8694,7 +8694,7 @@ var docma = Object.freeze(
                                 defaultvalue: false,
                                 description:
                                     'Self-close the tags for void\n        elements (`<br/>`, `<img/>`, etc.) with a `"/"` as required by XHTML.',
-                                name: "markdown.xhtml"
+                                name: "markdown.xhtml",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8702,7 +8702,7 @@ var docma = Object.freeze(
                                 defaultvalue: true,
                                 description:
                                     "Whether to parse GitHub style task\n        markdown (e.g. `- [x] task`) into checkbox elements.",
-                                name: "markdown.tasks"
+                                name: "markdown.tasks",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8710,14 +8710,14 @@ var docma = Object.freeze(
                                 defaultvalue: true,
                                 description:
                                     "If set to `true`, emoji shortcuts\n        (e.g. `&#x3A;smiley&#x3A;`) are parsed into `&lt;img /&gt;` elements\n        with {@link https://twitter.github.io/twemoji|twemoji} SVG URLs.",
-                                name: "markdown.emoji"
+                                name: "markdown.emoji",
                             },
                             {
                                 type: { names: ["Object"] },
                                 optional: true,
                                 description:
                                     "Configuration for the generated SPA (Single Page\n        Application).",
-                                name: "app"
+                                name: "app",
                             },
                             {
                                 type: { names: ["String"] },
@@ -8725,14 +8725,14 @@ var docma = Object.freeze(
                                 defaultvalue: '""',
                                 description:
                                     "Title of the main HTML document of the\n        generated web app. (Sets the value of the `&lt;title&gt;` element.)",
-                                name: "app.title"
+                                name: "app.title",
                             },
                             {
                                 type: { names: ["Array", "Object"] },
                                 optional: true,
                                 description:
                                     'One or more meta elements to be set for the\n        main HTML document of the generated web app. Set arbitrary object(s)\n        for each meta element to be added. e.g. `[{ charset: "utf-8"}, {\n        name: "robots", "content": "index, follow" }]`.',
-                                name: "app.meta"
+                                name: "app.meta",
                             },
                             {
                                 type: { names: ["String"] },
@@ -8740,14 +8740,14 @@ var docma = Object.freeze(
                                 defaultvalue: '"/"',
                                 description:
                                     'Sets the base path of the generated web app.\n        For example if the app will operate within `/doc/*` set the base path\n        to `"/doc"`.',
-                                name: "app.base"
+                                name: "app.base",
                             },
                             {
                                 type: { names: ["String"] },
                                 optional: true,
                                 description:
                                     "Local path to a `favicon.ico` file to be used\n         with the web app.",
-                                name: "app.favicon"
+                                name: "app.favicon",
                             },
                             {
                                 type: { names: ["String"] },
@@ -8755,14 +8755,14 @@ var docma = Object.freeze(
                                 defaultvalue: '"api"',
                                 description:
                                     'Defines the home content to be\n        displayed for the application root (when you enter the base path i.e.\n        `"/"`). Pass the type and name of the route in `{type}:{name}`\n        format. There are 2 types of routes: `api` for JS source\n        documentation and `content` for other HTML content such as parsed\n        markdown files. For example, if you have a grouped JS files\n        documented with a name `mylib`; to define this as the entrance of the\n        app, set this to `"api:mylib"`. If you have `"README.md"` in your\n        source files; to define this as the entrance, set this to\n        `"content:readme"`.',
-                                name: "app.entrance"
+                                name: "app.entrance",
                             },
                             {
                                 type: { names: ["String", "Object"] },
                                 optional: true,
                                 description:
                                     "Either a `String` defining the route\n        method or an `Object` defining both the method and whether the routes\n        should be case-sensitive.",
-                                name: "app.routing"
+                                name: "app.routing",
                             },
                             {
                                 type: { names: ["String"] },
@@ -8770,7 +8770,7 @@ var docma = Object.freeze(
                                 defaultvalue: '"query"',
                                 description:
                                     "Indicates the routing method for the generated SPA (Single\n               Page Application).\n               See {@link #Docma.RoutingMethod|`RoutingMethod` enumeration}.",
-                                name: "app.routing.method"
+                                name: "app.routing.method",
                             },
                             {
                                 type: { names: ["Boolean"] },
@@ -8778,7 +8778,7 @@ var docma = Object.freeze(
                                 defaultvalue: true,
                                 description:
                                     "Indicates whether the routes should be case-sensitive.\n               Note that if this is set to `false`, same route names will\n               overwrite the previous, even if they have different case.",
-                                name: "app.routing.caseSensitive"
+                                name: "app.routing.caseSensitive",
                             },
                             {
                                 type: { names: ["String"] },
@@ -8786,13 +8786,13 @@ var docma = Object.freeze(
                                 defaultvalue: '"static"',
                                 description:
                                     'Server or host type for the SPA. This\n        information helps Docma determine how to configure the generated SPA,\n        especially if `routing.method` is set to `"path"`. See\n        {@link #Docma.ServerType|`ServerType` enumeration} for details.',
-                                name: "app.server"
+                                name: "app.server",
                             },
                             {
                                 type: { names: ["Object"] },
                                 optional: true,
                                 description: "SPA template configuration.",
-                                name: "template"
+                                name: "template",
                             },
                             {
                                 type: { names: ["String"] },
@@ -8800,25 +8800,25 @@ var docma = Object.freeze(
                                 defaultvalue: '"default"',
                                 description:
                                     "Either the path of a custom Docma\n        template or the name of a built-in template. Omit to use the default\n        built-in template.",
-                                name: "template.path"
+                                name: "template.path",
                             },
                             {
                                 type: { names: ["Object"] },
                                 optional: true,
                                 description:
                                     "SPA template options. This is defined by\n        the template itself. Refer to the template's documentation for\n        options to be set at build-time. See\n        {@link templates/zebra/#template-options|Default Template options}.",
-                                name: "template.options"
-                            }
+                                name: "template.options",
+                            },
                         ],
                         examples: [
-                            "const buildConfig = {\n     src: [\n         // using an object to define (group) names for JS files.\n         {\n             // grouping JS files under the name \"my-lib\".\n             // This name also defines the api route name: e.g. ?api=my-lib or api/my-lib/\n             'my-lib': [\n                 './src/** /*.js',           // recurse all JS files under /src\n                 './lib/some-other.js',\n                 '!./lib/ignored.js'         // notice the bang! prefix to exclude this file\n             ],\n             // naming another api route\n             'other-lib': './other/*.js',    // ?api=other-lib\n         },\n\n         // ungrouped js files will be merged under default route\n         './src/main.js',                    // ?api or ?api=_def_\n         './src/main.utils.js',              // merged into same ?api or ?api=_def_\n\n         // including markdown (\"content\") files\n         './CHANGELOG.md',                   // this will have 'changelog' as route name.\n                                             // i.e. ?content=changelog\n         // forcing specific parser on files:\n         './LICENSE:md',                     // LICENSE file with no-extension is forced\n                                             // to markdown via :md suffix.\n                                             // route will be ?content=license or license/\n         // using an object to rename the route for the given markdown files\n         {\n             guide: './README.md'            // this will have 'guide' as content route name\n         }                                   // i.e. ?content=guide or guide/\n     ],\n     dest: './output/docs',                  // output directory for the generated docs\n     app: {\n         title: 'My Documentation',          // title of the app\n         routing: 'query',                   // routing method \"query\" or \"path\"\n         entrance: 'content:guide',          // initial route to load on entrance\n         base: '/'                           // base path of the SPA\n     },\n\n     // template-specific configuration.\n     // for Zebra template, see https://onury.io/docma/templates/zebra\n     template: {\n         path: 'zebra',\n         options: {\n             title: {\n                 label: 'My Docs',\n                 href: '/docs/?'\n             },\n             navbar: true,\n             sidebar: {\n                 enabled: true,\n                 outline: 'tree'\n             }\n         }\n     }\n };\n // See Docma's own configuration @\n // https://github.com/Prozi/docma/blob/master/docma.json"
+                            "const buildConfig = {\n     src: [\n         // using an object to define (group) names for JS files.\n         {\n             // grouping JS files under the name \"my-lib\".\n             // This name also defines the api route name: e.g. ?api=my-lib or api/my-lib/\n             'my-lib': [\n                 './src/** /*.js',           // recurse all JS files under /src\n                 './lib/some-other.js',\n                 '!./lib/ignored.js'         // notice the bang! prefix to exclude this file\n             ],\n             // naming another api route\n             'other-lib': './other/*.js',    // ?api=other-lib\n         },\n\n         // ungrouped js files will be merged under default route\n         './src/main.js',                    // ?api or ?api=_def_\n         './src/main.utils.js',              // merged into same ?api or ?api=_def_\n\n         // including markdown (\"content\") files\n         './CHANGELOG.md',                   // this will have 'changelog' as route name.\n                                             // i.e. ?content=changelog\n         // forcing specific parser on files:\n         './LICENSE:md',                     // LICENSE file with no-extension is forced\n                                             // to markdown via :md suffix.\n                                             // route will be ?content=license or license/\n         // using an object to rename the route for the given markdown files\n         {\n             guide: './README.md'            // this will have 'guide' as content route name\n         }                                   // i.e. ?content=guide or guide/\n     ],\n     dest: './output/docs',                  // output directory for the generated docs\n     app: {\n         title: 'My Documentation',          // title of the app\n         routing: 'query',                   // routing method \"query\" or \"path\"\n         entrance: 'content:guide',          // initial route to load on entrance\n         base: '/'                           // base path of the SPA\n     },\n\n     // template-specific configuration.\n     // for Zebra template, see https://onury.io/docma/templates/zebra\n     template: {\n         path: 'zebra',\n         options: {\n             title: {\n                 label: 'My Docs',\n                 href: '/docs/?'\n             },\n             navbar: true,\n             sidebar: {\n                 enabled: true,\n                 outline: 'tree'\n             }\n         }\n     }\n };\n // See Docma's own configuration @\n // https://github.com/Prozi/docma/blob/master/docma.json",
                         ],
                         memberof: "Docma",
                         longname: "Docma~BuildConfiguration",
                         scope: "inner",
                         $longname: "Docma~BuildConfiguration",
                         $kind: "typedef",
-                        $docmaLink: "api/#Docma~BuildConfiguration"
+                        $docmaLink: "api/#Docma~BuildConfiguration",
                     },
                     {
                         comment:
@@ -8833,17 +8833,17 @@ var docma = Object.freeze(
                                 id: "astnode100003405",
                                 name: "Docma.create",
                                 type: "MethodDefinition",
-                                paramnames: []
+                                paramnames: [],
                             },
-                            vars: { "": null }
+                            vars: { "": null },
                         },
                         description:
                             "Creates a new instance of `Docma`.\n This is equivalent to `new Docma()`.",
                         returns: [
                             {
                                 type: { names: ["Docma"] },
-                                description: "- Docma instance."
-                            }
+                                description: "- Docma instance.",
+                            },
                         ],
                         name: "create",
                         longname: "Docma.create",
@@ -8853,7 +8853,7 @@ var docma = Object.freeze(
                         params: [],
                         $longname: "Docma.create",
                         $kind: "method",
-                        $docmaLink: "api/#Docma.create"
+                        $docmaLink: "api/#Docma.create",
                     },
                     {
                         comment:
@@ -8870,8 +8870,8 @@ var docma = Object.freeze(
                                 type: "ObjectExpression",
                                 value:
                                     '{"DISABLED":0,"BUILD_LOGS":1,"WEB_LOGS":2,"VERBOSE":4,"NO_MINIFY":8,"JSDOC_OUTPUT":16,"ALL":31}',
-                                paramnames: []
-                            }
+                                paramnames: [],
+                            },
                         },
                         description: "Enumerates bitwise debug flags.",
                         kind: "member",
@@ -8895,8 +8895,8 @@ var docma = Object.freeze(
                                         id: "astnode100003464",
                                         name: "ALL",
                                         type: "Literal",
-                                        value: 31
-                                    }
+                                        value: 31,
+                                    },
                                 },
                                 description: "Enables all debug flags.",
                                 type: { names: ["Number"] },
@@ -8905,7 +8905,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 memberof: "Docma.Debug",
                                 scope: "static",
-                                defaultvalue: 31
+                                defaultvalue: 31,
                             },
                             {
                                 comment:
@@ -8920,8 +8920,8 @@ var docma = Object.freeze(
                                         id: "astnode100003454",
                                         name: "BUILD_LOGS",
                                         type: "Literal",
-                                        value: 1
-                                    }
+                                        value: 1,
+                                    },
                                 },
                                 description:
                                     "Outputs build logs to the Node console.",
@@ -8931,7 +8931,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 memberof: "Docma.Debug",
                                 scope: "static",
-                                defaultvalue: 1
+                                defaultvalue: 1,
                             },
                             {
                                 comment:
@@ -8946,8 +8946,8 @@ var docma = Object.freeze(
                                         id: "astnode100003452",
                                         name: "DISABLED",
                                         type: "Literal",
-                                        value: 0
-                                    }
+                                        value: 0,
+                                    },
                                 },
                                 description: "Disables debugging.",
                                 type: { names: ["Number"] },
@@ -8956,7 +8956,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 memberof: "Docma.Debug",
                                 scope: "static",
-                                defaultvalue: 0
+                                defaultvalue: 0,
                             },
                             {
                                 comment:
@@ -8971,8 +8971,8 @@ var docma = Object.freeze(
                                         id: "astnode100003462",
                                         name: "JSDOC_OUTPUT",
                                         type: "Literal",
-                                        value: 16
-                                    }
+                                        value: 16,
+                                    },
                                 },
                                 description:
                                     "Outputs one or more `[name.]jsdoc.json` files that include\n documentation data for each (grouped) javascript source.\n `name` is the group name you give when you define the source\n files. This is useful for investigating the raw JSDoc output.",
@@ -8982,7 +8982,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 memberof: "Docma.Debug",
                                 scope: "static",
-                                defaultvalue: 16
+                                defaultvalue: 16,
                             },
                             {
                                 comment:
@@ -8997,8 +8997,8 @@ var docma = Object.freeze(
                                         id: "astnode100003460",
                                         name: "NO_MINIFY",
                                         type: "Literal",
-                                        value: 8
-                                    }
+                                        value: 8,
+                                    },
                                 },
                                 description:
                                     "Disables minification for the generated web app assets such as\n Javascript files. This is useful if you're debugging a custom\n Docma template.",
@@ -9008,7 +9008,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 memberof: "Docma.Debug",
                                 scope: "static",
-                                defaultvalue: 8
+                                defaultvalue: 8,
                             },
                             {
                                 comment:
@@ -9023,8 +9023,8 @@ var docma = Object.freeze(
                                         id: "astnode100003458",
                                         name: "VERBOSE",
                                         type: "Literal",
-                                        value: 4
-                                    }
+                                        value: 4,
+                                    },
                                 },
                                 description:
                                     "Outputs verbose logs to consoles.",
@@ -9034,7 +9034,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 memberof: "Docma.Debug",
                                 scope: "static",
-                                defaultvalue: 4
+                                defaultvalue: 4,
                             },
                             {
                                 comment:
@@ -9049,8 +9049,8 @@ var docma = Object.freeze(
                                         id: "astnode100003456",
                                         name: "WEB_LOGS",
                                         type: "Literal",
-                                        value: 2
-                                    }
+                                        value: 2,
+                                    },
                                 },
                                 description:
                                     "Outputs app logs to the browser console.",
@@ -9060,8 +9060,8 @@ var docma = Object.freeze(
                                 kind: "member",
                                 memberof: "Docma.Debug",
                                 scope: "static",
-                                defaultvalue: 2
-                            }
+                                defaultvalue: 2,
+                            },
                         ],
                         $longname: "Docma.Debug",
                         $kind: "enum",
@@ -9080,8 +9080,8 @@ var docma = Object.freeze(
                                         id: "astnode100003464",
                                         name: "ALL",
                                         type: "Literal",
-                                        value: 31
-                                    }
+                                        value: 31,
+                                    },
                                 },
                                 description: "Enables all debug flags.",
                                 type: { names: ["Number"] },
@@ -9093,7 +9093,7 @@ var docma = Object.freeze(
                                 defaultvalue: 31,
                                 $longname: "Docma.Debug.ALL",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Debug.ALL"
+                                $docmaLink: "api/#Docma.Debug.ALL",
                             },
                             {
                                 comment:
@@ -9108,8 +9108,8 @@ var docma = Object.freeze(
                                         id: "astnode100003454",
                                         name: "BUILD_LOGS",
                                         type: "Literal",
-                                        value: 1
-                                    }
+                                        value: 1,
+                                    },
                                 },
                                 description:
                                     "Outputs build logs to the Node console.",
@@ -9122,7 +9122,7 @@ var docma = Object.freeze(
                                 defaultvalue: 1,
                                 $longname: "Docma.Debug.BUILD_LOGS",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Debug.BUILD_LOGS"
+                                $docmaLink: "api/#Docma.Debug.BUILD_LOGS",
                             },
                             {
                                 comment:
@@ -9137,8 +9137,8 @@ var docma = Object.freeze(
                                         id: "astnode100003452",
                                         name: "DISABLED",
                                         type: "Literal",
-                                        value: 0
-                                    }
+                                        value: 0,
+                                    },
                                 },
                                 description: "Disables debugging.",
                                 type: { names: ["Number"] },
@@ -9150,7 +9150,7 @@ var docma = Object.freeze(
                                 defaultvalue: 0,
                                 $longname: "Docma.Debug.DISABLED",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Debug.DISABLED"
+                                $docmaLink: "api/#Docma.Debug.DISABLED",
                             },
                             {
                                 comment:
@@ -9165,8 +9165,8 @@ var docma = Object.freeze(
                                         id: "astnode100003462",
                                         name: "JSDOC_OUTPUT",
                                         type: "Literal",
-                                        value: 16
-                                    }
+                                        value: 16,
+                                    },
                                 },
                                 description:
                                     "Outputs one or more `[name.]jsdoc.json` files that include\n documentation data for each (grouped) javascript source.\n `name` is the group name you give when you define the source\n files. This is useful for investigating the raw JSDoc output.",
@@ -9179,7 +9179,7 @@ var docma = Object.freeze(
                                 defaultvalue: 16,
                                 $longname: "Docma.Debug.JSDOC_OUTPUT",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Debug.JSDOC_OUTPUT"
+                                $docmaLink: "api/#Docma.Debug.JSDOC_OUTPUT",
                             },
                             {
                                 comment:
@@ -9194,8 +9194,8 @@ var docma = Object.freeze(
                                         id: "astnode100003460",
                                         name: "NO_MINIFY",
                                         type: "Literal",
-                                        value: 8
-                                    }
+                                        value: 8,
+                                    },
                                 },
                                 description:
                                     "Disables minification for the generated web app assets such as\n Javascript files. This is useful if you're debugging a custom\n Docma template.",
@@ -9208,7 +9208,7 @@ var docma = Object.freeze(
                                 defaultvalue: 8,
                                 $longname: "Docma.Debug.NO_MINIFY",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Debug.NO_MINIFY"
+                                $docmaLink: "api/#Docma.Debug.NO_MINIFY",
                             },
                             {
                                 comment:
@@ -9223,8 +9223,8 @@ var docma = Object.freeze(
                                         id: "astnode100003458",
                                         name: "VERBOSE",
                                         type: "Literal",
-                                        value: 4
-                                    }
+                                        value: 4,
+                                    },
                                 },
                                 description:
                                     "Outputs verbose logs to consoles.",
@@ -9237,7 +9237,7 @@ var docma = Object.freeze(
                                 defaultvalue: 4,
                                 $longname: "Docma.Debug.VERBOSE",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Debug.VERBOSE"
+                                $docmaLink: "api/#Docma.Debug.VERBOSE",
                             },
                             {
                                 comment:
@@ -9252,8 +9252,8 @@ var docma = Object.freeze(
                                         id: "astnode100003456",
                                         name: "WEB_LOGS",
                                         type: "Literal",
-                                        value: 2
-                                    }
+                                        value: 2,
+                                    },
                                 },
                                 description:
                                     "Outputs app logs to the browser console.",
@@ -9266,9 +9266,9 @@ var docma = Object.freeze(
                                 defaultvalue: 2,
                                 $longname: "Docma.Debug.WEB_LOGS",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Debug.WEB_LOGS"
-                            }
-                        ]
+                                $docmaLink: "api/#Docma.Debug.WEB_LOGS",
+                            },
+                        ],
                     },
                     {
                         comment:
@@ -9284,8 +9284,8 @@ var docma = Object.freeze(
                                 name: "Docma.RouteType",
                                 type: "ObjectExpression",
                                 value: '{"API":"api","CONTENT":"content"}',
-                                paramnames: []
-                            }
+                                paramnames: [],
+                            },
                         },
                         description: "Enumerates Docma SPA route types.",
                         kind: "member",
@@ -9294,7 +9294,7 @@ var docma = Object.freeze(
                         readonly: true,
                         examples: [
                             '<caption>Routing Method: <code>"query"</code></caption>\n type     name              path\n -------  ----------------  --------------------------\n api      _def_             ?api\n api      web               ?api=web\n content  templates         ?content=templates\n content  guide             ?content=guide\n\n ',
-                            '<caption>Routing Method: <code>"path"</code></caption>\n type     name              path\n -------  ----------------  --------------------------\n api      _def_             api/\n api      web               api/web/\n content  templates         templates/\n content  guide             guide/'
+                            '<caption>Routing Method: <code>"path"</code></caption>\n type     name              path\n -------  ----------------  --------------------------\n api      _def_             api/\n api      web               api/web/\n content  templates         templates/\n content  guide             guide/',
                         ],
                         name: "RouteType",
                         longname: "Docma.RouteType",
@@ -9314,8 +9314,8 @@ var docma = Object.freeze(
                                         id: "astnode100003428",
                                         name: "API",
                                         type: "Literal",
-                                        value: "api"
-                                    }
+                                        value: "api",
+                                    },
                                 },
                                 description:
                                     "Indicates a route for API documentation content, generated from\n Javascript source files via JSDoc.",
@@ -9325,7 +9325,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 memberof: "Docma.RouteType",
                                 scope: "static",
-                                defaultvalue: "api"
+                                defaultvalue: "api",
                             },
                             {
                                 comment:
@@ -9340,8 +9340,8 @@ var docma = Object.freeze(
                                         id: "astnode100003430",
                                         name: "CONTENT",
                                         type: "Literal",
-                                        value: "content"
-                                    }
+                                        value: "content",
+                                    },
                                 },
                                 description:
                                     "Indicates a route for other content, such as HTML files generated\n from markdown.",
@@ -9351,8 +9351,8 @@ var docma = Object.freeze(
                                 kind: "member",
                                 memberof: "Docma.RouteType",
                                 scope: "static",
-                                defaultvalue: "content"
-                            }
+                                defaultvalue: "content",
+                            },
                         ],
                         $longname: "Docma.RouteType",
                         $kind: "enum",
@@ -9371,8 +9371,8 @@ var docma = Object.freeze(
                                         id: "astnode100003428",
                                         name: "API",
                                         type: "Literal",
-                                        value: "api"
-                                    }
+                                        value: "api",
+                                    },
                                 },
                                 description:
                                     "Indicates a route for API documentation content, generated from\n Javascript source files via JSDoc.",
@@ -9385,7 +9385,7 @@ var docma = Object.freeze(
                                 defaultvalue: "api",
                                 $longname: "Docma.RouteType.API",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.RouteType.API"
+                                $docmaLink: "api/#Docma.RouteType.API",
                             },
                             {
                                 comment:
@@ -9400,8 +9400,8 @@ var docma = Object.freeze(
                                         id: "astnode100003430",
                                         name: "CONTENT",
                                         type: "Literal",
-                                        value: "content"
-                                    }
+                                        value: "content",
+                                    },
                                 },
                                 description:
                                     "Indicates a route for other content, such as HTML files generated\n from markdown.",
@@ -9414,9 +9414,9 @@ var docma = Object.freeze(
                                 defaultvalue: "content",
                                 $longname: "Docma.RouteType.CONTENT",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.RouteType.CONTENT"
-                            }
-                        ]
+                                $docmaLink: "api/#Docma.RouteType.CONTENT",
+                            },
+                        ],
                     },
                     {
                         comment:
@@ -9432,8 +9432,8 @@ var docma = Object.freeze(
                                 name: "Docma.RoutingMethod",
                                 type: "ObjectExpression",
                                 value: '{"QUERY":"query","PATH":"path"}',
-                                paramnames: []
-                            }
+                                paramnames: [],
+                            },
                         },
                         description:
                             "Enumerates the routing methods for a Docma generated web application.",
@@ -9459,8 +9459,8 @@ var docma = Object.freeze(
                                         id: "astnode100003420",
                                         name: "PATH",
                                         type: "Literal",
-                                        value: "path"
-                                    }
+                                        value: "path",
+                                    },
                                 },
                                 description:
                                     'Indicates that the SPA routes are based on path params rather than\n query-strings. For example, for a named group of JS source files\n (e.g. `"mylib"`), the generated documentation will be accessible at\n `api/mylib/`. Ungrouped JS documentation will be accessible at `api/`.\n And for other HTML content such as files generated from markdown\n files (e.g. README.md) will be accessible at `readme/`.',
@@ -9470,7 +9470,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 memberof: "Docma.RoutingMethod",
                                 scope: "static",
-                                defaultvalue: "path"
+                                defaultvalue: "path",
                             },
                             {
                                 comment:
@@ -9485,8 +9485,8 @@ var docma = Object.freeze(
                                         id: "astnode100003418",
                                         name: "QUERY",
                                         type: "Literal",
-                                        value: "query"
-                                    }
+                                        value: "query",
+                                    },
                                 },
                                 description:
                                     'Indicates that the SPA routes are based on query-strings.\n For example, for a named group of JS source files (e.g. `"mylib"`),\n the generated documentation will be accessible at `?api=mylib`.\n Ungrouped JS documentation will be accessible at `?api`.\n And for other HTML content such as files generated from markdown\n files (e.g. README.md) will be accessible at `?content=readme`.',
@@ -9496,8 +9496,8 @@ var docma = Object.freeze(
                                 kind: "member",
                                 memberof: "Docma.RoutingMethod",
                                 scope: "static",
-                                defaultvalue: "query"
-                            }
+                                defaultvalue: "query",
+                            },
                         ],
                         $longname: "Docma.RoutingMethod",
                         $kind: "enum",
@@ -9516,8 +9516,8 @@ var docma = Object.freeze(
                                         id: "astnode100003420",
                                         name: "PATH",
                                         type: "Literal",
-                                        value: "path"
-                                    }
+                                        value: "path",
+                                    },
                                 },
                                 description:
                                     'Indicates that the SPA routes are based on path params rather than\n query-strings. For example, for a named group of JS source files\n (e.g. `"mylib"`), the generated documentation will be accessible at\n `api/mylib/`. Ungrouped JS documentation will be accessible at `api/`.\n And for other HTML content such as files generated from markdown\n files (e.g. README.md) will be accessible at `readme/`.',
@@ -9530,7 +9530,7 @@ var docma = Object.freeze(
                                 defaultvalue: "path",
                                 $longname: "Docma.RoutingMethod.PATH",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.RoutingMethod.PATH"
+                                $docmaLink: "api/#Docma.RoutingMethod.PATH",
                             },
                             {
                                 comment:
@@ -9545,8 +9545,8 @@ var docma = Object.freeze(
                                         id: "astnode100003418",
                                         name: "QUERY",
                                         type: "Literal",
-                                        value: "query"
-                                    }
+                                        value: "query",
+                                    },
                                 },
                                 description:
                                     'Indicates that the SPA routes are based on query-strings.\n For example, for a named group of JS source files (e.g. `"mylib"`),\n the generated documentation will be accessible at `?api=mylib`.\n Ungrouped JS documentation will be accessible at `?api`.\n And for other HTML content such as files generated from markdown\n files (e.g. README.md) will be accessible at `?content=readme`.',
@@ -9559,9 +9559,9 @@ var docma = Object.freeze(
                                 defaultvalue: "query",
                                 $longname: "Docma.RoutingMethod.QUERY",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.RoutingMethod.QUERY"
-                            }
-                        ]
+                                $docmaLink: "api/#Docma.RoutingMethod.QUERY",
+                            },
+                        ],
                     },
                     {
                         comment:
@@ -9578,8 +9578,8 @@ var docma = Object.freeze(
                                 type: "ObjectExpression",
                                 value:
                                     '{"APACHE":"apache","GITHUB":"github","STATIC":"static","WINDOWS":"windows"}',
-                                paramnames: []
-                            }
+                                paramnames: [],
+                            },
                         },
                         description:
                             'Enumerates the server/host types for Docma generated SPA.\n The generated SPA is not limited to these hosts but Docma will generate\n additional server config files for these hosts; especially if the\n routing method is set to `"path"`. For example, for Apache;\n an `.htaccess` file will be auto-generated with redirect rules for\n (sub) routes. For GitHub, sub-directories will be generated\n (just like Jekyll) with index files for redirecting via http-meta\n refresh.',
@@ -9605,8 +9605,8 @@ var docma = Object.freeze(
                                         id: "astnode100003438",
                                         name: "APACHE",
                                         type: "Literal",
-                                        value: "apache"
-                                    }
+                                        value: "apache",
+                                    },
                                 },
                                 description:
                                     "Indicates that an Apache server will be hosting the generated SPA.",
@@ -9616,7 +9616,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 memberof: "Docma.ServerType",
                                 scope: "static",
-                                defaultvalue: "apache"
+                                defaultvalue: "apache",
                             },
                             {
                                 comment:
@@ -9631,8 +9631,8 @@ var docma = Object.freeze(
                                         id: "astnode100003440",
                                         name: "GITHUB",
                                         type: "Literal",
-                                        value: "github"
-                                    }
+                                        value: "github",
+                                    },
                                 },
                                 description:
                                     "Indicates that SPA will be hosted via\n {@link https://pages.github.com|GitHub Pages}.",
@@ -9642,7 +9642,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 memberof: "Docma.ServerType",
                                 scope: "static",
-                                defaultvalue: "github"
+                                defaultvalue: "github",
                             },
                             {
                                 comment:
@@ -9657,8 +9657,8 @@ var docma = Object.freeze(
                                         id: "astnode100003442",
                                         name: "STATIC",
                                         type: "Literal",
-                                        value: "static"
-                                    }
+                                        value: "static",
+                                    },
                                 },
                                 description:
                                     "Indicates that SPA will be hosted as static HTML files.\n Similar to `Docma.ServerType.GITHUB`.",
@@ -9668,7 +9668,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 memberof: "Docma.ServerType",
                                 scope: "static",
-                                defaultvalue: "static"
+                                defaultvalue: "static",
                             },
                             {
                                 comment:
@@ -9683,8 +9683,8 @@ var docma = Object.freeze(
                                         id: "astnode100003444",
                                         name: "WINDOWS",
                                         type: "Literal",
-                                        value: "windows"
-                                    }
+                                        value: "windows",
+                                    },
                                 },
                                 description:
                                     "Indicates that SPA will be hosted on a Windows server.",
@@ -9694,8 +9694,8 @@ var docma = Object.freeze(
                                 kind: "member",
                                 memberof: "Docma.ServerType",
                                 scope: "static",
-                                defaultvalue: "windows"
-                            }
+                                defaultvalue: "windows",
+                            },
                         ],
                         $longname: "Docma.ServerType",
                         $kind: "enum",
@@ -9714,8 +9714,8 @@ var docma = Object.freeze(
                                         id: "astnode100003438",
                                         name: "APACHE",
                                         type: "Literal",
-                                        value: "apache"
-                                    }
+                                        value: "apache",
+                                    },
                                 },
                                 description:
                                     "Indicates that an Apache server will be hosting the generated SPA.",
@@ -9728,7 +9728,7 @@ var docma = Object.freeze(
                                 defaultvalue: "apache",
                                 $longname: "Docma.ServerType.APACHE",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.ServerType.APACHE"
+                                $docmaLink: "api/#Docma.ServerType.APACHE",
                             },
                             {
                                 comment:
@@ -9743,8 +9743,8 @@ var docma = Object.freeze(
                                         id: "astnode100003440",
                                         name: "GITHUB",
                                         type: "Literal",
-                                        value: "github"
-                                    }
+                                        value: "github",
+                                    },
                                 },
                                 description:
                                     "Indicates that SPA will be hosted via\n {@link https://pages.github.com|GitHub Pages}.",
@@ -9757,7 +9757,7 @@ var docma = Object.freeze(
                                 defaultvalue: "github",
                                 $longname: "Docma.ServerType.GITHUB",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.ServerType.GITHUB"
+                                $docmaLink: "api/#Docma.ServerType.GITHUB",
                             },
                             {
                                 comment:
@@ -9772,8 +9772,8 @@ var docma = Object.freeze(
                                         id: "astnode100003442",
                                         name: "STATIC",
                                         type: "Literal",
-                                        value: "static"
-                                    }
+                                        value: "static",
+                                    },
                                 },
                                 description:
                                     "Indicates that SPA will be hosted as static HTML files.\n Similar to `Docma.ServerType.GITHUB`.",
@@ -9786,7 +9786,7 @@ var docma = Object.freeze(
                                 defaultvalue: "static",
                                 $longname: "Docma.ServerType.STATIC",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.ServerType.STATIC"
+                                $docmaLink: "api/#Docma.ServerType.STATIC",
                             },
                             {
                                 comment:
@@ -9801,8 +9801,8 @@ var docma = Object.freeze(
                                         id: "astnode100003444",
                                         name: "WINDOWS",
                                         type: "Literal",
-                                        value: "windows"
-                                    }
+                                        value: "windows",
+                                    },
                                 },
                                 description:
                                     "Indicates that SPA will be hosted on a Windows server.",
@@ -9815,9 +9815,9 @@ var docma = Object.freeze(
                                 defaultvalue: "windows",
                                 $longname: "Docma.ServerType.WINDOWS",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.ServerType.WINDOWS"
-                            }
-                        ]
+                                $docmaLink: "api/#Docma.ServerType.WINDOWS",
+                            },
+                        ],
                     },
                     {
                         comment:
@@ -9827,7 +9827,7 @@ var docma = Object.freeze(
                             lineno: 18,
                             columnno: 0,
                             path: "/home/jpietal/projects/docma/lib",
-                            code: {}
+                            code: {},
                         },
                         description:
                             "<blockquote>This class is useful for template authors only.</blockquote>\n\n Class that provides template information and methods for supporting the\n documentation build process.\n\n You should not instantiate this class directly with a `new` operator. Docma\n passes an instance of this class to your template module as the first\n argument; when the end-user builds their documentation.\n\n See {@link templates/guide/|Creating Docma Templates}.\n You can also use {@link cli/#docma-template-init--path-|Docma CLI}\n to initialize a new Docma template project. i.e. `docma template init`. This will\n generate most files required to author a template; including a main JS file for\n your module; as shown below in the example.",
@@ -9835,7 +9835,7 @@ var docma = Object.freeze(
                         name: "Template",
                         since: "2.0.0",
                         examples: [
-                            "<caption>Custom template module implementation</caption>\n module.exports = (template, modules) => {\n\n    // Docma also passes some useful modules (which it already uses internally);\n    // so you don't have to add them to your template module as dependencies.\n    // modules: _ (Lodash), Promise (Bluebird), fs (fs-extra), dust, HtmlParser, utils\n    const { Promise } = modules;\n\n    template.mainHTML = 'index.html';\n\n    template.defaultOptions = {\n        // whatever options your template has...\n        title: 'Docs',\n        searchEnabled: true\n    };\n\n    template.preBuild(() => {\n        // Do some stuff —before— Docma builds documentation for the end-user...\n        return Promise.resolve();\n    });\n\n    template.postBuild(() => {\n        // Do some stuff —after— the build completes...\n        return Promise.resolve();\n    });\n };"
+                            "<caption>Custom template module implementation</caption>\n module.exports = (template, modules) => {\n\n    // Docma also passes some useful modules (which it already uses internally);\n    // so you don't have to add them to your template module as dependencies.\n    // modules: _ (Lodash), Promise (Bluebird), fs (fs-extra), dust, HtmlParser, utils\n    const { Promise } = modules;\n\n    template.mainHTML = 'index.html';\n\n    template.defaultOptions = {\n        // whatever options your template has...\n        title: 'Docs',\n        searchEnabled: true\n    };\n\n    template.preBuild(() => {\n        // Do some stuff —before— Docma builds documentation for the end-user...\n        return Promise.resolve();\n    });\n\n    template.postBuild(() => {\n        // Do some stuff —after— the build completes...\n        return Promise.resolve();\n    });\n };",
                         ],
                         memberof: "Docma",
                         longname: "Docma.Template",
@@ -9852,7 +9852,7 @@ var docma = Object.freeze(
                                     lineno: 176,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description: "Gets the author of the template.",
                                 type: { names: ["String"] },
@@ -9863,7 +9863,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.Template#author",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Template#author"
+                                $docmaLink: "api/#Docma.Template#author",
                             },
                             {
                                 comment:
@@ -9873,7 +9873,7 @@ var docma = Object.freeze(
                                     lineno: 221,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets the build configuration used when building documentation with this\n template.",
@@ -9885,7 +9885,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.Template#buildConfig",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Template#buildConfig"
+                                $docmaLink: "api/#Docma.Template#buildConfig",
                             },
                             {
                                 comment:
@@ -9895,7 +9895,7 @@ var docma = Object.freeze(
                                     lineno: 231,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets the simple debugger/logger used by Dogma.",
@@ -9907,7 +9907,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.Template#debug",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Template#debug"
+                                $docmaLink: "api/#Docma.Template#debug",
                             },
                             {
                                 comment:
@@ -9917,7 +9917,7 @@ var docma = Object.freeze(
                                     lineno: 240,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets or sets the default options of the template.\n Default options can be set within the module main JS file or via\n `docmaTemplate.defaultOptions` within template's package.json.",
@@ -9929,7 +9929,8 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.Template#defaultOptions",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Template#defaultOptions"
+                                $docmaLink:
+                                    "api/#Docma.Template#defaultOptions",
                             },
                             {
                                 comment:
@@ -9939,7 +9940,7 @@ var docma = Object.freeze(
                                     lineno: 138,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets the description of the template.",
@@ -9951,7 +9952,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.Template#description",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Template#description"
+                                $docmaLink: "api/#Docma.Template#description",
                             },
                             {
                                 comment:
@@ -9961,7 +9962,7 @@ var docma = Object.freeze(
                                     lineno: 203,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets the dirname of the template.",
@@ -9973,7 +9974,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.Template#dirname",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Template#dirname"
+                                $docmaLink: "api/#Docma.Template#dirname",
                             },
                             {
                                 comment:
@@ -9983,7 +9984,7 @@ var docma = Object.freeze(
                                     lineno: 156,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets Docma version, template is built with.",
@@ -9995,7 +9996,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.Template#docmaVersion",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Template#docmaVersion"
+                                $docmaLink: "api/#Docma.Template#docmaVersion",
                             },
                             {
                                 comment:
@@ -10005,7 +10006,7 @@ var docma = Object.freeze(
                                     lineno: 328,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Convenience method for joining and getting the destination path within\n build (output) directory for the given string(s).",
@@ -10019,21 +10020,21 @@ var docma = Object.freeze(
                                         defaultvalue: '""',
                                         description:
                                             "String arguments of path sections.",
-                                        name: "args"
-                                    }
+                                        name: "args",
+                                    },
                                 ],
                                 returns: [
                                     {
                                         type: { names: ["String"] },
-                                        description: "-"
-                                    }
+                                        description: "-",
+                                    },
                                 ],
                                 memberof: "Docma.Template",
                                 longname: "Docma.Template#getDestPath",
                                 scope: "instance",
                                 $longname: "Docma.Template#getDestPath",
                                 $kind: "method",
-                                $docmaLink: "api/#Docma.Template#getDestPath"
+                                $docmaLink: "api/#Docma.Template#getDestPath",
                             },
                             {
                                 comment:
@@ -10043,7 +10044,7 @@ var docma = Object.freeze(
                                     lineno: 316,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Convenience method for joining and getting the source path within\n `<root>/template` directory for the given string(s).",
@@ -10057,21 +10058,21 @@ var docma = Object.freeze(
                                         defaultvalue: '""',
                                         description:
                                             "String arguments of path sections.",
-                                        name: "args"
-                                    }
+                                        name: "args",
+                                    },
                                 ],
                                 returns: [
                                     {
                                         type: { names: ["String"] },
-                                        description: "-"
-                                    }
+                                        description: "-",
+                                    },
                                 ],
                                 memberof: "Docma.Template",
                                 longname: "Docma.Template#getSrcPath",
                                 scope: "instance",
                                 $longname: "Docma.Template#getSrcPath",
                                 $kind: "method",
-                                $docmaLink: "api/#Docma.Template#getSrcPath"
+                                $docmaLink: "api/#Docma.Template#getSrcPath",
                             },
                             {
                                 comment:
@@ -10081,7 +10082,7 @@ var docma = Object.freeze(
                                     lineno: 291,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets or sets array of ignored files when building documentation with\n this template. Ignored files can be set within the module main JS file\n or via `docmaTemplate.ignore` within template's package.json.",
@@ -10093,7 +10094,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.Template#ignore",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Template#ignore"
+                                $docmaLink: "api/#Docma.Template#ignore",
                             },
                             {
                                 comment:
@@ -10103,7 +10104,7 @@ var docma = Object.freeze(
                                     lineno: 185,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets the license of the template.",
@@ -10115,7 +10116,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.Template#license",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Template#license"
+                                $docmaLink: "api/#Docma.Template#license",
                             },
                             {
                                 comment:
@@ -10125,7 +10126,7 @@ var docma = Object.freeze(
                                     lineno: 305,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Outputs a data log to the console. For more logger/debugger methods, use\n {@link api/#Docma.Template#debug|`#debug`} object.",
@@ -10139,15 +10140,15 @@ var docma = Object.freeze(
                                         defaultvalue: '""',
                                         description:
                                             "String arguments to be logged.",
-                                        name: "args"
-                                    }
+                                        name: "args",
+                                    },
                                 ],
                                 memberof: "Docma.Template",
                                 longname: "Docma.Template#log",
                                 scope: "instance",
                                 $longname: "Docma.Template#log",
                                 $kind: "method",
-                                $docmaLink: "api/#Docma.Template#log"
+                                $docmaLink: "api/#Docma.Template#log",
                             },
                             {
                                 comment:
@@ -10157,7 +10158,7 @@ var docma = Object.freeze(
                                     lineno: 275,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets or sets the main HTML file (name) of the template.\n Main HTML file can be set within the module main JS file or via\n `docmaTemplate.mainHTML` within template's package.json.",
@@ -10169,7 +10170,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.Template#mainHTML",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Template#mainHTML"
+                                $docmaLink: "api/#Docma.Template#mainHTML",
                             },
                             {
                                 comment:
@@ -10179,7 +10180,7 @@ var docma = Object.freeze(
                                     lineno: 129,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description: "Gets the name of the template.",
                                 type: { names: ["String"] },
@@ -10190,7 +10191,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.Template#name",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Template#name"
+                                $docmaLink: "api/#Docma.Template#name",
                             },
                             {
                                 comment:
@@ -10200,7 +10201,7 @@ var docma = Object.freeze(
                                     lineno: 262,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets or sets the template options set by the user when building\n documentation with this template.",
@@ -10212,7 +10213,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.Template#options",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Template#options"
+                                $docmaLink: "api/#Docma.Template#options",
                             },
                             {
                                 comment:
@@ -10222,7 +10223,7 @@ var docma = Object.freeze(
                                     lineno: 194,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description: "Gets the path of the template.",
                                 type: { names: ["String"] },
@@ -10233,7 +10234,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.Template#path",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Template#path"
+                                $docmaLink: "api/#Docma.Template#path",
                             },
                             {
                                 comment:
@@ -10243,7 +10244,7 @@ var docma = Object.freeze(
                                     lineno: 120,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets the package.json contents of the template.",
@@ -10255,7 +10256,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.Template#pkg",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Template#pkg"
+                                $docmaLink: "api/#Docma.Template#pkg",
                             },
                             {
                                 comment:
@@ -10265,7 +10266,7 @@ var docma = Object.freeze(
                                     lineno: 352,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Sets a post-build processor function that is ran right after Docma build\n completes.",
@@ -10276,15 +10277,15 @@ var docma = Object.freeze(
                                         type: { names: ["function"] },
                                         description:
                                             "Processor function. You can return a `Promise` if\n this is an async operation.",
-                                        name: "fn"
-                                    }
+                                        name: "fn",
+                                    },
                                 ],
                                 memberof: "Docma.Template",
                                 longname: "Docma.Template#postBuild",
                                 scope: "instance",
                                 $longname: "Docma.Template#postBuild",
                                 $kind: "method",
-                                $docmaLink: "api/#Docma.Template#postBuild"
+                                $docmaLink: "api/#Docma.Template#postBuild",
                             },
                             {
                                 comment:
@@ -10294,7 +10295,7 @@ var docma = Object.freeze(
                                     lineno: 340,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Sets a pre-build processor function that is ran right before Docma build\n starts.",
@@ -10305,15 +10306,15 @@ var docma = Object.freeze(
                                         type: { names: ["function"] },
                                         description:
                                             "Processor function. You can return a `Promise` if\n this is an async operation.",
-                                        name: "fn"
-                                    }
+                                        name: "fn",
+                                    },
                                 ],
                                 memberof: "Docma.Template",
                                 longname: "Docma.Template#preBuild",
                                 scope: "instance",
                                 $longname: "Docma.Template#preBuild",
                                 $kind: "method",
-                                $docmaLink: "api/#Docma.Template#preBuild"
+                                $docmaLink: "api/#Docma.Template#preBuild",
                             },
                             {
                                 comment:
@@ -10323,7 +10324,7 @@ var docma = Object.freeze(
                                     lineno: 165,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     'Gets Docma version (range) supported by this template.\n This is set via `peerDependencies` in package.json.\n If omitted, returns `">=2.0.0"`.',
@@ -10338,7 +10339,7 @@ var docma = Object.freeze(
                                     "Docma.Template#supportedDocmaVersion",
                                 $kind: "property",
                                 $docmaLink:
-                                    "api/#Docma.Template#supportedDocmaVersion"
+                                    "api/#Docma.Template#supportedDocmaVersion",
                             },
                             {
                                 comment:
@@ -10348,7 +10349,7 @@ var docma = Object.freeze(
                                     lineno: 212,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets the path of the template directory within the template.",
@@ -10360,7 +10361,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.Template#templateDir",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Template#templateDir"
+                                $docmaLink: "api/#Docma.Template#templateDir",
                             },
                             {
                                 comment:
@@ -10370,7 +10371,7 @@ var docma = Object.freeze(
                                     lineno: 147,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets the version of the template.",
@@ -10382,9 +10383,9 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.Template#version",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.Template#version"
-                            }
-                        ]
+                                $docmaLink: "api/#Docma.Template#version",
+                            },
+                        ],
                     },
                     {
                         comment:
@@ -10394,7 +10395,7 @@ var docma = Object.freeze(
                             lineno: 70,
                             columnno: 0,
                             path: "/home/jpietal/projects/docma/lib",
-                            code: {}
+                            code: {},
                         },
                         description:
                             "<blockquote>This class is useful for template authors only.</blockquote>\n\n Class that runs diagnostics on a target Docma template by analyzing\n the file structure, validating package metadata and testing with the\n template builder.",
@@ -10416,7 +10417,7 @@ var docma = Object.freeze(
                                     lineno: 327,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Analyzes the Docma template and collects diagnostics information on the\n template structure, package health and builder initialization.",
@@ -10425,15 +10426,16 @@ var docma = Object.freeze(
                                 returns: [
                                     {
                                         type: { names: ["Object"] },
-                                        description: "- Diagnostics data."
-                                    }
+                                        description: "- Diagnostics data.",
+                                    },
                                 ],
                                 memberof: "Docma.TemplateDoctor",
                                 longname: "Docma.TemplateDoctor#diagnose",
                                 scope: "instance",
                                 $longname: "Docma.TemplateDoctor#diagnose",
                                 $kind: "method",
-                                $docmaLink: "api/#Docma.TemplateDoctor#diagnose"
+                                $docmaLink:
+                                    "api/#Docma.TemplateDoctor#diagnose",
                             },
                             {
                                 comment:
@@ -10443,7 +10445,7 @@ var docma = Object.freeze(
                                     lineno: 145,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets the diagnostics data object that contains the results.",
@@ -10456,7 +10458,7 @@ var docma = Object.freeze(
                                 $longname: "Docma.TemplateDoctor#diagnostics",
                                 $kind: "property",
                                 $docmaLink:
-                                    "api/#Docma.TemplateDoctor#diagnostics"
+                                    "api/#Docma.TemplateDoctor#diagnostics",
                             },
                             {
                                 comment:
@@ -10466,7 +10468,7 @@ var docma = Object.freeze(
                                     lineno: 117,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets the package.json contents of the Docma template anayzed.",
@@ -10478,7 +10480,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.TemplateDoctor#pkg",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.TemplateDoctor#pkg"
+                                $docmaLink: "api/#Docma.TemplateDoctor#pkg",
                             },
                             {
                                 comment:
@@ -10488,7 +10490,7 @@ var docma = Object.freeze(
                                     lineno: 382,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Resets the state of the TemplateDoctor instance, cleaning up\n previous diagnosis information and data. (Note that settings are not\n reset.)",
@@ -10499,7 +10501,7 @@ var docma = Object.freeze(
                                 scope: "instance",
                                 $longname: "Docma.TemplateDoctor#reset",
                                 $kind: "method",
-                                $docmaLink: "api/#Docma.TemplateDoctor#reset"
+                                $docmaLink: "api/#Docma.TemplateDoctor#reset",
                             },
                             {
                                 comment:
@@ -10509,7 +10511,7 @@ var docma = Object.freeze(
                                     lineno: 154,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets or sets the diagnostics settings.",
@@ -10521,7 +10523,8 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.TemplateDoctor#settings",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.TemplateDoctor#settings"
+                                $docmaLink:
+                                    "api/#Docma.TemplateDoctor#settings",
                             },
                             {
                                 comment:
@@ -10531,7 +10534,7 @@ var docma = Object.freeze(
                                     lineno: 135,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets the template instance created while diagnosing. In other words,\n template instance is only available after `.diagnose()` is called.",
@@ -10543,7 +10546,8 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "Docma.TemplateDoctor#template",
                                 $kind: "property",
-                                $docmaLink: "api/#Docma.TemplateDoctor#template"
+                                $docmaLink:
+                                    "api/#Docma.TemplateDoctor#template",
                             },
                             {
                                 comment:
@@ -10553,7 +10557,7 @@ var docma = Object.freeze(
                                     lineno: 126,
                                     columnno: 4,
                                     path: "/home/jpietal/projects/docma/lib",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets the name of the Docma template.",
@@ -10566,8 +10570,8 @@ var docma = Object.freeze(
                                 $longname: "Docma.TemplateDoctor#templateName",
                                 $kind: "property",
                                 $docmaLink:
-                                    "api/#Docma.TemplateDoctor#templateName"
-                            }
+                                    "api/#Docma.TemplateDoctor#templateName",
+                            },
                         ],
                         $constructor: {
                             comment:
@@ -10582,9 +10586,9 @@ var docma = Object.freeze(
                                     id: "astnode100004298",
                                     name: "TemplateDoctor",
                                     type: "MethodDefinition",
-                                    paramnames: ["templatePath", "settings"]
+                                    paramnames: ["templatePath", "settings"],
                                 },
-                                vars: { "": null }
+                                vars: { "": null },
                             },
                             description:
                                 "Initializes a new instance of `Docma.TemplateDoctor`.",
@@ -10595,14 +10599,14 @@ var docma = Object.freeze(
                                     type: { names: ["String"] },
                                     description:
                                         "Path of the template to be diagnosed.",
-                                    name: "templatePath"
+                                    name: "templatePath",
                                 },
                                 {
                                     type: { names: ["Object"] },
                                     optional: true,
                                     defaultvalue: "{}",
                                     description: "Diagnose settings.",
-                                    name: "settings"
+                                    name: "settings",
                                 },
                                 {
                                     type: { names: ["Boolean"] },
@@ -10610,7 +10614,7 @@ var docma = Object.freeze(
                                     defaultvalue: true,
                                     description:
                                         "Whether not to log\n     diagnostics information to console.",
-                                    name: "settings.quiet"
+                                    name: "settings.quiet",
                                 },
                                 {
                                     type: { names: ["Boolean"] },
@@ -10618,8 +10622,8 @@ var docma = Object.freeze(
                                     defaultvalue: false,
                                     description:
                                         "Whether\n     to stop on first failure.",
-                                    name: "settings.stopOnFirstFailure"
-                                }
+                                    name: "settings.stopOnFirstFailure",
+                                },
                             ],
                             name: "TemplateDoctor",
                             longname: "Docma.TemplateDoctor",
@@ -10627,8 +10631,8 @@ var docma = Object.freeze(
                             scope: "static",
                             $longname: "Docma.TemplateDoctor",
                             $kind: "constructor",
-                            $docmaLink: "api/#Docma.TemplateDoctor"
-                        }
+                            $docmaLink: "api/#Docma.TemplateDoctor",
+                        },
                     },
                     {
                         comment:
@@ -10643,9 +10647,9 @@ var docma = Object.freeze(
                                 id: "astnode100003503",
                                 name: "Template",
                                 type: "MethodDefinition",
-                                paramnames: ["params"]
+                                paramnames: ["params"],
                             },
-                            vars: { "": null }
+                            vars: { "": null },
                         },
                         description:
                             "Initializes a new instance of `Docma.Template`.",
@@ -10654,31 +10658,31 @@ var docma = Object.freeze(
                             {
                                 type: { names: ["Object"] },
                                 description: "Template parameters.",
-                                name: "params"
+                                name: "params",
                             },
                             {
                                 type: { names: ["Object"] },
                                 description:
                                     "Resolved path of the template\n     module.",
-                                name: "params.modulePath"
+                                name: "params.modulePath",
                             },
                             {
                                 type: { names: ["Object"] },
                                 description:
                                     "Docma build configuration (that\n     also includes template configuration).",
-                                name: "params.buildConfig"
+                                name: "params.buildConfig",
                             },
                             {
                                 type: { names: ["String"] },
                                 description: "Current Docma version.",
-                                name: "params.docmaVersion"
+                                name: "params.docmaVersion",
                             },
                             {
                                 type: { names: ["function"] },
                                 description:
                                     "Log function to be used within the\n     template module.",
-                                name: "params.fnLog"
-                            }
+                                name: "params.fnLog",
+                            },
                         ],
                         name: "Template",
                         longname: "Template",
@@ -10687,8 +10691,8 @@ var docma = Object.freeze(
                         $longname: "Template",
                         $kind: "constructor",
                         $docmaLink: "api/#Template",
-                        $hide: true
-                    }
+                        $hide: true,
+                    },
                 ],
                 symbols: [
                     "Docma",
@@ -10731,8 +10735,8 @@ var docma = Object.freeze(
                     "Docma.TemplateDoctor#settings",
                     "Docma.TemplateDoctor#template",
                     "Docma.TemplateDoctor#templateName",
-                    "Template"
-                ]
+                    "Template",
+                ],
             },
             web: {
                 documentation: [
@@ -10744,7 +10748,7 @@ var docma = Object.freeze(
                             lineno: 17,
                             columnno: 0,
                             path: "/home/jpietal/projects/docma/lib/web",
-                            code: {}
+                            code: {},
                         },
                         description:
                             "Docma (web) core.\n\n When you build the documentation with a template, `docma-web.js` will be\n generated (and linked in the main HTML); which is the core engine for the\n documentation web app. This will include everything the app needs such as\n the documentation data, compiled partials, dustjs engine, etc...\n\n <blockquote>An instance of this object is globally accessible within the generated SPA\n as <code>docma</code>. Note that the size of the `docma-web.js` script depends primarily\n on the generated documentation data.</blockquote>",
@@ -10755,7 +10759,7 @@ var docma = Object.freeze(
                             "DocmaWeb~event:ready",
                             "DocmaWeb~event:render",
                             "DocmaWeb~event:route",
-                            "DocmaWeb~event:navigate"
+                            "DocmaWeb~event:navigate",
                         ],
                         longname: "DocmaWeb",
                         scope: "global",
@@ -10777,51 +10781,51 @@ var docma = Object.freeze(
                                         id: "astnode100000990",
                                         name: "DocmaWeb.prototype.addFilter",
                                         type: "FunctionExpression",
-                                        paramnames: ["name", "fn"]
+                                        paramnames: ["name", "fn"],
                                     },
                                     vars: {
                                         "dust.filters[undefined]":
-                                            "dust.filters[undefined]"
-                                    }
+                                            "dust.filters[undefined]",
+                                    },
                                 },
                                 description: "Adds a new Dust filter.",
                                 tags: [
                                     {
                                         originalTitle: "chainable",
                                         title: "chainable",
-                                        text: ""
-                                    }
+                                        text: "",
+                                    },
                                 ],
                                 see: [
                                     "{@link templates/filters/|Existing Docma (Dust) filters}",
-                                    "{@link https://www.dustjs.com/docs/filter-api|Dust Filter API}"
+                                    "{@link https://www.dustjs.com/docs/filter-api|Dust Filter API}",
                                 ],
                                 params: [
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Name of the filter to be added.",
-                                        name: "name"
+                                        name: "name",
                                     },
                                     {
                                         type: { names: ["function"] },
                                         description: "Filter function.",
-                                        name: "fn"
-                                    }
+                                        name: "fn",
+                                    },
                                 ],
                                 returns: [
                                     {
                                         type: { names: ["DocmaWeb"] },
                                         description:
-                                            "- `DocmaWeb` instance for chaining."
-                                    }
+                                            "- `DocmaWeb` instance for chaining.",
+                                    },
                                 ],
                                 exceptions: [
                                     {
                                         type: { names: ["Error"] },
                                         description:
-                                            "- If a filter with the given name already exists."
-                                    }
+                                            "- If a filter with the given name already exists.",
+                                    },
                                 ],
                                 name: "addFilter",
                                 longname: "DocmaWeb#addFilter",
@@ -10830,7 +10834,7 @@ var docma = Object.freeze(
                                 scope: "instance",
                                 $longname: "DocmaWeb#addFilter",
                                 $kind: "method",
-                                $docmaLink: "api/web/#DocmaWeb#addFilter"
+                                $docmaLink: "api/web/#DocmaWeb#addFilter",
                             },
                             {
                                 comment:
@@ -10841,7 +10845,7 @@ var docma = Object.freeze(
                                     columnno: 4,
                                     path:
                                         "/home/jpietal/projects/docma/lib/web",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     'Hash-map of JSDoc documentation outputs.\n\tEach key is the name of an API (formed by grouped Javascript files).\n\te.g. `docma.apis["some-api"]`\n\n Unnamed documentation data (consisting of ungrouped Javascript files) can be\n accessed via `docma.apis._def_`.\n\n\tEach value is an `Object` with the following signature:\n\t`{ documentation:Array, symbols:Array }`. `documentation` is the actual\n\tJSDoc data, and `symbols` is a flat array of symbol names.\n\n <blockquote>See {@link api/#Docma~BuildConfiguration|build configuration} for more\n details on how Javascript files can be grouped (and named) to form separate\n API documentations and SPA routes.</blockquote>',
@@ -10849,7 +10853,7 @@ var docma = Object.freeze(
                                 type: { names: ["Object"] },
                                 examples: [
                                     "<caption>Programmatic access to documentation data</caption>\n // output ungrouped (unnamed) API documentation data\n console.log(docma.apis._def_.documentation);\n console.log(docma.apis._def_.symbols); // flat list of symbol names\n // output one of the grouped (named) API documentation data\n console.log(docma.apis['my-scondary-api'].documentation);\n\n ",
-                                    "<caption>Usage in a Dust partial</caption>\n <!--\n \tEach API data is passed to the partial, according to the route.\n \tSo you'll always use `documentation` within the partials.\n -->\n {#documentation}\n     <h4>{longname}</h4>\n     <p>{description}</p>\n     <hr />\n {/documentation}"
+                                    "<caption>Usage in a Dust partial</caption>\n <!--\n \tEach API data is passed to the partial, according to the route.\n \tSo you'll always use `documentation` within the partials.\n -->\n {#documentation}\n     <h4>{longname}</h4>\n     <p>{description}</p>\n     <hr />\n {/documentation}",
                                 ],
                                 memberof: "DocmaWeb",
                                 longname: "DocmaWeb#apis",
@@ -10857,7 +10861,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "DocmaWeb#apis",
                                 $kind: "property",
-                                $docmaLink: "api/web/#DocmaWeb#apis"
+                                $docmaLink: "api/web/#DocmaWeb#apis",
                             },
                             {
                                 comment:
@@ -10868,7 +10872,7 @@ var docma = Object.freeze(
                                     columnno: 4,
                                     path:
                                         "/home/jpietal/projects/docma/lib/web",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Provides configuration data of the generated SPA, which is originally set\n at build-time, by the user.\n See {@link api/#Docma~BuildConfiguration|build configuration} for more\n details on how these settings take affect.",
@@ -10879,38 +10883,38 @@ var docma = Object.freeze(
                                         type: { names: ["String"] },
                                         description:
                                             "Base path of the generated web app.",
-                                        name: "base"
+                                        name: "base",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Name of the initial content displayed, when the web app is first\n           loaded.",
-                                        name: "entrance"
+                                        name: "entrance",
                                     },
                                     {
                                         type: { names: ["Array"] },
                                         description:
                                             "Array of arbitrary objects set for main document meta (tags).",
-                                        name: "meta"
+                                        name: "meta",
                                     },
                                     {
                                         type: { names: ["String", "Object"] },
                                         description:
                                             "Routing settings for the generated SPA.",
-                                        name: "routing"
+                                        name: "routing",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Server/host type of the generated SPA.",
-                                        name: "server"
+                                        name: "server",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Document title for the main file of the generated app.\n           (Value of the `&lt;title/>` tag.)",
-                                        name: "title"
-                                    }
+                                        name: "title",
+                                    },
                                 ],
                                 memberof: "DocmaWeb",
                                 longname: "DocmaWeb#app",
@@ -10918,7 +10922,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "DocmaWeb#app",
                                 $kind: "property",
-                                $docmaLink: "api/web/#DocmaWeb#app"
+                                $docmaLink: "api/web/#DocmaWeb#app",
                             },
                             {
                                 comment:
@@ -10934,8 +10938,8 @@ var docma = Object.freeze(
                                         id: "astnode100001064",
                                         name: "DocmaWeb.prototype.createRoute",
                                         type: "FunctionExpression",
-                                        paramnames: ["name", "type"]
-                                    }
+                                        paramnames: ["name", "type"],
+                                    },
                                 },
                                 description:
                                     "Creates a SPA route information object for the given route name and type.",
@@ -10943,20 +10947,20 @@ var docma = Object.freeze(
                                     {
                                         type: { names: ["String"] },
                                         description: "Name of the route.",
-                                        name: "name"
+                                        name: "name",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Type of the SPA route. See {@link #DocmaWeb.Route.Type|`DocmaWeb.Route.Type`}\n        enumeration for possible values.",
-                                        name: "type"
-                                    }
+                                        name: "type",
+                                    },
                                 ],
                                 returns: [
                                     {
                                         type: { names: ["DocmaWeb.Route"] },
-                                        description: "- Route instance."
-                                    }
+                                        description: "- Route instance.",
+                                    },
                                 ],
                                 name: "createRoute",
                                 longname: "DocmaWeb#createRoute",
@@ -10965,7 +10969,7 @@ var docma = Object.freeze(
                                 scope: "instance",
                                 $longname: "DocmaWeb#createRoute",
                                 $kind: "method",
-                                $docmaLink: "api/web/#DocmaWeb#createRoute"
+                                $docmaLink: "api/web/#DocmaWeb#createRoute",
                             },
                             {
                                 comment:
@@ -10976,7 +10980,7 @@ var docma = Object.freeze(
                                     columnno: 4,
                                     path:
                                         "/home/jpietal/projects/docma/lib/web",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets the route information for the current rendered content being\n displayed.",
@@ -10988,20 +10992,20 @@ var docma = Object.freeze(
                                         type: { names: ["String"] },
                                         description:
                                             'Name of the current route. For `api` routes, this is the name\n           of the grouped JS files parsed. If no name is given, this is\n           set to `"_def_"` by default. For `content` routes, this is\n           either the custom name given at build-time or, by default; the\n           name of the generated HTML file; lower-cased, without the\n           extension. e.g. `"README.md"` will have the route name\n           `"readme"` after the build.',
-                                        name: "name"
+                                        name: "name",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Path of the current route.",
-                                        name: "path"
+                                        name: "path",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             'Type of the current route. If a generated JSDoc API\n           documentation is being displayed, this is set to `"api"`.\n           If any other HTML content (such as a converted markdown) is\n           being displayed; this is set to `"content"`.',
-                                        name: "type"
-                                    }
+                                        name: "type",
+                                    },
                                 ],
                                 memberof: "DocmaWeb",
                                 longname: "DocmaWeb#currentRoute",
@@ -11009,7 +11013,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "DocmaWeb#currentRoute",
                                 $kind: "property",
-                                $docmaLink: "api/web/#DocmaWeb#currentRoute"
+                                $docmaLink: "api/web/#DocmaWeb#currentRoute",
                             },
                             {
                                 comment:
@@ -11020,7 +11024,7 @@ var docma = Object.freeze(
                                     columnno: 4,
                                     path:
                                         "/home/jpietal/projects/docma/lib/web",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "JSDoc documentation data for the current API route.\n\tIf current route is not an API route, this will be `null`.\n\n <blockquote>See {@link api/#Docma~BuildConfiguration|build configuration} for more\n details on how Javascript files can be grouped (and named) to form\n separate API documentations and SPA routes.</blockquote>",
@@ -11028,7 +11032,7 @@ var docma = Object.freeze(
                                 type: { names: ["Array"] },
                                 examples: [
                                     "<caption>Output current API documentation data</caption>\n if (docma.currentRoute.type === 'api') {\n \tconsole.log(docma.documentation);\n }\n\n ",
-                                    "<caption>Usage in (Dust) partial</caption>\n {#documentation}\n     <h4>{longname}</h4>\n     <p>{description}</p>\n     <hr />\n {/documentation}"
+                                    "<caption>Usage in (Dust) partial</caption>\n {#documentation}\n     <h4>{longname}</h4>\n     <p>{description}</p>\n     <hr />\n {/documentation}",
                                 ],
                                 memberof: "DocmaWeb",
                                 longname: "DocmaWeb#documentation",
@@ -11036,7 +11040,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "DocmaWeb#documentation",
                                 $kind: "property",
-                                $docmaLink: "api/web/#DocmaWeb#documentation"
+                                $docmaLink: "api/web/#DocmaWeb#documentation",
                             },
                             {
                                 comment:
@@ -11052,8 +11056,8 @@ var docma = Object.freeze(
                                         id: "astnode100000691",
                                         name: "DocmaWeb.prototype.error",
                                         type: "FunctionExpression",
-                                        paramnames: []
-                                    }
+                                        paramnames: [],
+                                    },
                                 },
                                 description:
                                     "Outputs an error log to the browser console. (Unlike `console.error()`) this\n method respects `debug` option of Docma build configuration.",
@@ -11064,8 +11068,8 @@ var docma = Object.freeze(
                                         variable: true,
                                         defaultvalue: '""',
                                         description: "Arguments to be logged.",
-                                        name: "args"
-                                    }
+                                        name: "args",
+                                    },
                                 ],
                                 name: "error",
                                 longname: "DocmaWeb#error",
@@ -11074,7 +11078,7 @@ var docma = Object.freeze(
                                 scope: "instance",
                                 $longname: "DocmaWeb#error",
                                 $kind: "method",
-                                $docmaLink: "api/web/#DocmaWeb#error"
+                                $docmaLink: "api/web/#DocmaWeb#error",
                             },
                             {
                                 comment:
@@ -11092,8 +11096,8 @@ var docma = Object.freeze(
                                         type: "ObjectExpression",
                                         value:
                                             '{"Ready":"ready","Render":"render","Route":"route","Navigate":"navigate"}',
-                                        paramnames: []
-                                    }
+                                        paramnames: [],
+                                    },
                                 },
                                 description: "Docma SPA events enumeration.",
                                 kind: "member",
@@ -11118,8 +11122,8 @@ var docma = Object.freeze(
                                                 id: "astnode100000488",
                                                 name: "Navigate",
                                                 type: "Literal",
-                                                value: "navigate"
-                                            }
+                                                value: "navigate",
+                                            },
                                         },
                                         description:
                                             "Emitted either when the route is changed or navigated to a\n bookmark (i.e. hashchange).",
@@ -11129,7 +11133,7 @@ var docma = Object.freeze(
                                         kind: "member",
                                         memberof: "DocmaWeb.Event",
                                         scope: "static",
-                                        defaultvalue: "navigate"
+                                        defaultvalue: "navigate",
                                     },
                                     {
                                         comment:
@@ -11145,8 +11149,8 @@ var docma = Object.freeze(
                                                 id: "astnode100000482",
                                                 name: "Ready",
                                                 type: "Literal",
-                                                value: "ready"
-                                            }
+                                                value: "ready",
+                                            },
                                         },
                                         description:
                                             "Emitted when Docma is ready and the initial content is rendered.",
@@ -11156,7 +11160,7 @@ var docma = Object.freeze(
                                         kind: "member",
                                         memberof: "DocmaWeb.Event",
                                         scope: "static",
-                                        defaultvalue: "ready"
+                                        defaultvalue: "ready",
                                     },
                                     {
                                         comment:
@@ -11172,8 +11176,8 @@ var docma = Object.freeze(
                                                 id: "astnode100000484",
                                                 name: "Render",
                                                 type: "Literal",
-                                                value: "render"
-                                            }
+                                                value: "render",
+                                            },
                                         },
                                         description:
                                             "Emitted when page content (a Dust partial) is rendered.",
@@ -11183,7 +11187,7 @@ var docma = Object.freeze(
                                         kind: "member",
                                         memberof: "DocmaWeb.Event",
                                         scope: "static",
-                                        defaultvalue: "render"
+                                        defaultvalue: "render",
                                     },
                                     {
                                         comment:
@@ -11199,8 +11203,8 @@ var docma = Object.freeze(
                                                 id: "astnode100000486",
                                                 name: "Route",
                                                 type: "Literal",
-                                                value: "route"
-                                            }
+                                                value: "route",
+                                            },
                                         },
                                         description:
                                             "Emitted when SPA route is changed.",
@@ -11210,8 +11214,8 @@ var docma = Object.freeze(
                                         kind: "member",
                                         memberof: "DocmaWeb.Event",
                                         scope: "static",
-                                        defaultvalue: "route"
-                                    }
+                                        defaultvalue: "route",
+                                    },
                                 ],
                                 $longname: "DocmaWeb.Event",
                                 $kind: "enum",
@@ -11231,8 +11235,8 @@ var docma = Object.freeze(
                                                 id: "astnode100000488",
                                                 name: "Navigate",
                                                 type: "Literal",
-                                                value: "navigate"
-                                            }
+                                                value: "navigate",
+                                            },
                                         },
                                         description:
                                             "Emitted either when the route is changed or navigated to a\n bookmark (i.e. hashchange).",
@@ -11246,7 +11250,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Event.Navigate",
                                         $kind: "property",
                                         $docmaLink:
-                                            "api/web/#DocmaWeb.Event.Navigate"
+                                            "api/web/#DocmaWeb.Event.Navigate",
                                     },
                                     {
                                         comment:
@@ -11262,8 +11266,8 @@ var docma = Object.freeze(
                                                 id: "astnode100000482",
                                                 name: "Ready",
                                                 type: "Literal",
-                                                value: "ready"
-                                            }
+                                                value: "ready",
+                                            },
                                         },
                                         description:
                                             "Emitted when Docma is ready and the initial content is rendered.",
@@ -11277,7 +11281,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Event.Ready",
                                         $kind: "property",
                                         $docmaLink:
-                                            "api/web/#DocmaWeb.Event.Ready"
+                                            "api/web/#DocmaWeb.Event.Ready",
                                     },
                                     {
                                         comment:
@@ -11293,8 +11297,8 @@ var docma = Object.freeze(
                                                 id: "astnode100000484",
                                                 name: "Render",
                                                 type: "Literal",
-                                                value: "render"
-                                            }
+                                                value: "render",
+                                            },
                                         },
                                         description:
                                             "Emitted when page content (a Dust partial) is rendered.",
@@ -11308,7 +11312,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Event.Render",
                                         $kind: "property",
                                         $docmaLink:
-                                            "api/web/#DocmaWeb.Event.Render"
+                                            "api/web/#DocmaWeb.Event.Render",
                                     },
                                     {
                                         comment:
@@ -11324,8 +11328,8 @@ var docma = Object.freeze(
                                                 id: "astnode100000486",
                                                 name: "Route",
                                                 type: "Literal",
-                                                value: "route"
-                                            }
+                                                value: "route",
+                                            },
                                         },
                                         description:
                                             "Emitted when SPA route is changed.",
@@ -11339,9 +11343,9 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Event.Route",
                                         $kind: "property",
                                         $docmaLink:
-                                            "api/web/#DocmaWeb.Event.Route"
-                                    }
-                                ]
+                                            "api/web/#DocmaWeb.Event.Route",
+                                    },
+                                ],
                             },
                             {
                                 comment:
@@ -11352,7 +11356,7 @@ var docma = Object.freeze(
                                     columnno: 0,
                                     path:
                                         "/home/jpietal/projects/docma/lib/web",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Fired either when the route is changed or navigated to a bookmark\n (i.e. on hash-change). If the route does not exist (404), `currentRoute`\n will be `null`.",
@@ -11360,14 +11364,14 @@ var docma = Object.freeze(
                                 name: "event:navigate",
                                 type: { names: ["DocmaWeb.Route"] },
                                 examples: [
-                                    "docma.on('navigate', function (currentRoute) {\n     if (currentRoute) {\n         // do stuff...\n     }\n });"
+                                    "docma.on('navigate', function (currentRoute) {\n     if (currentRoute) {\n         // do stuff...\n     }\n });",
                                 ],
                                 memberof: "DocmaWeb",
                                 longname: "DocmaWeb~event:navigate",
                                 scope: "inner",
                                 $longname: "DocmaWeb~event:navigate",
                                 $kind: "event",
-                                $docmaLink: "api/web/#DocmaWeb~event:navigate"
+                                $docmaLink: "api/web/#DocmaWeb~event:navigate",
                             },
                             {
                                 comment:
@@ -11378,21 +11382,21 @@ var docma = Object.freeze(
                                     columnno: 0,
                                     path:
                                         "/home/jpietal/projects/docma/lib/web",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Fired when Docma is ready and the initial content is rendered.\n This is only fired once.",
                                 kind: "event",
                                 name: "event:ready",
                                 examples: [
-                                    "docma.once('ready', function () {\n     // do stuff...\n });"
+                                    "docma.once('ready', function () {\n     // do stuff...\n });",
                                 ],
                                 memberof: "DocmaWeb",
                                 longname: "DocmaWeb~event:ready",
                                 scope: "inner",
                                 $longname: "DocmaWeb~event:ready",
                                 $kind: "event",
-                                $docmaLink: "api/web/#DocmaWeb~event:ready"
+                                $docmaLink: "api/web/#DocmaWeb~event:ready",
                             },
                             {
                                 comment:
@@ -11403,7 +11407,7 @@ var docma = Object.freeze(
                                     columnno: 0,
                                     path:
                                         "/home/jpietal/projects/docma/lib/web",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Fired when page content (a Dust partial) is rendered. The emitted obeject is\n `currentRoute`. If the route does not exist (404), `currentRoute` will be\n `null`. This is fired after the `route` event.",
@@ -11411,14 +11415,14 @@ var docma = Object.freeze(
                                 name: "event:render",
                                 type: { names: ["DocmaWeb.Route"] },
                                 examples: [
-                                    "docma.on('render', function (currentRoute) {\n     if (currentRoute && currentRoute.type === docma.Route.Type.API) {\n         // do stuff...\n     }\n });"
+                                    "docma.on('render', function (currentRoute) {\n     if (currentRoute && currentRoute.type === docma.Route.Type.API) {\n         // do stuff...\n     }\n });",
                                 ],
                                 memberof: "DocmaWeb",
                                 longname: "DocmaWeb~event:render",
                                 scope: "inner",
                                 $longname: "DocmaWeb~event:render",
                                 $kind: "event",
-                                $docmaLink: "api/web/#DocmaWeb~event:render"
+                                $docmaLink: "api/web/#DocmaWeb~event:render",
                             },
                             {
                                 comment:
@@ -11429,7 +11433,7 @@ var docma = Object.freeze(
                                     columnno: 0,
                                     path:
                                         "/home/jpietal/projects/docma/lib/web",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Fired when SPA route is changed. The emitted obeject is `currentRoute`. If\n the route does not exist (404), `currentRoute` will be `null`. This is fired\n before the `render` event.",
@@ -11437,14 +11441,14 @@ var docma = Object.freeze(
                                 name: "event:route",
                                 type: { names: ["DocmaWeb.Route"] },
                                 examples: [
-                                    "docma.on('route', function (currentRoute) {\n     if (currentRoute && currentRoute.type === docma.Route.Type.API) {\n         // do stuff...\n     }\n });"
+                                    "docma.on('route', function (currentRoute) {\n     if (currentRoute && currentRoute.type === docma.Route.Type.API) {\n         // do stuff...\n     }\n });",
                                 ],
                                 memberof: "DocmaWeb",
                                 longname: "DocmaWeb~event:route",
                                 scope: "inner",
                                 $longname: "DocmaWeb~event:route",
                                 $kind: "event",
-                                $docmaLink: "api/web/#DocmaWeb~event:route"
+                                $docmaLink: "api/web/#DocmaWeb~event:route",
                             },
                             {
                                 comment:
@@ -11460,15 +11464,15 @@ var docma = Object.freeze(
                                         id: "astnode100001374",
                                         name: "DocmaWeb.prototype.fetch",
                                         type: "FunctionExpression",
-                                        paramnames: ["url", "callback"]
+                                        paramnames: ["url", "callback"],
                                     },
                                     vars: {
                                         xhr: "DocmaWeb#fetch~xhr",
                                         self: "DocmaWeb#fetch~self",
                                         "xhr.onreadystatechange":
                                             "DocmaWeb#fetch~xhr.onreadystatechange",
-                                        "": null
-                                    }
+                                        "": null,
+                                    },
                                 },
                                 description:
                                     "Asynchronously fetches (text) content from the given URL via an\n `XmlHttpRequest`. Note that the URL has to be in the same-origin, for\n this to work.",
@@ -11476,14 +11480,14 @@ var docma = Object.freeze(
                                     {
                                         type: { names: ["String"] },
                                         description: "URL to be fetched.",
-                                        name: "url"
+                                        name: "url",
                                     },
                                     {
                                         type: { names: ["function"] },
                                         description:
                                             "Function to be executed when the content is fetched; with the\n        following signature: `function (status, responseText) { .. }`",
-                                        name: "callback"
-                                    }
+                                        name: "callback",
+                                    },
                                 ],
                                 name: "fetch",
                                 longname: "DocmaWeb#fetch",
@@ -11492,7 +11496,7 @@ var docma = Object.freeze(
                                 scope: "instance",
                                 $longname: "DocmaWeb#fetch",
                                 $kind: "method",
-                                $docmaLink: "api/web/#DocmaWeb#fetch"
+                                $docmaLink: "api/web/#DocmaWeb#fetch",
                             },
                             {
                                 comment:
@@ -11508,8 +11512,8 @@ var docma = Object.freeze(
                                         id: "astnode100001045",
                                         name: "DocmaWeb.prototype.filterExists",
                                         type: "FunctionExpression",
-                                        paramnames: ["name"]
-                                    }
+                                        paramnames: ["name"],
+                                    },
                                 },
                                 description:
                                     "Checks whether a Dust filter with the given name already exists.",
@@ -11518,14 +11522,14 @@ var docma = Object.freeze(
                                         type: { names: ["String"] },
                                         description:
                                             "Name of the filter to be checked.",
-                                        name: "name"
-                                    }
+                                        name: "name",
+                                    },
                                 ],
                                 returns: [
                                     {
                                         type: { names: ["Boolean"] },
-                                        description: "-"
-                                    }
+                                        description: "-",
+                                    },
                                 ],
                                 name: "filterExists",
                                 longname: "DocmaWeb#filterExists",
@@ -11534,7 +11538,7 @@ var docma = Object.freeze(
                                 scope: "instance",
                                 $longname: "DocmaWeb#filterExists",
                                 $kind: "method",
-                                $docmaLink: "api/web/#DocmaWeb#filterExists"
+                                $docmaLink: "api/web/#DocmaWeb#filterExists",
                             },
                             {
                                 comment:
@@ -11551,12 +11555,12 @@ var docma = Object.freeze(
                                         name:
                                             "DocmaWeb.prototype.getContentElem",
                                         type: "FunctionExpression",
-                                        paramnames: []
+                                        paramnames: [],
                                     },
                                     vars: {
                                         dContent:
-                                            "DocmaWeb#getContentElem~dContent"
-                                    }
+                                            "DocmaWeb#getContentElem~dContent",
+                                    },
                                 },
                                 description:
                                     "Gets Docma content DOM element that the HTML content will be loaded\n into. This should be called for `docma-content` partial.",
@@ -11564,8 +11568,8 @@ var docma = Object.freeze(
                                     {
                                         type: { names: ["HTMLElement"] },
                                         description:
-                                            "- Docma content DOM element."
-                                    }
+                                            "- Docma content DOM element.",
+                                    },
                                 ],
                                 name: "getContentElem",
                                 longname: "DocmaWeb#getContentElem",
@@ -11574,7 +11578,7 @@ var docma = Object.freeze(
                                 scope: "instance",
                                 $longname: "DocmaWeb#getContentElem",
                                 $kind: "method",
-                                $docmaLink: "api/web/#DocmaWeb#getContentElem"
+                                $docmaLink: "api/web/#DocmaWeb#getContentElem",
                             },
                             {
                                 comment:
@@ -11590,20 +11594,21 @@ var docma = Object.freeze(
                                         id: "astnode100000717",
                                         name: "DocmaWeb.prototype.getDocmaElem",
                                         type: "FunctionExpression",
-                                        paramnames: []
+                                        paramnames: [],
                                     },
                                     vars: {
                                         docmaElem:
-                                            "DocmaWeb#getDocmaElem~docmaElem"
-                                    }
+                                            "DocmaWeb#getDocmaElem~docmaElem",
+                                    },
                                 },
                                 description:
                                     "Gets Docma main DOM element which the Dust templates will be rendered\n into.",
                                 returns: [
                                     {
                                         type: { names: ["HTMLElement"] },
-                                        description: "- Docma main DOM element."
-                                    }
+                                        description:
+                                            "- Docma main DOM element.",
+                                    },
                                 ],
                                 name: "getDocmaElem",
                                 longname: "DocmaWeb#getDocmaElem",
@@ -11612,7 +11617,7 @@ var docma = Object.freeze(
                                 scope: "instance",
                                 $longname: "DocmaWeb#getDocmaElem",
                                 $kind: "method",
-                                $docmaLink: "api/web/#DocmaWeb#getDocmaElem"
+                                $docmaLink: "api/web/#DocmaWeb#getDocmaElem",
                             },
                             {
                                 comment:
@@ -11628,8 +11633,8 @@ var docma = Object.freeze(
                                         id: "astnode100000639",
                                         name: "DocmaWeb.prototype.info",
                                         type: "FunctionExpression",
-                                        paramnames: []
-                                    }
+                                        paramnames: [],
+                                    },
                                 },
                                 description:
                                     "Outputs an informational log to the browser console. (Unlike\n `console.info()`) this method respects `debug` option of Docma build\n configuration.",
@@ -11640,8 +11645,8 @@ var docma = Object.freeze(
                                         variable: true,
                                         defaultvalue: '""',
                                         description: "Arguments to be logged.",
-                                        name: "args"
-                                    }
+                                        name: "args",
+                                    },
                                 ],
                                 name: "info",
                                 longname: "DocmaWeb#info",
@@ -11650,7 +11655,7 @@ var docma = Object.freeze(
                                 scope: "instance",
                                 $longname: "DocmaWeb#info",
                                 $kind: "method",
-                                $docmaLink: "api/web/#DocmaWeb#info"
+                                $docmaLink: "api/web/#DocmaWeb#info",
                             },
                             {
                                 comment:
@@ -11666,14 +11671,14 @@ var docma = Object.freeze(
                                         id: "astnode100000813",
                                         name: "DocmaWeb.prototype.loadContent",
                                         type: "FunctionExpression",
-                                        paramnames: ["html"]
+                                        paramnames: ["html"],
                                     },
                                     vars: {
                                         dContent:
                                             "DocmaWeb#loadContent~dContent",
                                         "dContent.innerHTML":
-                                            "DocmaWeb#loadContent~dContent.innerHTML"
-                                    }
+                                            "DocmaWeb#loadContent~dContent.innerHTML",
+                                    },
                                 },
                                 description:
                                     "Loads the given HTML content into `docma-content` element. This is a\n low-level method. Typically you would not need to use this.",
@@ -11681,8 +11686,8 @@ var docma = Object.freeze(
                                     {
                                         type: { names: ["String"] },
                                         description: "Content to be loaded.",
-                                        name: "html"
-                                    }
+                                        name: "html",
+                                    },
                                 ],
                                 name: "loadContent",
                                 longname: "DocmaWeb#loadContent",
@@ -11691,7 +11696,7 @@ var docma = Object.freeze(
                                 scope: "instance",
                                 $longname: "DocmaWeb#loadContent",
                                 $kind: "method",
-                                $docmaLink: "api/web/#DocmaWeb#loadContent"
+                                $docmaLink: "api/web/#DocmaWeb#loadContent",
                             },
                             {
                                 comment:
@@ -11702,7 +11707,7 @@ var docma = Object.freeze(
                                     columnno: 4,
                                     path:
                                         "/home/jpietal/projects/docma/lib/web",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Similar to `window.location` but with differences and additional\n information.",
@@ -11714,80 +11719,80 @@ var docma = Object.freeze(
                                         type: { names: ["String"] },
                                         description:
                                             "Gets the base path of the application URL, which is set at Docma build-time.",
-                                        name: "base"
+                                        name: "base",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Gets the application entrance route, which is set at Docma build-time.",
-                                        name: "entrance"
+                                        name: "entrance",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Gets the path and filename of the current URL.",
-                                        name: "fullpath"
+                                        name: "fullpath",
                                     },
                                     {
                                         type: { names: ["function"] },
                                         description:
                                             "Gets the value of the given querystring parameter.",
-                                        name: "getQuery()"
+                                        name: "getQuery()",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Gets the anchor `#` of the current URL, without `#` prefix.",
-                                        name: "hash"
+                                        name: "hash",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Gets the hostname and port number of the current URL.",
-                                        name: "host"
+                                        name: "host",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Gets the domain name of the web host.",
-                                        name: "hostname"
+                                        name: "hostname",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Gets the href (URL) of the current location.",
-                                        name: "href"
+                                        name: "href",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Gets the protocol, hostname and port number of the current URL.",
-                                        name: "origin"
+                                        name: "origin",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Gets the path, filename and query-string of the current URL, without the base.",
-                                        name: "path"
+                                        name: "path",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Gets the path and filename of the current URL, without the base.",
-                                        name: "pathname"
+                                        name: "pathname",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Gets the web protocol used, without `:` suffix.",
-                                        name: "protocol"
+                                        name: "protocol",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Gets the querystring part of the current URL, without `?` prefix.",
-                                        name: "query"
-                                    }
+                                        name: "query",
+                                    },
                                 ],
                                 memberof: "DocmaWeb",
                                 longname: "DocmaWeb#location",
@@ -11795,7 +11800,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "DocmaWeb#location",
                                 $kind: "property",
-                                $docmaLink: "api/web/#DocmaWeb#location"
+                                $docmaLink: "api/web/#DocmaWeb#location",
                             },
                             {
                                 comment:
@@ -11811,8 +11816,8 @@ var docma = Object.freeze(
                                         id: "astnode100000613",
                                         name: "DocmaWeb.prototype.log",
                                         type: "FunctionExpression",
-                                        paramnames: []
-                                    }
+                                        paramnames: [],
+                                    },
                                 },
                                 description:
                                     "Outputs a general log to the browser console. (Unlike `console.log()`) this\n method respects `debug` option of Docma build configuration.",
@@ -11823,8 +11828,8 @@ var docma = Object.freeze(
                                         variable: true,
                                         defaultvalue: '""',
                                         description: "Arguments to be logged.",
-                                        name: "args"
-                                    }
+                                        name: "args",
+                                    },
                                 ],
                                 name: "log",
                                 longname: "DocmaWeb#log",
@@ -11833,7 +11838,7 @@ var docma = Object.freeze(
                                 scope: "instance",
                                 $longname: "DocmaWeb#log",
                                 $kind: "method",
-                                $docmaLink: "api/web/#DocmaWeb#log"
+                                $docmaLink: "api/web/#DocmaWeb#log",
                             },
                             {
                                 comment:
@@ -11844,7 +11849,7 @@ var docma = Object.freeze(
                                     columnno: 0,
                                     path:
                                         "/home/jpietal/projects/docma/lib/web",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Removes the given listener from the specified event.",
@@ -11855,36 +11860,36 @@ var docma = Object.freeze(
                                     {
                                         originalTitle: "chainable",
                                         title: "chainable",
-                                        text: ""
-                                    }
+                                        text: "",
+                                    },
                                 ],
                                 params: [
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Name of the event to remove the listener from.\n        See {@link #DocmaWeb.Event|`DocmaWeb.Event`} enumeration.",
-                                        name: "eventName"
+                                        name: "eventName",
                                     },
                                     {
                                         type: { names: ["function"] },
                                         description:
                                             "Function to be removed from the event.",
-                                        name: "listener"
-                                    }
+                                        name: "listener",
+                                    },
                                 ],
                                 returns: [
                                     {
                                         type: { names: ["DocmaWeb"] },
                                         description:
-                                            "- `DocmaWeb` instance for chaining."
-                                    }
+                                            "- `DocmaWeb` instance for chaining.",
+                                    },
                                 ],
                                 memberof: "DocmaWeb",
                                 longname: "DocmaWeb#off",
                                 scope: "instance",
                                 $longname: "DocmaWeb#off",
                                 $kind: "method",
-                                $docmaLink: "api/web/#DocmaWeb#off"
+                                $docmaLink: "api/web/#DocmaWeb#off",
                             },
                             {
                                 comment:
@@ -11895,7 +11900,7 @@ var docma = Object.freeze(
                                     columnno: 0,
                                     path:
                                         "/home/jpietal/projects/docma/lib/web",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Adds a listener function to the specified event.\n Note that the listener will not be added if it is a duplicate.\n If the listener returns true then it will be removed after it is called.",
@@ -11906,39 +11911,39 @@ var docma = Object.freeze(
                                     {
                                         originalTitle: "chainable",
                                         title: "chainable",
-                                        text: ""
-                                    }
+                                        text: "",
+                                    },
                                 ],
                                 params: [
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Name of the event to attach the listener to.\n        See {@link #DocmaWeb.Event|`DocmaWeb.Event`} enumeration.",
-                                        name: "eventName"
+                                        name: "eventName",
                                     },
                                     {
                                         type: { names: ["function"] },
                                         description:
                                             "Function to be called when the event is emitted. If the function\n        returns true then it will be removed after calling.",
-                                        name: "listener"
-                                    }
+                                        name: "listener",
+                                    },
                                 ],
                                 returns: [
                                     {
                                         type: { names: ["DocmaWeb"] },
                                         description:
-                                            "- `DocmaWeb` instance for chaining."
-                                    }
+                                            "- `DocmaWeb` instance for chaining.",
+                                    },
                                 ],
                                 examples: [
-                                    "docma.on('render', function (currentRoute) {\n \tif (!currentRoute) {\n \t\tconsole.log('Not found!');\n \t\treturn;\n \t}\n \tif (currentRoute.type === docma.Route.Type.API) {\n \t\tconsole.log('This is an API route.')\n \t}\n });"
+                                    "docma.on('render', function (currentRoute) {\n \tif (!currentRoute) {\n \t\tconsole.log('Not found!');\n \t\treturn;\n \t}\n \tif (currentRoute.type === docma.Route.Type.API) {\n \t\tconsole.log('This is an API route.')\n \t}\n });",
                                 ],
                                 memberof: "DocmaWeb",
                                 longname: "DocmaWeb#on",
                                 scope: "instance",
                                 $longname: "DocmaWeb#on",
                                 $kind: "method",
-                                $docmaLink: "api/web/#DocmaWeb#on"
+                                $docmaLink: "api/web/#DocmaWeb#on",
                             },
                             {
                                 comment:
@@ -11949,7 +11954,7 @@ var docma = Object.freeze(
                                     columnno: 0,
                                     path:
                                         "/home/jpietal/projects/docma/lib/web",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Adds a listener that will be automatically removed after its first\n execution.",
@@ -11960,39 +11965,39 @@ var docma = Object.freeze(
                                     {
                                         originalTitle: "chainable",
                                         title: "chainable",
-                                        text: ""
-                                    }
+                                        text: "",
+                                    },
                                 ],
                                 params: [
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Name of the event to attach the listener to.\n        See {@link #DocmaWeb.Event|`DocmaWeb.Event`} enumeration.",
-                                        name: "eventName"
+                                        name: "eventName",
                                     },
                                     {
                                         type: { names: ["function"] },
                                         description:
                                             "Function to be called when the event is emitted.",
-                                        name: "listener"
-                                    }
+                                        name: "listener",
+                                    },
                                 ],
                                 returns: [
                                     {
                                         type: { names: ["DocmaWeb"] },
                                         description:
-                                            "- `DocmaWeb` instance for chaining."
-                                    }
+                                            "- `DocmaWeb` instance for chaining.",
+                                    },
                                 ],
                                 examples: [
-                                    "docma.once('ready', function () {\n \tconsole.log('Docma is ready!');\n });"
+                                    "docma.once('ready', function () {\n \tconsole.log('Docma is ready!');\n });",
                                 ],
                                 memberof: "DocmaWeb",
                                 longname: "DocmaWeb#once",
                                 scope: "instance",
                                 $longname: "DocmaWeb#once",
                                 $kind: "method",
-                                $docmaLink: "api/web/#DocmaWeb#once"
+                                $docmaLink: "api/web/#DocmaWeb#once",
                             },
                             {
                                 comment:
@@ -12008,31 +12013,31 @@ var docma = Object.freeze(
                                         id: "astnode100001026",
                                         name: "DocmaWeb.prototype.removeFilter",
                                         type: "FunctionExpression",
-                                        paramnames: ["name"]
-                                    }
+                                        paramnames: ["name"],
+                                    },
                                 },
                                 description: "Removes an existing Dust filter.",
                                 tags: [
                                     {
                                         originalTitle: "chainable",
                                         title: "chainable",
-                                        text: ""
-                                    }
+                                        text: "",
+                                    },
                                 ],
                                 params: [
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Name of the filter to be removed.",
-                                        name: "name"
-                                    }
+                                        name: "name",
+                                    },
                                 ],
                                 returns: [
                                     {
                                         type: { names: ["DocmaWeb"] },
                                         description:
-                                            "- `DocmaWeb` instance for chaining."
-                                    }
+                                            "- `DocmaWeb` instance for chaining.",
+                                    },
                                 ],
                                 name: "removeFilter",
                                 longname: "DocmaWeb#removeFilter",
@@ -12041,7 +12046,7 @@ var docma = Object.freeze(
                                 scope: "instance",
                                 $longname: "DocmaWeb#removeFilter",
                                 $kind: "method",
-                                $docmaLink: "api/web/#DocmaWeb#removeFilter"
+                                $docmaLink: "api/web/#DocmaWeb#removeFilter",
                             },
                             {
                                 comment:
@@ -12057,15 +12062,15 @@ var docma = Object.freeze(
                                         id: "astnode100001451",
                                         name: "DocmaWeb.prototype.render",
                                         type: "FunctionExpression",
-                                        paramnames: ["routeInfo", "callback"]
+                                        paramnames: ["routeInfo", "callback"],
                                     },
                                     vars: {
                                         "this._.currentRoute":
                                             "DocmaWeb#render#_.currentRoute",
                                         isCbFn: "DocmaWeb#render~isCbFn",
                                         self: "DocmaWeb#render~self",
-                                        "": null
-                                    }
+                                        "": null,
+                                    },
                                 },
                                 description:
                                     'Renders content into docma-main element, by the given route information.\n\n If the content is empty or `"api"`, we\'ll render the `docma-api` Dust\n template. Otherwise, (e.g. `"readme"`) we\'ll render `docma-content` Dust\n template, then  fetch `content/readme.html` and load it in the `docma-main`\n element.\n\n <blockquote>Note that rendering and the callback will be cancelled if the given\n content is the latest content rendered.</blockquote>',
@@ -12074,15 +12079,15 @@ var docma = Object.freeze(
                                         type: { names: ["DocmaWeb.Route"] },
                                         description:
                                             "Route information of the page to be\n rendered.",
-                                        name: "routeInfo"
+                                        name: "routeInfo",
                                     },
                                     {
                                         type: { names: ["function"] },
                                         optional: true,
                                         description:
                                             "Function to be executed when the rendering is\n complete. `function (httpStatus:Number) { .. }`",
-                                        name: "callback"
-                                    }
+                                        name: "callback",
+                                    },
                                 ],
                                 returns: [{ type: { names: ["void"] } }],
                                 fires: ["DocmaWeb~event:render"],
@@ -12093,7 +12098,7 @@ var docma = Object.freeze(
                                 scope: "instance",
                                 $longname: "DocmaWeb#render",
                                 $kind: "method",
-                                $docmaLink: "api/web/#DocmaWeb#render"
+                                $docmaLink: "api/web/#DocmaWeb#render",
                             },
                             {
                                 comment:
@@ -12109,13 +12114,13 @@ var docma = Object.freeze(
                                         id: "astnode100001638",
                                         name: "DocmaWeb.Route",
                                         type: "FunctionExpression",
-                                        paramnames: ["docma", "name", "type"]
+                                        paramnames: ["docma", "name", "type"],
                                     },
                                     vars: {
                                         "this._docma": "DocmaWeb.Route#_docma",
                                         name: "DocmaWeb.Route~name",
-                                        info: "DocmaWeb.Route~info"
-                                    }
+                                        info: "DocmaWeb.Route~info",
+                                    },
                                 },
                                 classdesc:
                                     "Creates SPA route information object for the given route name\n and type. You cannot directly construct an instance of this class via\n `new` operator. Use {@link #DocmaWeb#createRoute|`DocmaWeb#createRoute`}\n method instead.",
@@ -12125,19 +12130,19 @@ var docma = Object.freeze(
                                     {
                                         type: { names: ["DocmaWeb"] },
                                         description: "`DocmaWeb` instance.",
-                                        name: "docma"
+                                        name: "docma",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description: "Name of the route.",
-                                        name: "name"
+                                        name: "name",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Type of the SPA route. See\n        {@link #DocmaWeb.Route.Type|`DocmaWeb.Route.Type`} enumeration\n        for possible values.",
-                                        name: "type"
-                                    }
+                                        name: "type",
+                                    },
                                 ],
                                 name: "Route",
                                 longname: "DocmaWeb.Route",
@@ -12162,14 +12167,14 @@ var docma = Object.freeze(
                                                 name:
                                                     "DocmaWeb.Route.prototype.apply",
                                                 type: "FunctionExpression",
-                                                paramnames: ["cb"]
+                                                paramnames: ["cb"],
                                             },
                                             vars: {
                                                 "this._docma._.documentation":
                                                     "DocmaWeb.Route#_docma._.documentation",
                                                 "this._docma._.symbols":
-                                                    "DocmaWeb.Route#_docma._.symbols"
-                                            }
+                                                    "DocmaWeb.Route#_docma._.symbols",
+                                            },
                                         },
                                         description:
                                             "Applies the route to the application.",
@@ -12180,17 +12185,17 @@ var docma = Object.freeze(
                                                 optional: true,
                                                 description:
                                                     "Callback function to be executed after route is\n rendered.",
-                                                name: "cb"
-                                            }
+                                                name: "cb",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: {
-                                                    names: ["DocmaWeb.Route"]
+                                                    names: ["DocmaWeb.Route"],
                                                 },
                                                 description:
-                                                    "- The route instance for chaining."
-                                            }
+                                                    "- The route instance for chaining.",
+                                            },
                                         ],
                                         name: "apply",
                                         longname: "DocmaWeb.Route#apply",
@@ -12200,7 +12205,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Route#apply",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/#DocmaWeb.Route#apply"
+                                            "api/web/#DocmaWeb.Route#apply",
                                     },
                                     {
                                         comment:
@@ -12211,7 +12216,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets the path of the generated content (HTML) file.\n If this is an API route, `contentPath` is `null`.",
@@ -12224,7 +12229,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Route#contentPath",
                                         $kind: "property",
                                         $docmaLink:
-                                            "api/web/#DocmaWeb.Route#contentPath"
+                                            "api/web/#DocmaWeb.Route#contentPath",
                                     },
                                     {
                                         comment:
@@ -12241,16 +12246,16 @@ var docma = Object.freeze(
                                                 name:
                                                     "DocmaWeb.Route.prototype.exists",
                                                 type: "FunctionExpression",
-                                                paramnames: []
-                                            }
+                                                paramnames: [],
+                                            },
                                         },
                                         description:
                                             "Checks whether the route actually exists.",
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         name: "exists",
                                         longname: "DocmaWeb.Route#exists",
@@ -12260,7 +12265,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Route#exists",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/#DocmaWeb.Route#exists"
+                                            "api/web/#DocmaWeb.Route#exists",
                                     },
                                     {
                                         comment:
@@ -12271,7 +12276,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets the ID of the route. A route ID consists of the route type and the\n name; delimited via a colon. e.g. `api:web`.",
@@ -12283,7 +12288,8 @@ var docma = Object.freeze(
                                         kind: "member",
                                         $longname: "DocmaWeb.Route#id",
                                         $kind: "property",
-                                        $docmaLink: "api/web/#DocmaWeb.Route#id"
+                                        $docmaLink:
+                                            "api/web/#DocmaWeb.Route#id",
                                     },
                                     {
                                         comment:
@@ -12300,26 +12306,26 @@ var docma = Object.freeze(
                                                 name:
                                                     "DocmaWeb.Route.prototype.isCurrent",
                                                 type: "FunctionExpression",
-                                                paramnames: []
-                                            }
+                                                paramnames: [],
+                                            },
                                         },
                                         description:
                                             "Checks whether the route is currently being viewed.",
                                         params: [
                                             {
                                                 type: {
-                                                    names: ["DocmaWeb.Route"]
+                                                    names: ["DocmaWeb.Route"],
                                                 },
                                                 description:
                                                     "Object to be checked.",
-                                                name: "routeInfo"
-                                            }
+                                                name: "routeInfo",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         name: "isCurrent",
                                         longname: "DocmaWeb.Route#isCurrent",
@@ -12329,7 +12335,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Route#isCurrent",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/#DocmaWeb.Route#isCurrent"
+                                            "api/web/#DocmaWeb.Route#isCurrent",
                                     },
                                     {
                                         comment:
@@ -12346,26 +12352,26 @@ var docma = Object.freeze(
                                                 name:
                                                     "DocmaWeb.Route.prototype.isEqualTo",
                                                 type: "FunctionExpression",
-                                                paramnames: ["routeInfo"]
-                                            }
+                                                paramnames: ["routeInfo"],
+                                            },
                                         },
                                         description:
                                             "Checks whether the route is equal to the given route.",
                                         params: [
                                             {
                                                 type: {
-                                                    names: ["DocmaWeb.Route"]
+                                                    names: ["DocmaWeb.Route"],
                                                 },
                                                 description:
                                                     "Route to be checked against.",
-                                                name: "routeInfo"
-                                            }
+                                                name: "routeInfo",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         name: "isEqualTo",
                                         longname: "DocmaWeb.Route#isEqualTo",
@@ -12375,7 +12381,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Route#isEqualTo",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/#DocmaWeb.Route#isEqualTo"
+                                            "api/web/#DocmaWeb.Route#isEqualTo",
                                     },
                                     {
                                         comment:
@@ -12386,7 +12392,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets the name of the SPA route, which is either set by the user when\n building the documentation; or auto-generated from the source file name.",
@@ -12399,7 +12405,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Route#name",
                                         $kind: "property",
                                         $docmaLink:
-                                            "api/web/#DocmaWeb.Route#name"
+                                            "api/web/#DocmaWeb.Route#name",
                                     },
                                     {
                                         comment:
@@ -12410,7 +12416,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets the URL path of the SPA route. For example, if SPA route method is\n `query`, the URL path for a route named `guide` will be `?content=guide`.\n If routing method is `path` it will be `guide/`.",
@@ -12423,7 +12429,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Route#path",
                                         $kind: "property",
                                         $docmaLink:
-                                            "api/web/#DocmaWeb.Route#path"
+                                            "api/web/#DocmaWeb.Route#path",
                                     },
                                     {
                                         comment:
@@ -12434,7 +12440,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets the type of the source which this route is generated from. See\n {@link #DocmaWeb.Route.SourceType|`DocmaWeb.Route.SourceType`} enumeration\n for possible values.",
@@ -12447,7 +12453,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Route#sourceType",
                                         $kind: "property",
                                         $docmaLink:
-                                            "api/web/#DocmaWeb.Route#sourceType"
+                                            "api/web/#DocmaWeb.Route#sourceType",
                                     },
                                     {
                                         comment:
@@ -12458,7 +12464,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Enumerates the source types that a SPA route is generated from.",
@@ -12490,8 +12496,8 @@ var docma = Object.freeze(
                                                         id: "astnode100001765",
                                                         name: "HTML",
                                                         type: "Literal",
-                                                        value: "html"
-                                                    }
+                                                        value: "html",
+                                                    },
                                                 },
                                                 description:
                                                     "Indicates that the documentation route is generated from HTML\n source.",
@@ -12507,7 +12513,7 @@ var docma = Object.freeze(
                                                     "DocmaWeb.Route.SourceType.HTML",
                                                 $kind: "property",
                                                 $docmaLink:
-                                                    "api/web/#DocmaWeb.Route.SourceType.HTML"
+                                                    "api/web/#DocmaWeb.Route.SourceType.HTML",
                                             },
                                             {
                                                 comment:
@@ -12524,8 +12530,8 @@ var docma = Object.freeze(
                                                         id: "astnode100001761",
                                                         name: "JS",
                                                         type: "Literal",
-                                                        value: "js"
-                                                    }
+                                                        value: "js",
+                                                    },
                                                 },
                                                 description:
                                                     "Indicates that the documentation route is generated from Javascript\n source.",
@@ -12541,7 +12547,7 @@ var docma = Object.freeze(
                                                     "DocmaWeb.Route.SourceType.JS",
                                                 $kind: "property",
                                                 $docmaLink:
-                                                    "api/web/#DocmaWeb.Route.SourceType.JS"
+                                                    "api/web/#DocmaWeb.Route.SourceType.JS",
                                             },
                                             {
                                                 comment:
@@ -12558,8 +12564,8 @@ var docma = Object.freeze(
                                                         id: "astnode100001763",
                                                         name: "MD",
                                                         type: "Literal",
-                                                        value: "md"
-                                                    }
+                                                        value: "md",
+                                                    },
                                                 },
                                                 description:
                                                     "Indicates that the documentation route is generated from markdown\n source.",
@@ -12575,9 +12581,9 @@ var docma = Object.freeze(
                                                     "DocmaWeb.Route.SourceType.MD",
                                                 $kind: "property",
                                                 $docmaLink:
-                                                    "api/web/#DocmaWeb.Route.SourceType.MD"
-                                            }
-                                        ]
+                                                    "api/web/#DocmaWeb.Route.SourceType.MD",
+                                            },
+                                        ],
                                     },
                                     {
                                         comment:
@@ -12594,20 +12600,20 @@ var docma = Object.freeze(
                                                 name:
                                                     "DocmaWeb.Route.prototype.toString",
                                                 type: "FunctionExpression",
-                                                paramnames: []
+                                                paramnames: [],
                                             },
                                             vars: {
                                                 o: "DocmaWeb.Route#toString~o",
-                                                "": null
-                                            }
+                                                "": null,
+                                            },
                                         },
                                         description:
                                             "Gets the string representation of the route.",
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         name: "toString",
                                         longname: "DocmaWeb.Route#toString",
@@ -12617,7 +12623,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Route#toString",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/#DocmaWeb.Route#toString"
+                                            "api/web/#DocmaWeb.Route#toString",
                                     },
                                     {
                                         comment:
@@ -12628,7 +12634,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets the type of the generated SPA route. See\n {@link #DocmaWeb.Route.Type|`DocmaWeb.Route.Type`} enumeration\n for possible values.",
@@ -12641,7 +12647,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Route#type",
                                         $kind: "property",
                                         $docmaLink:
-                                            "api/web/#DocmaWeb.Route#type"
+                                            "api/web/#DocmaWeb.Route#type",
                                     },
                                     {
                                         comment:
@@ -12652,7 +12658,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Enumerates the Docma SPA route types.",
@@ -12664,7 +12670,7 @@ var docma = Object.freeze(
                                         readonly: true,
                                         examples: [
                                             '<caption>When `docma.app.routing.method` is `"query"`</caption>\n type     name              path\n -------  ----------------  --------------------------\n api      _def_             ?api\n api      web               ?api=web\n content  templates         ?content=templates\n content  guide             ?content=guide\n\n ',
-                                            '<caption>When `docma.app.routing.method` is `"path"`</caption>\n type     name              path\n -------  ----------------  --------------------------\n api      _def_             api/\n api      web               api/web/\n content  templates         templates/\n content  guide             guide/'
+                                            '<caption>When `docma.app.routing.method` is `"path"`</caption>\n type     name              path\n -------  ----------------  --------------------------\n api      _def_             api/\n api      web               api/web/\n content  templates         templates/\n content  guide             guide/',
                                         ],
                                         memberof: "DocmaWeb.Route",
                                         longname: "DocmaWeb.Route.Type",
@@ -12688,8 +12694,8 @@ var docma = Object.freeze(
                                                         id: "astnode100001737",
                                                         name: "API",
                                                         type: "Literal",
-                                                        value: "api"
-                                                    }
+                                                        value: "api",
+                                                    },
                                                 },
                                                 description:
                                                     "Indicates that the route is for API documentation content, generated\n from one or more Javascript files.",
@@ -12704,7 +12710,7 @@ var docma = Object.freeze(
                                                     "DocmaWeb.Route.Type.API",
                                                 $kind: "property",
                                                 $docmaLink:
-                                                    "api/web/#DocmaWeb.Route.Type.API"
+                                                    "api/web/#DocmaWeb.Route.Type.API",
                                             },
                                             {
                                                 comment:
@@ -12721,8 +12727,8 @@ var docma = Object.freeze(
                                                         id: "astnode100001739",
                                                         name: "CONTENT",
                                                         type: "Literal",
-                                                        value: "content"
-                                                    }
+                                                        value: "content",
+                                                    },
                                                 },
                                                 description:
                                                     "Indicates that the route is for other content, such as parsed HTML\n files or HTML files generated from markdown.",
@@ -12737,11 +12743,11 @@ var docma = Object.freeze(
                                                     "DocmaWeb.Route.Type.CONTENT",
                                                 $kind: "property",
                                                 $docmaLink:
-                                                    "api/web/#DocmaWeb.Route.Type.CONTENT"
-                                            }
-                                        ]
-                                    }
-                                ]
+                                                    "api/web/#DocmaWeb.Route.Type.CONTENT",
+                                            },
+                                        ],
+                                    },
+                                ],
                             },
                             {
                                 comment:
@@ -12752,14 +12758,14 @@ var docma = Object.freeze(
                                     columnno: 4,
                                     path:
                                         "/home/jpietal/projects/docma/lib/web",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Array of available SPA routes of the documentation.\n This is created at build-time and defined via the `src` param of the\n {@link api/#Docma~BuildConfiguration|build configuration}.",
                                 name: "routes",
                                 type: { names: ["Array"] },
                                 see: [
-                                    "{@link #DocmaWeb.Route|`DocmaWeb.Route`}"
+                                    "{@link #DocmaWeb.Route|`DocmaWeb.Route`}",
                                 ],
                                 memberof: "DocmaWeb",
                                 longname: "DocmaWeb#routes",
@@ -12767,7 +12773,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "DocmaWeb#routes",
                                 $kind: "property",
-                                $docmaLink: "api/web/#DocmaWeb#routes"
+                                $docmaLink: "api/web/#DocmaWeb#routes",
                             },
                             {
                                 comment:
@@ -12778,14 +12784,14 @@ var docma = Object.freeze(
                                     columnno: 4,
                                     path:
                                         "/home/jpietal/projects/docma/lib/web",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "A flat array of JSDoc documentation symbol names. This is useful for\n\tbuilding menus, etc... If current route is not an API route, this will\n\tbe `null`.\n\n <blockquote>See {@link api/docma#Docma~BuildConfiguration|build configuration} for more\n details on how Javascript files can be grouped (and named) to form\n separate API documentations and SPA routes.</blockquote>",
                                 name: "symbols",
                                 type: { names: ["Array"] },
                                 examples: [
-                                    '<caption>Usage in (Dust) partial</caption>\n <ul class="menu">\n     {#symbols}\n         <li><a href="#{.}">{.}</a></li>\n     {/symbols}\n </ul>'
+                                    '<caption>Usage in (Dust) partial</caption>\n <ul class="menu">\n     {#symbols}\n         <li><a href="#{.}">{.}</a></li>\n     {/symbols}\n </ul>',
                                 ],
                                 memberof: "DocmaWeb",
                                 longname: "DocmaWeb#symbols",
@@ -12793,7 +12799,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "DocmaWeb#symbols",
                                 $kind: "property",
-                                $docmaLink: "api/web/#DocmaWeb#symbols"
+                                $docmaLink: "api/web/#DocmaWeb#symbols",
                             },
                             {
                                 comment:
@@ -12804,7 +12810,7 @@ var docma = Object.freeze(
                                     columnno: 4,
                                     path:
                                         "/home/jpietal/projects/docma/lib/web",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Provides template specific configuration data.\n This is also useful within the Dust partials of the Docma template.",
@@ -12815,41 +12821,41 @@ var docma = Object.freeze(
                                         type: { names: ["String"] },
                                         description:
                                             "Author information for the Docma template.",
-                                        name: "author"
+                                        name: "author",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "License information for the Docma template.",
-                                        name: "license"
+                                        name: "license",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Name of the main file of the template. i.e. `index.html`",
-                                        name: "mainHTML"
+                                        name: "mainHTML",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Name of the Docma template.",
-                                        name: "name"
+                                        name: "name",
                                     },
                                     {
                                         type: { names: ["Object"] },
                                         description:
                                             "Docma template options. Defined at build-time,\n by the user.",
-                                        name: "options"
+                                        name: "options",
                                     },
                                     {
                                         type: { names: ["String"] },
                                         description:
                                             "Version of the Docma template.",
-                                        name: "version"
-                                    }
+                                        name: "version",
+                                    },
                                 ],
                                 examples: [
-                                    '<caption>Usage in a Dust partial</caption>\n <div>\n     {?template.options.someOption}\n     <span>Displayed if someOption is true.</span>\n     {/template.options.someOption}\n </div>\n <div class="footer">{template.name} by {template.author}</div>'
+                                    '<caption>Usage in a Dust partial</caption>\n <div>\n     {?template.options.someOption}\n     <span>Displayed if someOption is true.</span>\n     {/template.options.someOption}\n </div>\n <div class="footer">{template.name} by {template.author}</div>',
                                 ],
                                 memberof: "DocmaWeb",
                                 longname: "DocmaWeb#template",
@@ -12857,7 +12863,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "DocmaWeb#template",
                                 $kind: "property",
-                                $docmaLink: "api/web/#DocmaWeb#template"
+                                $docmaLink: "api/web/#DocmaWeb#template",
                             },
                             {
                                 comment:
@@ -12874,8 +12880,8 @@ var docma = Object.freeze(
                                         name: "DocmaWeb.Utils",
                                         type: "Identifier",
                                         value: "Utils",
-                                        paramnames: []
-                                    }
+                                        paramnames: [],
+                                    },
                                 },
                                 description:
                                     "Utilities for inspecting JSDoc documentation and symbols; and parsing\n documentation data into proper HTML.\n See {@link api/web/utils|`DocmaWeb.Utils` documentation}.",
@@ -12887,7 +12893,7 @@ var docma = Object.freeze(
                                 scope: "static",
                                 $longname: "DocmaWeb.Utils",
                                 $kind: "namespace",
-                                $docmaLink: "api/web/#DocmaWeb.Utils"
+                                $docmaLink: "api/web/#DocmaWeb.Utils",
                             },
                             {
                                 comment:
@@ -12898,7 +12904,7 @@ var docma = Object.freeze(
                                     columnno: 0,
                                     path:
                                         "/home/jpietal/projects/docma/lib/web",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Gets Docma version which the documentation is built with.",
@@ -12910,7 +12916,7 @@ var docma = Object.freeze(
                                 kind: "member",
                                 $longname: "DocmaWeb#version",
                                 $kind: "property",
-                                $docmaLink: "api/web/#DocmaWeb#version"
+                                $docmaLink: "api/web/#DocmaWeb#version",
                             },
                             {
                                 comment:
@@ -12926,8 +12932,8 @@ var docma = Object.freeze(
                                         id: "astnode100000665",
                                         name: "DocmaWeb.prototype.warn",
                                         type: "FunctionExpression",
-                                        paramnames: []
-                                    }
+                                        paramnames: [],
+                                    },
                                 },
                                 description:
                                     "Outputs a warning log to the browser console. (Unlike `console.warn()`) this\n method respects `debug` option of Docma build configuration.",
@@ -12938,8 +12944,8 @@ var docma = Object.freeze(
                                         variable: true,
                                         defaultvalue: '""',
                                         description: "Arguments to be logged.",
-                                        name: "args"
-                                    }
+                                        name: "args",
+                                    },
                                 ],
                                 name: "warn",
                                 longname: "DocmaWeb#warn",
@@ -12948,10 +12954,10 @@ var docma = Object.freeze(
                                 scope: "instance",
                                 $longname: "DocmaWeb#warn",
                                 $kind: "method",
-                                $docmaLink: "api/web/#DocmaWeb#warn"
-                            }
-                        ]
-                    }
+                                $docmaLink: "api/web/#DocmaWeb#warn",
+                            },
+                        ],
+                    },
                 ],
                 symbols: [
                     "DocmaWeb",
@@ -12999,8 +13005,8 @@ var docma = Object.freeze(
                     "DocmaWeb#template",
                     "DocmaWeb.Utils",
                     "DocmaWeb#version",
-                    "DocmaWeb#warn"
-                ]
+                    "DocmaWeb#warn",
+                ],
             },
             "web/utils": {
                 documentation: [
@@ -13012,7 +13018,7 @@ var docma = Object.freeze(
                             lineno: 6,
                             columnno: 0,
                             path: "/home/jpietal/projects/docma/lib/web",
-                            code: {}
+                            code: {},
                         },
                         description:
                             "Docma (web) core class.\n See {@link api/web|documentation}.",
@@ -13033,7 +13039,7 @@ var docma = Object.freeze(
                                     columnno: 0,
                                     path:
                                         "/home/jpietal/projects/docma/lib/web",
-                                    code: {}
+                                    code: {},
                                 },
                                 description:
                                     "Utilities for inspecting JSDoc documentation and symbols; and parsing\n documentation data into proper HTML.",
@@ -13056,7 +13062,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description: "DOM utilities.",
                                         name: "DOM",
@@ -13080,7 +13086,7 @@ var docma = Object.freeze(
                                                     columnno: 0,
                                                     path:
                                                         "/home/jpietal/projects/docma/lib/web",
-                                                    code: {}
+                                                    code: {},
                                                 },
                                                 description:
                                                     "Gets the offset coordinates of the given element, relative to document\n body.",
@@ -13091,24 +13097,24 @@ var docma = Object.freeze(
                                                     {
                                                         type: {
                                                             names: [
-                                                                "HTMLElement"
-                                                            ]
+                                                                "HTMLElement",
+                                                            ],
                                                         },
                                                         description:
                                                             "Target element.",
-                                                        name: "e"
-                                                    }
+                                                        name: "e",
+                                                    },
                                                 ],
                                                 returns: [
                                                     {
                                                         type: {
                                                             names: [
                                                                 "Object",
-                                                                "null"
-                                                            ]
+                                                                "null",
+                                                            ],
                                                         },
-                                                        description: "-"
-                                                    }
+                                                        description: "-",
+                                                    },
                                                 ],
                                                 memberof: "DocmaWeb.Utils.DOM",
                                                 longname:
@@ -13117,7 +13123,7 @@ var docma = Object.freeze(
                                                     "DocmaWeb.Utils.DOM.getOffset",
                                                 $kind: "method",
                                                 $docmaLink:
-                                                    "api/web/utils/#DocmaWeb.Utils.DOM.getOffset"
+                                                    "api/web/utils/#DocmaWeb.Utils.DOM.getOffset",
                                             },
                                             {
                                                 comment:
@@ -13129,7 +13135,7 @@ var docma = Object.freeze(
                                                     columnno: 0,
                                                     path:
                                                         "/home/jpietal/projects/docma/lib/web",
-                                                    code: {}
+                                                    code: {},
                                                 },
                                                 description:
                                                     "Scrolls the document to the given hash target.",
@@ -13139,13 +13145,13 @@ var docma = Object.freeze(
                                                 params: [
                                                     {
                                                         type: {
-                                                            names: ["String"]
+                                                            names: ["String"],
                                                         },
                                                         optional: true,
                                                         description:
                                                             "Bookmark target. If omitted, document is\n scrolled to the top.",
-                                                        name: "hash"
-                                                    }
+                                                        name: "hash",
+                                                    },
                                                 ],
                                                 memberof: "DocmaWeb.Utils.DOM",
                                                 longname:
@@ -13154,9 +13160,9 @@ var docma = Object.freeze(
                                                     "DocmaWeb.Utils.DOM.scrollTo",
                                                 $kind: "method",
                                                 $docmaLink:
-                                                    "api/web/utils/#DocmaWeb.Utils.DOM.scrollTo"
-                                            }
-                                        ]
+                                                    "api/web/utils/#DocmaWeb.Utils.DOM.scrollTo",
+                                            },
+                                        ],
                                     },
                                     {
                                         comment:
@@ -13167,7 +13173,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets code file information from the given symbol.",
@@ -13178,14 +13184,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Target documentation symbol.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Object"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -13195,7 +13201,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.getCodeFileInfo",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.getCodeFileInfo"
+                                            "api/web/utils/#DocmaWeb.Utils.getCodeFileInfo",
                                     },
                                     {
                                         comment:
@@ -13206,7 +13212,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets the code name of the given symbol.",
@@ -13217,15 +13223,15 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
                                                 description:
-                                                    "- If no code name, falls back to long name."
-                                            }
+                                                    "- If no code name, falls back to long name.",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.getCodeName",
@@ -13233,7 +13239,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.getCodeName",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.getCodeName"
+                                            "api/web/utils/#DocmaWeb.Utils.getCodeName",
                                     },
                                     {
                                         comment:
@@ -13244,7 +13250,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets HTML formatted, delimeted code tags.",
@@ -13253,23 +13259,23 @@ var docma = Object.freeze(
                                         params: [
                                             {
                                                 type: {
-                                                    names: ["Array", "Object"]
+                                                    names: ["Array", "Object"],
                                                 },
                                                 description:
                                                     "Documentation array or APIs object\n with signature `{ documentation:Array, symbols:Array }`.",
-                                                name: "docsOrApis"
+                                                name: "docsOrApis",
                                             },
                                             {
                                                 type: { names: ["Array"] },
                                                 description:
                                                     "String list of values to be placed within code\n tags.",
-                                                name: "list"
+                                                name: "list",
                                             },
                                             {
                                                 type: { names: ["Object"] },
                                                 optional: true,
                                                 description: "Options.",
-                                                name: "options"
+                                                name: "options",
                                             },
                                             {
                                                 type: { names: ["String"] },
@@ -13277,24 +13283,27 @@ var docma = Object.freeze(
                                                 defaultvalue: '","',
                                                 description:
                                                     "String delimeter.",
-                                                name: "options.delimeter"
+                                                name: "options.delimeter",
                                             },
                                             {
                                                 type: {
-                                                    names: ["Boolean", "String"]
+                                                    names: [
+                                                        "Boolean",
+                                                        "String",
+                                                    ],
                                                 },
                                                 optional: true,
                                                 defaultvalue: false,
                                                 description:
                                                     'Whether to add\n     HTML anchor links to output. Set to `"internal"` to link\n     internally (to Docma route with symbol hash, if found) or\n     `"external"` to link externally (to MDN URL if this is a\n     JS/Web-API built-in type/object) or `true` to try linking either\n     to an internal or external target, which ever is found.',
-                                                name: "options.links"
-                                            }
+                                                name: "options.links",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.getCodeTags",
@@ -13302,7 +13311,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.getCodeTags",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.getCodeTags"
+                                            "api/web/utils/#DocmaWeb.Utils.getCodeTags",
                                     },
                                     {
                                         comment:
@@ -13313,7 +13322,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets HTML formatted list of emitted events from the given list. Event\n names items are wrapped with code tags. If multiple, formatted as an\n HTML unordered list.",
@@ -13322,23 +13331,23 @@ var docma = Object.freeze(
                                         params: [
                                             {
                                                 type: {
-                                                    names: ["Array", "Object"]
+                                                    names: ["Array", "Object"],
                                                 },
                                                 description:
                                                     "Documentation array or APIs object\n with signature `{ documentation:Array, symbols:Array }`.",
-                                                name: "docsOrApis"
+                                                name: "docsOrApis",
                                             },
                                             {
                                                 type: { names: ["Array"] },
                                                 description:
                                                     "List of emitted (fired) events.",
-                                                name: "list"
+                                                name: "list",
                                             },
                                             {
                                                 type: { names: ["Object"] },
                                                 optional: true,
                                                 description: "Options.",
-                                                name: "options"
+                                                name: "options",
                                             },
                                             {
                                                 type: { names: ["String"] },
@@ -13346,24 +13355,27 @@ var docma = Object.freeze(
                                                 defaultvalue: '", "',
                                                 description:
                                                     "Events delimeter.",
-                                                name: "options.delimeter"
+                                                name: "options.delimeter",
                                             },
                                             {
                                                 type: {
-                                                    names: ["Boolean", "String"]
+                                                    names: [
+                                                        "Boolean",
+                                                        "String",
+                                                    ],
                                                 },
                                                 optional: true,
                                                 defaultvalue: false,
                                                 description:
                                                     'Whether to add\n     HTML anchor links to output. Set to `"internal"` to link\n     internally (to Docma route with symbol hash, if found) or\n     `"external"` to link externally (to MDN URL if this is a\n     JS/Web-API built-in type/object) or `true` to try linking either\n     to an internal or external target, which ever is found.',
-                                                name: "options.links"
-                                            }
+                                                name: "options.links",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -13373,7 +13385,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.getEmittedEvents",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.getEmittedEvents"
+                                            "api/web/utils/#DocmaWeb.Utils.getEmittedEvents",
                                     },
                                     {
                                         comment:
@@ -13384,7 +13396,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets HTML formatted list of types from the given symbols list. Type\n items are wrapped with code tags. If multiple, formatted as an HTML\n unordered list.",
@@ -13393,40 +13405,43 @@ var docma = Object.freeze(
                                         params: [
                                             {
                                                 type: {
-                                                    names: ["Array", "Object"]
+                                                    names: ["Array", "Object"],
                                                 },
                                                 description:
                                                     "Documentation array or APIs object\n with signature `{ documentation:Array, symbols:Array }`.",
-                                                name: "docsOrApis"
+                                                name: "docsOrApis",
                                             },
                                             {
                                                 type: { names: ["Array"] },
                                                 description:
                                                     "List of symbols to be converted to formatted\n string.",
-                                                name: "list"
+                                                name: "list",
                                             },
                                             {
                                                 type: { names: ["Object"] },
                                                 optional: true,
                                                 description: "Format options.",
-                                                name: "options"
+                                                name: "options",
                                             },
                                             {
                                                 type: { names: ["String"] },
                                                 optional: true,
                                                 defaultvalue: '"|"',
                                                 description: "Types delimeter.",
-                                                name: "options.delimeter"
+                                                name: "options.delimeter",
                                             },
                                             {
                                                 type: {
-                                                    names: ["Boolean", "String"]
+                                                    names: [
+                                                        "Boolean",
+                                                        "String",
+                                                    ],
                                                 },
                                                 optional: true,
                                                 defaultvalue: false,
                                                 description:
                                                     'Whether to add\n     HTML anchor links to output. Set to `"internal"` to link\n     internally (to Docma route with symbol hash, if found) or\n     `"external"` to link externally (to MDN URL if this is a\n     JS/Web-API built-in type/object) or `true` to try linking either\n     to an internal or external target, which ever is found.',
-                                                name: "options.links"
+                                                name: "options.links",
                                             },
                                             {
                                                 type: { names: ["Boolean"] },
@@ -13434,7 +13449,7 @@ var docma = Object.freeze(
                                                 defaultvalue: true,
                                                 description:
                                                     "Whether to include descriptions.",
-                                                name: "options.descriptions"
+                                                name: "options.descriptions",
                                             },
                                             {
                                                 type: { names: ["String"] },
@@ -13442,14 +13457,14 @@ var docma = Object.freeze(
                                                 defaultvalue: '"  —  "',
                                                 description:
                                                     "Description delimiter.",
-                                                name: "options.descDelimeter"
-                                            }
+                                                name: "options.descDelimeter",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -13459,7 +13474,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.getFormattedTypeList",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.getFormattedTypeList"
+                                            "api/web/utils/#DocmaWeb.Utils.getFormattedTypeList",
                                     },
                                     {
                                         comment:
@@ -13470,7 +13485,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Builds a string of keywords from the given symbol.\n This is useful for filter/search features of a template.",
@@ -13481,14 +13496,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Target documentation symbol.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.getKeywords",
@@ -13496,7 +13511,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.getKeywords",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.getKeywords"
+                                            "api/web/utils/#DocmaWeb.Utils.getKeywords",
                                     },
                                     {
                                         comment:
@@ -13507,7 +13522,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets the number of levels for the given symbol or name. e.g.\n `mylib.prop` has 2 levels.",
@@ -13516,18 +13531,18 @@ var docma = Object.freeze(
                                         params: [
                                             {
                                                 type: {
-                                                    names: ["Object", "String"]
+                                                    names: ["Object", "String"],
                                                 },
                                                 description:
                                                     "Documented symbol object or long name.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Number"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.getLevels",
@@ -13535,7 +13550,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.getLevels",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.getLevels"
+                                            "api/web/utils/#DocmaWeb.Utils.getLevels",
                                     },
                                     {
                                         comment:
@@ -13546,7 +13561,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets the original long name of the given symbol.\n JSDoc overwrites the `longname` and `name` of the symbol, if it has an\n alias. This returns the correct long name.",
@@ -13559,21 +13574,21 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.getLongName",
                                         $longname: "DocmaWeb.Utils.getLongName",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.getLongName"
+                                            "api/web/utils/#DocmaWeb.Utils.getLongName",
                                     },
                                     {
                                         comment:
@@ -13584,7 +13599,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets the short name of the given symbol.\n JSDoc overwrites the `longname` and `name` of the symbol, if it has an\n alias. This returns the correct short name.",
@@ -13595,14 +13610,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.getName",
@@ -13610,7 +13625,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.getName",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.getName"
+                                            "api/web/utils/#DocmaWeb.Utils.getName",
                                     },
                                     {
                                         comment:
@@ -13621,7 +13636,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets the parent symbol object from the given symbol object or symbol's\n name.",
@@ -13630,27 +13645,27 @@ var docma = Object.freeze(
                                         params: [
                                             {
                                                 type: {
-                                                    names: ["Array", "Object"]
+                                                    names: ["Array", "Object"],
                                                 },
                                                 description:
                                                     "Documentation array or APIs object\n with signature `{ documentation:Array, symbols:Array }`.",
-                                                name: "docs"
+                                                name: "docs",
                                             },
                                             {
                                                 type: {
-                                                    names: ["Object", "String"]
+                                                    names: ["Object", "String"],
                                                 },
                                                 description:
                                                     "Documented symbol object or long name.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
                                                 description:
-                                                    "- `null` if symbol has no parent."
-                                            }
+                                                    "- `null` if symbol has no parent.",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.getParent",
@@ -13658,7 +13673,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.getParent",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.getParent"
+                                            "api/web/utils/#DocmaWeb.Utils.getParent",
                                     },
                                     {
                                         comment:
@@ -13669,7 +13684,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             'Gets the parent symbol name from the given symbol object or symbol\'s name\n (notation). Note that, this will return the parent name even if the parent\n symbol does not exist in the documentation. If there is no parent, returns\n `""` (empty string).',
@@ -13678,18 +13693,18 @@ var docma = Object.freeze(
                                         params: [
                                             {
                                                 type: {
-                                                    names: ["Object", "String"]
+                                                    names: ["Object", "String"],
                                                 },
                                                 description:
                                                     "Documented symbol object or long name.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Number"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -13699,7 +13714,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.getParentName",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.getParentName"
+                                            "api/web/utils/#DocmaWeb.Utils.getParentName",
                                     },
                                     {
                                         comment:
@@ -13710,7 +13725,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets the return types of the symbol as a string (joined with pipes `|`).",
@@ -13719,40 +13734,43 @@ var docma = Object.freeze(
                                         params: [
                                             {
                                                 type: {
-                                                    names: ["Array", "Object"]
+                                                    names: ["Array", "Object"],
                                                 },
                                                 description:
                                                     "Documentation array or APIs object\n with signature `{ documentation:Array, symbols:Array }`.",
-                                                name: "docsOrApis"
+                                                name: "docsOrApis",
                                             },
                                             {
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Target documentation symbol.",
-                                                name: "symbol"
+                                                name: "symbol",
                                             },
                                             {
                                                 type: { names: ["Object"] },
                                                 optional: true,
                                                 description: "Options.",
-                                                name: "options"
+                                                name: "options",
                                             },
                                             {
                                                 type: {
-                                                    names: ["Boolean", "String"]
+                                                    names: [
+                                                        "Boolean",
+                                                        "String",
+                                                    ],
                                                 },
                                                 optional: true,
                                                 defaultvalue: false,
                                                 description:
                                                     'Whether to add\n     HTML anchor links to output. Set to `"internal"` to link\n     internally (to Docma route with symbol hash, if found) or\n     `"external"` to link externally (to MDN URL if this is a\n     JS/Web-API built-in type/object) or `true` to try linking either\n     to an internal or external target, which ever is found.',
-                                                name: "options.links"
-                                            }
+                                                name: "options.links",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -13762,7 +13780,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.getReturnTypes",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.getReturnTypes"
+                                            "api/web/utils/#DocmaWeb.Utils.getReturnTypes",
                                     },
                                     {
                                         comment:
@@ -13773,7 +13791,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets the first matching symbol by the given name.",
@@ -13782,25 +13800,25 @@ var docma = Object.freeze(
                                         params: [
                                             {
                                                 type: {
-                                                    names: ["Array", "Object"]
+                                                    names: ["Array", "Object"],
                                                 },
                                                 description:
                                                     "Documentation array or APIs object\n with signature `{ documentation:Array, symbols:Array }`.",
-                                                name: "docsOrApis"
+                                                name: "docsOrApis",
                                             },
                                             {
                                                 type: { names: ["String"] },
                                                 description:
                                                     "Symbol name to be checked. Better, pass the\n `longname` (or `$longname`). It will still find a short name but it'll\n return the first occurence if there are multiple symbols with the same\n short name. e.g. `create` is ambiguous but `Docma.create` is unique.",
-                                                name: "name"
-                                            }
+                                                name: "name",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Object"] },
                                                 description:
-                                                    "- Symbol object if found. Otherwise, returns `null`."
-                                            }
+                                                    "- Symbol object if found. Otherwise, returns `null`.",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -13810,7 +13828,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.getSymbolByName",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.getSymbolByName"
+                                            "api/web/utils/#DocmaWeb.Utils.getSymbolByName",
                                     },
                                     {
                                         comment:
@@ -13821,7 +13839,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets Docma route link for the given symbol or symbol name.",
@@ -13831,27 +13849,27 @@ var docma = Object.freeze(
                                         params: [
                                             {
                                                 type: {
-                                                    names: ["Array", "Object"]
+                                                    names: ["Array", "Object"],
                                                 },
                                                 description:
                                                     "Documentation array or APIs object\n with signature `{ documentation:Array, symbols:Array }`.",
-                                                name: "docsOrApis"
+                                                name: "docsOrApis",
                                             },
                                             {
                                                 type: {
-                                                    names: ["Object", "String"]
+                                                    names: ["Object", "String"],
                                                 },
                                                 description:
                                                     "Either the symbol itself or the\n name of the symbol.",
-                                                name: "symbolOrName"
-                                            }
+                                                name: "symbolOrName",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
                                                 description:
-                                                    "- Empty string if symbol is not found."
-                                            }
+                                                    "- Empty string if symbol is not found.",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -13860,7 +13878,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.getSymbolLink",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.getSymbolLink"
+                                            "api/web/utils/#DocmaWeb.Utils.getSymbolLink",
                                     },
                                     {
                                         comment:
@@ -13871,7 +13889,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets the types of the symbol as a string (joined with pipes `|`).",
@@ -13880,43 +13898,46 @@ var docma = Object.freeze(
                                         params: [
                                             {
                                                 type: {
-                                                    names: ["Array", "Object"]
+                                                    names: ["Array", "Object"],
                                                 },
                                                 description:
                                                     "Documentation array or APIs object\n with signature `{ documentation:Array, symbols:Array }`.",
-                                                name: "docsOrApis"
+                                                name: "docsOrApis",
                                             },
                                             {
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Target documentation symbol.",
-                                                name: "symbol"
+                                                name: "symbol",
                                             },
                                             {
                                                 type: { names: ["Object"] },
                                                 optional: true,
                                                 description: "Options.",
-                                                name: "options"
+                                                name: "options",
                                             },
                                             {
                                                 type: {
-                                                    names: ["Boolean", "String"]
+                                                    names: [
+                                                        "Boolean",
+                                                        "String",
+                                                    ],
                                                 },
                                                 optional: true,
                                                 defaultvalue: false,
                                                 description:
                                                     'Whether to add\n     HTML anchor links to output. Set to `"internal"` to link\n     internally (to Docma route with symbol hash, if found) or\n     `"external"` to link externally (to MDN URL if this is a\n     JS/Web-API built-in type/object) or `true` to try linking either\n     to an internal or external target, which ever is found.',
-                                                name: "options.links"
-                                            }
+                                                name: "options.links",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         examples: [
-                                            'var symbol = { "type": { "names": ["Number", "String"] } };\n DocmaWeb.Utils.getTypes(docs, symbol); // "Number|String"'
+                                            'var symbol = { "type": { "names": ["Number", "String"] } };\n DocmaWeb.Utils.getTypes(docs, symbol); // "Number|String"',
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.getTypes",
@@ -13924,7 +13945,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.getTypes",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.getTypes"
+                                            "api/web/utils/#DocmaWeb.Utils.getTypes",
                                     },
                                     {
                                         comment:
@@ -13935,7 +13956,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol has description.",
@@ -13946,14 +13967,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -13963,7 +13984,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.hasDescription",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.hasDescription"
+                                            "api/web/utils/#DocmaWeb.Utils.hasDescription",
                                     },
                                     {
                                         comment:
@@ -13974,7 +13995,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is a callback definition.",
@@ -13986,21 +14007,21 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isCallback",
                                         $longname: "DocmaWeb.Utils.isCallback",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isCallback"
+                                            "api/web/utils/#DocmaWeb.Utils.isCallback",
                                     },
                                     {
                                         comment:
@@ -14011,7 +14032,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is a class.",
@@ -14022,14 +14043,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isClass",
@@ -14037,7 +14058,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isClass",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isClass"
+                                            "api/web/utils/#DocmaWeb.Utils.isClass",
                                     },
                                     {
                                         comment:
@@ -14048,7 +14069,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is marked as a constant.",
@@ -14059,14 +14080,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isConstant",
@@ -14074,7 +14095,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isConstant",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isConstant"
+                                            "api/web/utils/#DocmaWeb.Utils.isConstant",
                                     },
                                     {
                                         comment:
@@ -14085,7 +14106,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is a constructor.",
@@ -14096,14 +14117,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -14113,7 +14134,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.isConstructor",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isConstructor"
+                                            "api/web/utils/#DocmaWeb.Utils.isConstructor",
                                     },
                                     {
                                         comment:
@@ -14124,7 +14145,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is deprecated.",
@@ -14135,14 +14156,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isDeprecated",
@@ -14151,7 +14172,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.isDeprecated",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isDeprecated"
+                                            "api/web/utils/#DocmaWeb.Utils.isDeprecated",
                                     },
                                     {
                                         comment:
@@ -14162,7 +14183,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is an enumeration.",
@@ -14173,14 +14194,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isEnum",
@@ -14188,7 +14209,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isEnum",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isEnum"
+                                            "api/web/utils/#DocmaWeb.Utils.isEnum",
                                     },
                                     {
                                         comment:
@@ -14199,7 +14220,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is an event.",
@@ -14210,14 +14231,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isEvent",
@@ -14225,7 +14246,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isEvent",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isEvent"
+                                            "api/web/utils/#DocmaWeb.Utils.isEvent",
                                     },
                                     {
                                         comment:
@@ -14236,7 +14257,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is defined outside of the current package.",
@@ -14247,14 +14268,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isExternal",
@@ -14262,7 +14283,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isExternal",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isExternal"
+                                            "api/web/utils/#DocmaWeb.Utils.isExternal",
                                     },
                                     {
                                         comment:
@@ -14273,7 +14294,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is a generator function.",
@@ -14284,14 +14305,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isGenerator",
@@ -14299,7 +14320,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isGenerator",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isGenerator"
+                                            "api/web/utils/#DocmaWeb.Utils.isGenerator",
                                     },
                                     {
                                         comment:
@@ -14310,7 +14331,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol has global scope.",
@@ -14321,14 +14342,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isGlobal",
@@ -14336,7 +14357,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isGlobal",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isGlobal"
+                                            "api/web/utils/#DocmaWeb.Utils.isGlobal",
                                     },
                                     {
                                         comment:
@@ -14347,7 +14368,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol has an inner scope.",
@@ -14358,14 +14379,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isInner",
@@ -14373,7 +14394,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isInner",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isInner"
+                                            "api/web/utils/#DocmaWeb.Utils.isInner",
                                     },
                                     {
                                         comment:
@@ -14384,7 +14405,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is an instance member.",
@@ -14395,14 +14416,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -14412,7 +14433,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.isInstanceMember",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isInstanceMember"
+                                            "api/web/utils/#DocmaWeb.Utils.isInstanceMember",
                                     },
                                     {
                                         comment:
@@ -14423,7 +14444,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is an instance method.",
@@ -14434,14 +14455,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -14451,7 +14472,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.isInstanceMethod",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isInstanceMethod"
+                                            "api/web/utils/#DocmaWeb.Utils.isInstanceMethod",
                                     },
                                     {
                                         comment:
@@ -14462,7 +14483,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is an instance property.",
@@ -14473,14 +14494,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -14490,7 +14511,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.isInstanceProperty",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isInstanceProperty"
+                                            "api/web/utils/#DocmaWeb.Utils.isInstanceProperty",
                                     },
                                     {
                                         comment:
@@ -14501,7 +14522,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is marked as an interface that other symbols\n can implement.",
@@ -14512,14 +14533,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isInterface",
@@ -14527,7 +14548,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isInterface",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isInterface"
+                                            "api/web/utils/#DocmaWeb.Utils.isInterface",
                                     },
                                     {
                                         comment:
@@ -14538,7 +14559,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is a method (function).",
@@ -14549,14 +14570,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isMethod",
@@ -14564,7 +14585,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isMethod",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isMethod"
+                                            "api/web/utils/#DocmaWeb.Utils.isMethod",
                                     },
                                     {
                                         comment:
@@ -14575,7 +14596,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is marked as a mixin (is intended to be\n added to other objects).",
@@ -14586,14 +14607,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isMixin",
@@ -14601,7 +14622,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isMixin",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isMixin"
+                                            "api/web/utils/#DocmaWeb.Utils.isMixin",
                                     },
                                     {
                                         comment:
@@ -14612,7 +14633,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is a module.",
@@ -14623,14 +14644,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isModule",
@@ -14638,7 +14659,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isModule",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isModule"
+                                            "api/web/utils/#DocmaWeb.Utils.isModule",
                                     },
                                     {
                                         comment:
@@ -14649,7 +14670,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is a namespace.",
@@ -14660,14 +14681,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isNamespace",
@@ -14675,7 +14696,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isNamespace",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isNamespace"
+                                            "api/web/utils/#DocmaWeb.Utils.isNamespace",
                                     },
                                     {
                                         comment:
@@ -14686,7 +14707,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol has `package` private access; indicating\n that the symbol is available only to code in the same directory as the\n source file for this symbol.",
@@ -14697,14 +14718,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -14714,7 +14735,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.isPackagePrivate",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isPackagePrivate"
+                                            "api/web/utils/#DocmaWeb.Utils.isPackagePrivate",
                                     },
                                     {
                                         comment:
@@ -14725,7 +14746,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol has `private` access.",
@@ -14736,14 +14757,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isPrivate",
@@ -14751,7 +14772,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isPrivate",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isPrivate"
+                                            "api/web/utils/#DocmaWeb.Utils.isPrivate",
                                     },
                                     {
                                         comment:
@@ -14762,7 +14783,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is a property (and not a method/function).",
@@ -14773,14 +14794,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isProperty",
@@ -14788,7 +14809,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isProperty",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isProperty"
+                                            "api/web/utils/#DocmaWeb.Utils.isProperty",
                                     },
                                     {
                                         comment:
@@ -14799,7 +14820,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol has `protected` access.",
@@ -14810,14 +14831,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isProtected",
@@ -14825,7 +14846,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isProtected",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isProtected"
+                                            "api/web/utils/#DocmaWeb.Utils.isProtected",
                                     },
                                     {
                                         comment:
@@ -14836,7 +14857,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol has `public` access.",
@@ -14847,14 +14868,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isPublic",
@@ -14862,7 +14883,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isPublic",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isPublic"
+                                            "api/web/utils/#DocmaWeb.Utils.isPublic",
                                     },
                                     {
                                         comment:
@@ -14873,7 +14894,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is read-only.",
@@ -14884,14 +14905,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isReadOnly",
@@ -14899,7 +14920,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.isReadOnly",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isReadOnly"
+                                            "api/web/utils/#DocmaWeb.Utils.isReadOnly",
                                     },
                                     {
                                         comment:
@@ -14910,7 +14931,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is a static member.",
@@ -14923,14 +14944,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -14939,7 +14960,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.isStaticMember",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isStaticMember"
+                                            "api/web/utils/#DocmaWeb.Utils.isStaticMember",
                                     },
                                     {
                                         comment:
@@ -14950,7 +14971,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is a static method.",
@@ -14961,14 +14982,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -14978,7 +14999,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.isStaticMethod",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isStaticMethod"
+                                            "api/web/utils/#DocmaWeb.Utils.isStaticMethod",
                                     },
                                     {
                                         comment:
@@ -14989,7 +15010,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is a static property.",
@@ -15000,14 +15021,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -15017,7 +15038,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.isStaticProperty",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isStaticProperty"
+                                            "api/web/utils/#DocmaWeb.Utils.isStaticProperty",
                                     },
                                     {
                                         comment:
@@ -15028,7 +15049,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is a custom type definition.",
@@ -15041,21 +15062,21 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.isTypeDef",
                                         $longname: "DocmaWeb.Utils.isTypeDef",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isTypeDef"
+                                            "api/web/utils/#DocmaWeb.Utils.isTypeDef",
                                     },
                                     {
                                         comment:
@@ -15066,7 +15087,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Checks whether the given symbol is undocumented.\n This checks if the symbol has any comments.",
@@ -15077,14 +15098,14 @@ var docma = Object.freeze(
                                                 type: { names: ["Object"] },
                                                 description:
                                                     "Documented symbol object.",
-                                                name: "symbol"
-                                            }
+                                                name: "symbol",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["Boolean"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -15094,7 +15115,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.isUndocumented",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.isUndocumented"
+                                            "api/web/utils/#DocmaWeb.Utils.isUndocumented",
                                     },
                                     {
                                         comment:
@@ -15105,7 +15126,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Normalizes the number of spaces/tabs to multiples of 2 spaces, in the\n beginning of each line. Useful for fixing mixed indets of a description\n or example.",
@@ -15116,14 +15137,14 @@ var docma = Object.freeze(
                                                 type: { names: ["String"] },
                                                 description:
                                                     "String to process.",
-                                                name: "string"
-                                            }
+                                                name: "string",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -15133,7 +15154,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.normalizeTabs",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.normalizeTabs"
+                                            "api/web/utils/#DocmaWeb.Utils.normalizeTabs",
                                     },
                                     {
                                         comment:
@@ -15144,7 +15165,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets the value of the target property by the given dot\n {@link https://github.com/onury/notation|notation}.",
@@ -15155,31 +15176,31 @@ var docma = Object.freeze(
                                             {
                                                 type: { names: ["Object"] },
                                                 description: "Source object.",
-                                                name: "obj"
+                                                name: "obj",
                                             },
                                             {
                                                 type: { names: ["String"] },
                                                 description:
                                                     "Path of the property in dot-notation.",
-                                                name: "notation"
-                                            }
+                                                name: "notation",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["*"] },
                                                 description:
-                                                    "- The value of the notation. If the given notation does\n not exist, safely returns `undefined`."
-                                            }
+                                                    "- The value of the notation. If the given notation does\n not exist, safely returns `undefined`.",
+                                            },
                                         ],
                                         examples: [
-                                            'var symbol = { code: { meta: { type: "MethodDefinition" } } };\n DocmaWeb.Utils.notate(symbol, "code.meta.type"); // returns "MethodDefinition"'
+                                            'var symbol = { code: { meta: { type: "MethodDefinition" } } };\n DocmaWeb.Utils.notate(symbol, "code.meta.type"); // returns "MethodDefinition"',
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.notate",
                                         $longname: "DocmaWeb.Utils.notate",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.notate"
+                                            "api/web/utils/#DocmaWeb.Utils.notate",
                                     },
                                     {
                                         comment:
@@ -15190,7 +15211,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Parses the given string into proper HTML. Removes leading whitespace,\n converts new lines to paragraphs, ticks to code tags and JSDoc links to\n anchors.",
@@ -15201,13 +15222,13 @@ var docma = Object.freeze(
                                                 type: { names: ["String"] },
                                                 description:
                                                     "String to be parsed.",
-                                                name: "string"
+                                                name: "string",
                                             },
                                             {
                                                 type: { names: ["Object"] },
                                                 optional: true,
                                                 description: "Parse options.",
-                                                name: "options"
+                                                name: "options",
                                             },
                                             {
                                                 type: { names: ["Object"] },
@@ -15215,21 +15236,21 @@ var docma = Object.freeze(
                                                 defaultvalue: false,
                                                 description:
                                                     "If enabled, single lines will not be converted to paragraphs.",
-                                                name: "options.keepIfSingle"
+                                                name: "options.keepIfSingle",
                                             },
                                             {
                                                 type: { names: ["String"] },
                                                 optional: true,
                                                 description:
                                                     'Href target for links. e.g. `"_blank"`',
-                                                name: "options.target"
-                                            }
+                                                name: "options.target",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.parse",
@@ -15237,7 +15258,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.parse",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.parse"
+                                            "api/web/utils/#DocmaWeb.Utils.parse",
                                     },
                                     {
                                         comment:
@@ -15248,7 +15269,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Converts JSDoc `@link` directives to HTML anchor tags.",
@@ -15259,27 +15280,27 @@ var docma = Object.freeze(
                                                 type: { names: ["String"] },
                                                 description:
                                                     "String to be parsed.",
-                                                name: "string"
+                                                name: "string",
                                             },
                                             {
                                                 type: { names: ["Object"] },
                                                 optional: true,
                                                 description: "Parse options.",
-                                                name: "options"
+                                                name: "options",
                                             },
                                             {
                                                 type: { names: ["String"] },
                                                 optional: true,
                                                 description:
                                                     'Href target. e.g. `"_blank"`',
-                                                name: "options.target"
-                                            }
+                                                name: "options.target",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.parseLinks",
@@ -15287,7 +15308,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.parseLinks",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.parseLinks"
+                                            "api/web/utils/#DocmaWeb.Utils.parseLinks",
                                     },
                                     {
                                         comment:
@@ -15298,7 +15319,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Converts new lines to HTML paragraphs.",
@@ -15309,13 +15330,13 @@ var docma = Object.freeze(
                                                 type: { names: ["String"] },
                                                 description:
                                                     "String to be parsed.",
-                                                name: "string"
+                                                name: "string",
                                             },
                                             {
                                                 type: { names: ["Object"] },
                                                 optional: true,
                                                 description: "Parse options.",
-                                                name: "options"
+                                                name: "options",
                                             },
                                             {
                                                 type: { names: ["Boolean"] },
@@ -15323,14 +15344,14 @@ var docma = Object.freeze(
                                                 defaultvalue: false,
                                                 description:
                                                     "If `true`, lines will not be converted to paragraphs.",
-                                                name: "options.keepIfSingle"
-                                            }
+                                                name: "options.keepIfSingle",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname:
@@ -15340,7 +15361,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.parseNewLines",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.parseNewLines"
+                                            "api/web/utils/#DocmaWeb.Utils.parseNewLines",
                                     },
                                     {
                                         comment:
@@ -15351,7 +15372,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Converts back-ticks to HTML code tags.",
@@ -15362,14 +15383,14 @@ var docma = Object.freeze(
                                                 type: { names: ["String"] },
                                                 description:
                                                     "String to be parsed.",
-                                                name: "string"
-                                            }
+                                                name: "string",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.parseTicks",
@@ -15377,7 +15398,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.parseTicks",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.parseTicks"
+                                            "api/web/utils/#DocmaWeb.Utils.parseTicks",
                                     },
                                     {
                                         comment:
@@ -15388,7 +15409,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Removes leading spaces and dashes. Useful when displaying symbol\n descriptions.",
@@ -15399,14 +15420,14 @@ var docma = Object.freeze(
                                                 type: { names: ["String"] },
                                                 description:
                                                     "String to be trimmed.",
-                                                name: "string"
-                                            }
+                                                name: "string",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.trimLeft",
@@ -15414,7 +15435,7 @@ var docma = Object.freeze(
                                         $longname: "DocmaWeb.Utils.trimLeft",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.trimLeft"
+                                            "api/web/utils/#DocmaWeb.Utils.trimLeft",
                                     },
                                     {
                                         comment:
@@ -15425,7 +15446,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Removes leading and trailing new lines.",
@@ -15436,14 +15457,14 @@ var docma = Object.freeze(
                                                 type: { names: ["String"] },
                                                 description:
                                                     "String to be trimmed.",
-                                                name: "string"
-                                            }
+                                                name: "string",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
-                                                description: "-"
-                                            }
+                                                description: "-",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.trimNewLines",
@@ -15452,7 +15473,7 @@ var docma = Object.freeze(
                                             "DocmaWeb.Utils.trimNewLines",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.trimNewLines"
+                                            "api/web/utils/#DocmaWeb.Utils.trimNewLines",
                                     },
                                     {
                                         comment:
@@ -15463,7 +15484,7 @@ var docma = Object.freeze(
                                             columnno: 0,
                                             path:
                                                 "/home/jpietal/projects/docma/lib/web",
-                                            code: {}
+                                            code: {},
                                         },
                                         description:
                                             "Gets the type of the given object.",
@@ -15475,27 +15496,27 @@ var docma = Object.freeze(
                                                 type: { names: ["*"] },
                                                 description:
                                                     "Object to be inspected.",
-                                                name: "obj"
-                                            }
+                                                name: "obj",
+                                            },
                                         ],
                                         returns: [
                                             {
                                                 type: { names: ["String"] },
                                                 description:
-                                                    "- Lower-case name of the type."
-                                            }
+                                                    "- Lower-case name of the type.",
+                                            },
                                         ],
                                         memberof: "DocmaWeb.Utils",
                                         longname: "DocmaWeb.Utils.type",
                                         $longname: "DocmaWeb.Utils.type",
                                         $kind: "method",
                                         $docmaLink:
-                                            "api/web/utils/#DocmaWeb.Utils.type"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
+                                            "api/web/utils/#DocmaWeb.Utils.type",
+                                    },
+                                ],
+                            },
+                        ],
+                    },
                 ],
                 symbols: [
                     "DocmaWeb",
@@ -15557,9 +15578,9 @@ var docma = Object.freeze(
                     "DocmaWeb.Utils.parseTicks",
                     "DocmaWeb.Utils.trimLeft",
                     "DocmaWeb.Utils.trimNewLines",
-                    "DocmaWeb.Utils.type"
-                ]
-            }
+                    "DocmaWeb.Utils.type",
+                ],
+            },
         },
         app: {
             title: "Docma Documentation",
@@ -15568,7 +15589,7 @@ var docma = Object.freeze(
             entrance: "content:home",
             routing: { method: "path", caseSensitive: true },
             server: "github",
-            favicon: "./favicon.ico"
+            favicon: "./favicon.ico",
         },
         template: {
             name: "docma-template-zebra",
@@ -15585,7 +15606,7 @@ var docma = Object.freeze(
                     dark:
                         "https://raw.githubusercontent.com/Prozi/docma/master/img/docma-logo.png",
                     light:
-                        "https://raw.githubusercontent.com/Prozi/docma/master/img/docma-logo.pn"
+                        "https://raw.githubusercontent.com/Prozi/docma/master/img/docma-logo.pn",
                 },
                 sidebar: {
                     enabled: true,
@@ -15596,19 +15617,19 @@ var docma = Object.freeze(
                     itemsOverflow: "shrink",
                     badges: true,
                     search: true,
-                    animations: true
+                    animations: true,
                 },
                 symbols: {
                     autoLink: true,
                     params: "list",
                     enums: "list",
                     props: "list",
-                    meta: false
+                    meta: false,
                 },
                 contentView: {
                     bookmarks: "h1,h2,h3",
                     faLibs: "all",
-                    faVersion: "5.5.0"
+                    faVersion: "5.5.0",
                 },
                 navbar: {
                     enabled: true,
@@ -15624,16 +15645,16 @@ var docma = Object.freeze(
                                 { separator: true },
                                 {
                                     label: "Docma Template API",
-                                    href: "api/#Docma.Template"
+                                    href: "api/#Docma.Template",
                                 },
                                 { separator: true },
                                 { label: "Docma Web API", href: "api/web" },
                                 {
                                     label: "Docma Filters",
-                                    href: "templates/filters"
-                                }
+                                    href: "templates/filters",
+                                },
                             ],
-                            chevron: true
+                            chevron: true,
                         },
                         {
                             label: "Download",
@@ -15642,39 +15663,39 @@ var docma = Object.freeze(
                                     label: "<code>npm i docma -D</code>",
                                     href:
                                         "https://www.npmjs.com/package/@jacekpietal/docma",
-                                    target: "_blank"
+                                    target: "_blank",
                                 },
                                 {
                                     label: "Docma Releases",
                                     href:
                                         "https://github.com/Prozi/docma/releases",
-                                    target: "_blank"
+                                    target: "_blank",
                                 },
                                 { separator: true },
-                                { label: "Change Log", href: "changelog" }
+                                { label: "Change Log", href: "changelog" },
                             ],
-                            chevron: true
+                            chevron: true,
                         },
                         {
                             iconClass: "fab fa-lg fa-github",
                             label: "",
                             href: "https://github.com/Prozi/docma",
-                            target: "_blank"
-                        }
-                    ]
-                }
-            }
+                            target: "_blank",
+                        },
+                    ],
+                },
+            },
         },
         partials: {
             api: "docma-api",
             content: "docma-content",
-            notFound: "docma-404"
+            notFound: "docma-404",
         },
         elementID: "docma-main",
         contentElementID: "docma-content",
         defaultApiName: "_def_",
-        logsEnabled: false
-    })
+        logsEnabled: false,
+    }),
 );
 
 /* global docma, DocmaWeb, page, sessionStorage */
@@ -15775,7 +15796,7 @@ var docma = Object.freeze(
             var content = getRouteName(context); // e.g. cli or templates/filters
             var routeInfo = docma.createRoute(
                 content,
-                DocmaWeb.Route.Type.CONTENT
+                DocmaWeb.Route.Type.CONTENT,
             );
             // route not found, send to next (not-found)
             if (!routeInfo || !routeInfo.exists()) return next();
@@ -15866,7 +15887,7 @@ var docma = Object.freeze(
             popstate: true,
             dispatch: true,
             hashbang: false,
-            decodeURLComponents: true
+            decodeURLComponents: true,
         });
 
         docma.info("Docma SPA loaded!");

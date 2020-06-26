@@ -1,6 +1,6 @@
 {
   "name": "@jacekpietal/docma",
-  "version": "3.2.11",
+  "version": "3.2.12",
   "description": "A powerful dev-tool to easily generate beautiful HTML documentation from Javascript (JSDoc), Markdown and HTML files.",
   "repository": "Prozi/docma",
   "license": "MIT",
@@ -44,11 +44,13 @@
     "docs": "node bin/docma",
     "docs:query": "node bin/docma -c ./test/docma.query.json",
     "docs:debug": "node bin/docma --debug",
+    "prettify": "yarn prettier . --write",
     "serve": "node bin/docma serve",
     "start": "npm run docs && npm run serve",
     "start:query": "npm run docs:query && npm run serve",
     "start:debug": "npm run docs:debug && npm run serve",
     "test": "jest --verbose --no-cache",
+    "precommit": "yarn docs && yarn lint && yarn prettify",
     "postinstall": "mkdir -p lib/web/assets && touch lib/web/assets/docma.less"
   },
   "jest": {
@@ -109,18 +111,21 @@
     "less-plugin-clean-css": "^1.5.1",
     "lodash": "^4.17.15",
     "marked": "^1.1.0",
-    "npm-name": "^6.0.0",
+    "npm-name": "^6.0.1",
     "semver": "^7.3.2",
     "strip-json-comments": "^3.1.0",
-    "uglify-js": "^3.9.4",
+    "uglify-js": "^3.10.0",
     "yargs": "^15.3.1"
   },
   "devDependencies": {
-    "eslint": "^7.2.0",
+    "braces": "^3.0.2",
+    "chokidar": "^3.4.0",
+    "clean-css": "^4.2.3",
+    "eslint": "^7.3.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-xo": "^0.31.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "jest-cli": "^26.0.1",
+    "jest-cli": "^26.1.0",
     "prettier": "^2.0.5"
   }
 }
