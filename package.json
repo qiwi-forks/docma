@@ -1,6 +1,6 @@
 {
   "name": "@jacekpietal/docma",
-  "version": "3.2.12",
+  "version": "3.2.13",
   "description": "A powerful dev-tool to easily generate beautiful HTML documentation from Javascript (JSDoc), Markdown and HTML files.",
   "repository": "Prozi/docma",
   "license": "MIT",
@@ -51,7 +51,7 @@
     "start:debug": "npm run docs:debug && npm run serve",
     "test": "jest --verbose --no-cache",
     "precommit": "yarn docs && yarn lint && yarn prettify",
-    "postinstall": "mkdir -p lib/web/assets && touch lib/web/assets/docma.less"
+    "deprecated_postinstall": "mkdir -p lib/web/assets && touch lib/web/assets/docma.less"
   },
   "jest": {
     "testEnvironment": "node",
