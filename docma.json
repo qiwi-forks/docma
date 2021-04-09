@@ -1,5 +1,5 @@
 {
-    "debug": 13,
+    "debug": 3,
     "jsdoc": {
         "encoding": "utf8",
         "recurse": false,
@@ -36,26 +36,27 @@
         "entrance": "content:home",
         "routing": "path",
         "server": "github",
-        "favicon": "./favicon.ico"
+        "favicon": "./favicon.ico" // local path of favicon to be copied
     },
     "template": {
-        "path": "zebra",
+        "path": "./node_modules/docma-template-zebra", // set to "zebra" (this path is for this repo only)
         "options": {
             "title": {
                 "label": "Docma",
                 "href": "."
             },
             "logo": {
-                "dark": "https://raw.githubusercontent.com/Prozi/docma/master/img/docma-logo.png",
-                "light": "https://raw.githubusercontent.com/Prozi/docma/master/img/docma-logo.png"
+                // URL String or { dark: String, light: String }
+                "dark": "img/docma-logo.png",
+                "light": "img/docma-logo.png"
             },
             "sidebar": {
                 "enabled": true,
-                "outline": "flat", // "flat" | "tree"
+                "outline": "tree", // "flat" | "tree"
                 "collapsed": false,
                 "toolbar": true,
                 "itemsFolded": false,
-                "itemsOverflow": "shrink", // "crop" | "shrink"
+                "itemsOverflow": "crop", // "crop" | "shrink"
                 "badges": true, // true | false | <string-value>
                 "search": true,
                 "animations": true
@@ -69,7 +70,7 @@
             },
             "contentView": {
                 "bookmarks": "h1,h2,h3",
-                "faLibs": "all" // "all"|"solid"|"regular"|"brands" or comma-separated or null
+                "faLibs": "all" // "all" or "solid"|"regular"|"brands" or comma-separated or null
             },
             "navbar": {
                 "enabled": true,
@@ -81,10 +82,21 @@
                         "iconClass": "fas fa-book",
                         "label": "Building Docs",
                         "items": [
-                            { "label": "Guide", "href": "." },
-                            { "separator": true },
-                            { "label": "Docma (Builder) API", "href": "api" },
-                            { "label": "Build Configuration", "href": "api/#Docma~BuildConfiguration" }
+                            {
+                                "label": "Guide",
+                                "href": "."
+                            },
+                            {
+                                "separator": true
+                            },
+                            {
+                                "label": "Docma (Builder) API",
+                                "href": "api"
+                            },
+                            {
+                                "label": "Build Configuration",
+                                "href": "api/#Docma~BuildConfiguration"
+                            }
                         ]
                     },
                     {
@@ -92,14 +104,19 @@
                         "label": "Templates",
                         "items": [
                             {
+                                "label": "Default Template - Zebra",
+                                "href": "templates/zebra"
+                            },
+                            {
+                                "separator": true
+                            },
+                            {
                                 "label": "Docma Template API",
                                 "href": "api/#Docma.Template"
                             },
-                            { "separator": true },
-                            { "label": "Docma Web API", "href": "api/web" },
                             {
-                                "label": "Docma Filters",
-                                "href": "templates/filters"
+                                "label": "Docma Web API",
+                                "href": "api/web"
                             }
                         ]
                     },
@@ -108,7 +125,7 @@
                         "label": "Download",
                         "items": [
                             {
-                                "label": "<code>npm i docma -D</code>",
+                                "label": "<code>npm i @jacekpietal/docma -D</code>",
                                 "href": "https://www.npmjs.com/package/@jacekpietal/docma",
                                 "target": "_blank"
                             },
@@ -117,7 +134,9 @@
                                 "href": "https://github.com/Prozi/docma/releases",
                                 "target": "_blank"
                             },
-                            { "separator": true },
+                            {
+                                "separator": true
+                            },
                             {
                                 "label": "Change Log",
                                 "href": "changelog"
@@ -135,17 +154,31 @@
         }
     },
     "src": [
+        // API sources
+        // default group (docma)
+        // route @ api/
         "./lib/Docma.js",
         "./lib/Template.js",
         "./lib/TemplateDoctor.js",
+        // grouped JS API documentation
         {
+            // route @ api/web/
             "web": ["./lib/web/DocmaWeb.js", "./lib/web/DocmaWeb.Route.js"],
+            // route @ api/web/utils/
             "web/utils": "./lib/web/DocmaWeb.Utils.js"
         },
-        "./*.md",
+        // Content sources
+        // markdown
+        "./CHANGELOG.md",
+        "./README.md",
         "./LICENSE",
         {
-            "home": "./README.md"
+            "home": "./README.md",
+            // renamed markdown (deep routes)
+            // "templates/guide": "./templates/guide.md",
+            // "templates/filters": "./templates/filters.md",
+            "templates/zebra": "./node_modules/docma-template-zebra/README.md"
+            // renamed html file
         }
     ],
     "assets": {

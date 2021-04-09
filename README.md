@@ -7,7 +7,7 @@
     <a href="https://github.com/Prozi/docma"><img src="https://img.shields.io/github/release/Prozi/docma.svg?style=flat-square" alt="release" /></a>
     <a href="https://github.com/Prozi/docma/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/@jacekpietal/docma.svg?style=flat-square" alt="license" /></a>
     <a href="https://www.npmjs.com/package/@jacekpietal/docma"><img src="https://img.shields.io/npm/dt/@jacekpietal/docma.svg?style=flat-square" alt="downloads" /></a>
-    <a href="https://david-dm.org/Prozi/docma"><img src="https://img.shields.io/librariesio/github/Prozi/docma" alt="dependencies" /></a>
+    <a href="https://libraries.io/npm/@jacekpietal%2Fdocma"><img src="https://img.shields.io/librariesio/github/Prozi/docma" alt="dependencies" /></a>
     <a href="https://github.com/Prozi/docma/graphs/commit-activity"><img src="https://img.shields.io/maintenance/yes/2021.svg?style=flat-square" alt="maintained" /></a>
     <a href="https://onury.io/docma"><img src="https://img.shields.io/badge/docs%20by-docma-c27cf4.svg?docs%20by=docma&style=flat-square" alt="documentation" /></a>
     <br />
@@ -32,7 +32,7 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 ...like this:
 
 <p align="center">
-    <a href="https://onury.io/docma"><img width="650" height="385" src="https://raw.github.com/Prozi/docma/master/img/docma-screen.gif" alt="Docma screen" /></a>
+    <a href="https://onury.io/docma"><img width="650" height="385" src="./docma-screen.gif" alt="Docma screen" /></a>
     <br />
     <br />
     <sub>This is generated with the built-in template, Zebra.</sub><br />
@@ -42,7 +42,7 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 ## Installation
 
 ```console
-yarn add @jacekpietal/docma -D
+npm i @jacekpietal/docma -D
 ```
 
 ## Building Documentation with CLI
@@ -51,13 +51,13 @@ You can use Docma CLI to build documentations directly from your console.
 Once you create the configuration file `docma.json` in your project root, it's quite simple.
 
 ```console
-yarn docma
+docma
 ```
 
 You can even serve the docs locally and test.
 
 ```console
-yarn docma serve
+docma serve
 ```
 
 See
@@ -136,19 +136,18 @@ Emoji shortcuts used in source markdown files are parsed into [twemoji][twemoji]
 
 [license]: https://github.com/Prozi/docma/blob/master/LICENSE
 [changelog]: https://github.com/Prozi/docma/blob/master/CHANGELOG.md
-[screenshot]: https://raw.github.com/Prozi/docma/master/img/docma-screen.jpg
-[screen-gif]: https://raw.github.com/Prozi/docma/master/img/docma-screen.gif
+[screenshot]: https://raw.github.com/Prozi/docma/master/docma-screen.jpg
+[screen-gif]: https://raw.github.com/Prozi/docma/master/docma-screen.gif
 [docma-docs]: https://onury.io/docma
 [docma-api]: https://onury.io/docma/api
 [docma-cli]: https://onury.io/docma/cli
 [docma-config]: https://onury.io/docma/api/#Docma~BuildConfiguration
-[docma-faq]: https://onury.io/docma/faq
 [zebra]: https://onury.io/docma/templates/zebra
-[jsdoc]: https://usejsdoc.org
-[jsdoc-x]: https://github.com/onury/jsdoc-x
+[jsdoc]: http://usejsdoc.org
+[jsdoc-x]: https://github.com/Prozi/jsdoc-x
 [marked]: https://github.com/chjj/marked
 [markdown]: https://daringfireball.net/projects/markdown
-[dustjs]: https://www.dustjs.com
+[dustjs]: http://www.dustjs.com
 [dustjs-github]: https://github.com/linkedin/dustjs
 [twemoji]: https://github.com/twitter/twemoji
 [cc-by-4]: https://creativecommons.org/licenses/by/4.0

@@ -15660,7 +15660,8 @@ var docma = Object.freeze(
                             label: "Download",
                             items: [
                                 {
-                                    label: "<code>npm i docma -D</code>",
+                                    label:
+                                        "<code>npm i @jacekpietal/docma -D</code>",
                                     href:
                                         "https://www.npmjs.com/package/@jacekpietal/docma",
                                     target: "_blank",
