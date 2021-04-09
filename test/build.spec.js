@@ -43,7 +43,7 @@ describe("build", () => {
                 base: "/",
             },
             template: {
-                path: "./templates/zebra",
+                path: "./node_modules/docma-template-zebra/",
                 options: {
                     title: "",
                 },

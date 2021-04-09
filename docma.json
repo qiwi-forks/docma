@@ -33,20 +33,19 @@
         "title": "Docma Documentation",
         "meta": null,
         "base": ".",
-        "entrance": "content:home", // use "api:your-lib" to set the entrance to a JSAPI page
+        "entrance": "content:home",
         "routing": "path",
         "server": "github",
-        "favicon": "./favicon.ico" // local path of favicon to be copied
+        "favicon": "./favicon.ico"
     },
     "template": {
-        "path": "zebra", // set to "zebra" (this path is for this repo only)
+        "path": "zebra",
         "options": {
             "title": {
                 "label": "Docma",
                 "href": "."
             },
             "logo": {
-                // URL String or { dark: String, light: String }
                 "dark": "https://raw.githubusercontent.com/Prozi/docma/master/img/docma-logo.png",
                 "light": "https://raw.githubusercontent.com/Prozi/docma/master/img/docma-logo.png"
             },
@@ -70,7 +69,7 @@
             },
             "contentView": {
                 "bookmarks": "h1,h2,h3",
-                "faLibs": "all" // "all" or "solid"|"regular"|"brands" or comma-separated or null
+                "faLibs": "all" // "all"|"solid"|"regular"|"brands" or comma-separated or null
             },
             "navbar": {
                 "enabled": true,
@@ -78,28 +77,20 @@
                 "dark": false,
                 "animations": true,
                 "menu": [
-                    // {
-                    //     "iconClass": "fas fa-book",
-                    //     "label": "Building Docs",
-                    //     "items": [
-                    //         { "label": "Guide", "href": "." },
-                    //         { "separator": true },
-                    //         { "label": "Docma (Builder) API", "href": "api" },
-                    //         { "label": "Build Configuration", "href": "api/#Docma~BuildConfiguration" },
-                    //         { "separator": true },
-                    //         { "label": "Docma CLI", "href": "cli" }
-                    //     ]
-                    // },
                     {
-                        "label": "F.A.Q.",
-                        "href": "faq"
+                        "iconClass": "fas fa-book",
+                        "label": "Building Docs",
+                        "items": [
+                            { "label": "Guide", "href": "." },
+                            { "separator": true },
+                            { "label": "Docma (Builder) API", "href": "api" },
+                            { "label": "Build Configuration", "href": "api/#Docma~BuildConfiguration" }
+                        ]
                     },
                     {
                         "iconClass": "fas fa-puzzle-piece",
                         "label": "Templates",
                         "items": [
-                            { "separator": true },
-                            // { "label": "Creating Docma Templates", "href": "templates/guide" },
                             {
                                 "label": "Docma Template API",
                                 "href": "api/#Docma.Template"
@@ -113,7 +104,7 @@
                         ]
                     },
                     {
-                        // "iconClass": "fas fa-cloud-download-alt",
+                        "iconClass": "fas fa-cloud-download-alt",
                         "label": "Download",
                         "items": [
                             {
@@ -144,28 +135,16 @@
         }
     },
     "src": [
-        // API sources
-        // default group (docma)
-        // route @ api/
         "./lib/Docma.js",
         "./lib/Template.js",
         "./lib/TemplateDoctor.js",
-        // grouped JS API documentation
         {
-            // route @ api/web/
             "web": ["./lib/web/DocmaWeb.js", "./lib/web/DocmaWeb.Route.js"],
-            // route @ api/web/utils/
             "web/utils": "./lib/web/DocmaWeb.Utils.js"
         },
-        // Content sources
-        // markdown
-        // "./README.md",
         "./*.md",
-        // "./LICENSE:md",
+        "./LICENSE",
         {
-            // renamed markdown (deep routes)
-            // "templates/guide": "./doc/templates/guide.md",
-            // "templates/filters": "./doc/templates/filters.md",
             "home": "./README.md"
         }
     ],

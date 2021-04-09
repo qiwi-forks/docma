@@ -7,8 +7,8 @@
     <a href="https://github.com/Prozi/docma"><img src="https://img.shields.io/github/release/Prozi/docma.svg?style=flat-square" alt="release" /></a>
     <a href="https://github.com/Prozi/docma/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/@jacekpietal/docma.svg?style=flat-square" alt="license" /></a>
     <a href="https://www.npmjs.com/package/@jacekpietal/docma"><img src="https://img.shields.io/npm/dt/@jacekpietal/docma.svg?style=flat-square" alt="downloads" /></a>
-    <a href="https://david-dm.org/Prozi/docma"><img src="https://david-dm.org/Prozi/docma.svg?style=flat-square" alt="dependencies" /></a>
-    <a href="https://github.com/Prozi/docma/graphs/commit-activity"><img src="https://img.shields.io/maintenance/yes/2020.svg?style=flat-square" alt="maintained" /></a>
+    <a href="https://david-dm.org/Prozi/docma"><img src="https://img.shields.io/librariesio/github/Prozi/docma" alt="dependencies" /></a>
+    <a href="https://github.com/Prozi/docma/graphs/commit-activity"><img src="https://img.shields.io/maintenance/yes/2021.svg?style=flat-square" alt="maintained" /></a>
     <a href="https://onury.io/docma"><img src="https://img.shields.io/badge/docs%20by-docma-c27cf4.svg?docs%20by=docma&style=flat-square" alt="documentation" /></a>
     <br />
     <sub>© 2019, Onur Yıldırım (<b><a href="https://github.com/onury">@onury</a></b>).</sub>
