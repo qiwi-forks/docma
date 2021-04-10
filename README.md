@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://onury.io/docma"><img width="200" height="200" src="https://raw.githubusercontent.com/Prozi/docma/master/img/docma-logo.png" alt="Docma" /></a>
+    <a href="https://prozi.github.io/docma"><img width="200" height="200" src="https://raw.githubusercontent.com/Prozi/docma/master/img/docma-logo.png" alt="Docma" /></a>
 </p>
 
 <p align="center">
@@ -7,9 +7,9 @@
     <a href="https://github.com/Prozi/docma"><img src="https://img.shields.io/github/release/Prozi/docma.svg?style=flat-square" alt="release" /></a>
     <a href="https://github.com/Prozi/docma/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/@jacekpietal/docma.svg?style=flat-square" alt="license" /></a>
     <a href="https://www.npmjs.com/package/@jacekpietal/docma"><img src="https://img.shields.io/npm/dt/@jacekpietal/docma.svg?style=flat-square" alt="downloads" /></a>
-    <a href="https://libraries.io/npm/@jacekpietal%2Fdocma"><img src="https://img.shields.io/librariesio/github/Prozi/docma" alt="dependencies" /></a>
+    <a href="https://libraries.io/npm/@jacekpietal%2Fdocma"><img src="https://img.shields.io/librariesio/github/Prozi/docma?style=flat-square" alt="dependencies" /></a>
     <a href="https://github.com/Prozi/docma/graphs/commit-activity"><img src="https://img.shields.io/maintenance/yes/2021.svg?style=flat-square" alt="maintained" /></a>
-    <a href="https://onury.io/docma"><img src="https://img.shields.io/badge/docs%20by-docma-c27cf4.svg?docs%20by=docma&style=flat-square" alt="documentation" /></a>
+    <a href="https://prozi.github.io/docma"><img src="https://img.shields.io/badge/docs%20by-docma-c27cf4.svg?docs%20by=docma&style=flat-square" alt="documentation" /></a>
     <br />
     <sub>© 2019, Onur Yıldırım (<b><a href="https://github.com/onury">@onury</a></b>).</sub>
 </p>
@@ -32,11 +32,11 @@ A powerful tool to easily generate beautiful HTML documentation from Javascript 
 ...like this:
 
 <p align="center">
-    <a href="https://onury.io/docma"><img width="650" height="385" src="https://raw.githubusercontent.com/Prozi/docma/master/img/docma-screen.gif" alt="Docma screen" /></a>
+    <a href="https://prozi.github.io/docma/"><img width="650" height="385" src="https://raw.githubusercontent.com/Prozi/docma/master/img/docma-screen.gif" alt="Docma screen" /></a>
     <br />
     <br />
     <sub>This is generated with the built-in template, Zebra.</sub><br />
-    <a href="https://onury.io/docma">click to view live</a>
+    <a href="https://prozi.github.io/docma/">click to view live</a>
 </p>
 
 ## Installation
@@ -138,11 +138,11 @@ Emoji shortcuts used in source markdown files are parsed into [twemoji][twemoji]
 [changelog]: https://github.com/Prozi/docma/blob/master/CHANGELOG.md
 [screenshot]: https://raw.github.com/Prozi/docma/master/docma-screen.jpg
 [screen-gif]: https://raw.github.com/Prozi/docma/master/docma-screen.gif
-[docma-docs]: https://onury.io/docma
-[docma-api]: https://onury.io/docma/api
-[docma-cli]: https://onury.io/docma/cli
-[docma-config]: https://onury.io/docma/api/#Docma~BuildConfiguration
-[zebra]: https://onury.io/docma/templates/zebra
+[docma-docs]: https://prozi.github.io/docma
+[docma-api]: https://prozi.github.io/docma/api
+[docma-cli]: https://prozi.github.io/docma/cli
+[docma-config]: https://prozi.github.io/docma/api/#Docma~BuildConfiguration
+[zebra]: https://prozi.github.io/docma/templates/zebra
 [jsdoc]: http://usejsdoc.org
 [jsdoc-x]: https://github.com/Prozi/jsdoc-x
 [marked]: https://github.com/chjj/marked
