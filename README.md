@@ -71,7 +71,7 @@ See
 If you need to build documentation from within your code, use the API.
 
 ```js
-const Docma = require("docma");
+const Docma = require("@jacekpietal/docma");
 ```
 
 Either by passing a [configuration][docma-config] object.
