@@ -1,8 +1,7 @@
 {
-  "name": "@jacekpietal/docma",
-  "version": "3.3.3",
+  "name": "@qiwi/docma",
+  "version": "0.0.0",
   "description": "A powerful dev-tool to easily generate beautiful HTML documentation from Javascript (JSDoc), Markdown and HTML files.",
-  "repository": "Prozi/docma",
   "license": "MIT",
   "author": {
     "name": "Onur Yıldırım",
@@ -130,5 +129,13 @@
   "resolutions": {
     "clean-css": "^4.1.11",
     "braces": "^2.3.1"
+  },
+  "bugs": {
+    "url": "https://github.com/qiwi-forks/docma/issues"
+  },
+  "homepage": "https://github.com/qiwi-forks/docma#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qiwi-forks/docma.git"
   }
 }
