@@ -10,6 +10,9 @@ yarn add @qiwi/docma
 ```
 
 ### Usage
+```shell
+docma -c ./docma.json
+```
 Follow [the original docs](https://github.com/onury/docma).
 
 ### License
