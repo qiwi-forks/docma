@@ -1,3 +1,11 @@
+## [3.3.4](https://github.com/qiwi-forks/docma/compare/v3.3.3...v3.3.4) (2022-05-09)
+
+
+### Bug Fixes
+
+* move to gh-actions, tech release ([42fce0d](https://github.com/qiwi-forks/docma/commit/42fce0d2ab9f0fe7702161a17f29a1f868f85660))
+* up deps, fix some vuls ([08418e5](https://github.com/qiwi-forks/docma/commit/08418e520fed2c962a8ed80b017e8dab142d5583))
+
 # Docma Changelog
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org).
