@@ -1,3 +1,10 @@
+## [3.3.10](https://github.com/qiwi-forks/docma/compare/v3.3.9...v3.3.10) (2022-05-09)
+
+
+### Performance Improvements
+
+* fix ci ([37a8765](https://github.com/qiwi-forks/docma/commit/37a87658996cc7e863e9d8e4c54a5ca66140b4d5))
+
 ## [3.3.9](https://github.com/qiwi-forks/docma/compare/v3.3.8...v3.3.9) (2022-05-09)
 
 
