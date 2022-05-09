@@ -1,3 +1,10 @@
+## [3.3.8](https://github.com/qiwi-forks/docma/compare/v3.3.7...v3.3.8) (2022-05-09)
+
+
+### Performance Improvements
+
+* tech release ([5078ed5](https://github.com/qiwi-forks/docma/commit/5078ed5e9190714b2b99b73e929bcb696be5ede6))
+
 ## [3.3.7](https://github.com/qiwi-forks/docma/compare/v3.3.6...v3.3.7) (2022-05-09)
 
 
