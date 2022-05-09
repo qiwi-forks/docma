@@ -13,7 +13,7 @@ yarn add @qiwi/docma
 ```shell
 docma -c ./docma.json
 ```
-Follow [the original docs](https://github.com/onury/docma).
+Follow [the original docs](https://github.com/onury/docma)
 
 ### License
 [MIT](./LICENSE)
